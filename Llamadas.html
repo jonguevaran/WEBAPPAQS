@@ -468,20 +468,30 @@
 
                 if (checked) {
                     if (!lines.includes(remotaText)) {
-                        // Aseguramos que existan al menos 2 líneas
-                        while (lines.length < 2) {
-                            lines.push("");
+                        // Buscar el índice de la última línea con texto
+                        let lastTextIdx = -1;
+                        for (let i = lines.length - 1; i >= 0; i--) {
+                            if (lines[i].trim() !== "") {
+                                lastTextIdx = i;
+                                break;
+                            }
                         }
-                        // Insertar una línea en blanco en la 3ra fila (índice 2) y el texto en la 4ta (índice 3)
-                        lines.splice(2, 0, "", remotaText);
+                        if (lastTextIdx !== -1) {
+                            // Insertar remotaText en la línea siguiente a la última con texto, y una línea vacía después
+                            lines.splice(lastTextIdx + 1, 0, remotaText, "");
+                        } else {
+                            // Si el campo está vacío, colocar remotaText y una línea vacía
+                            lines = [remotaText, ""];
+                        }
                     }
                 } else {
                     const idx = lines.indexOf(remotaText);
                     if (idx !== -1) {
-                        lines.splice(idx, 1); // Quitar el texto
-                        // Quitar también la línea en blanco que se insertó arriba (si está vacía)
-                        if (idx > 0 && lines[idx - 1] === "") {
-                            lines.splice(idx - 1, 1);
+                        // Si la línea siguiente es vacía, la quitamos también
+                        if (idx + 1 < lines.length && lines[idx + 1] === "") {
+                            lines.splice(idx, 2);
+                        } else {
+                            lines.splice(idx, 1);
                         }
                     }
                 }
@@ -490,6 +500,16 @@
                 ta2.dispatchEvent(new Event('input', { bubbles: true }));
                 records[currentIndex].isRemota = checked;
                 saveState();
+
+                if (checked) {
+                    // Dejar el cursor en la nueva línea vacía justo después del texto insertado
+                    const startPos = ta2.value.indexOf(remotaText);
+                    if (startPos !== -1) {
+                        const cursorSectionPos = startPos + remotaText.length + 1;
+                        ta2.focus();
+                        ta2.setSelectionRange(cursorSectionPos, cursorSectionPos);
+                    }
+                }
             });
 
             chkConfirmado.addEventListener('change', (e) => {
