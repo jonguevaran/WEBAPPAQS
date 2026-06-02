@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<!-- 
+una herramienta abierta 
+para todos los que consideren 
+que pueda ser útil. 
+Ender Guevara 
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador de Datos JSON</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <style>
+        .tab-transition { transition: all 0.3s ease; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #floating-menu-container:hover { right: 1rem; opacity: 1; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        .excel-table th, .excel-table td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            text-align: left;
+            white-space: nowrap;
+        }
+        .excel-table th { background-color: #e0f2fe; color: #0f172a; font-weight: bold; }
+        .dark .excel-table th { background-color: #1e293b; color: #e2e8f0; border-color: #475569; }
+        .dark .excel-table td { border-color: #475569; }
+    </style>
+</head>
+<body class="bg-slate-100 dark:bg-slate-900 transition-colors duration-300 h-[100dvh] text-slate-800 dark:text-slate-100 font-sans p-2 sm:p-4 flex flex-col items-center justify-center overflow-hidden">
+
+    <div id="floating-menu-container" class="fixed top-6 -right-6 opacity-70 z-50 transition-all duration-300 ease-in-out flex flex-col items-end">
+        <div id="settingsMenu" class="hidden absolute right-0 mt-14 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all origin-top-right">
+            
+            <!-- Grupo 1: Personalización -->
+            <div class="flex flex-col">
+                <button onclick="toggleLanguage(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+                    <span id="langBtnText">Mudar para Português</span>
+                </button>
+                <button onclick="toggleTheme(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors border-t border-slate-100 dark:border-slate-700 focus:outline-none">
+                    <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                    <span id="themeBtnText">Modo Escuro</span>
+                </button>
+            </div>
+
+            <!-- Separador físico 20px -->
+            <div class="h-[20px] bg-slate-50 dark:bg-slate-800/80 border-y border-slate-100 dark:border-slate-700"></div>
+
+            <!-- Grupo 2: Datos (Historial) -->
+            <div id="menuRegistrySection" class="hidden flex-col">
+                <button onclick="loadRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-3 transition-colors focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+                    <span id="btnMenuLoadRegistryText">Cargar Registro</span>
+                </button>
+                <button onclick="downloadRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 flex items-center gap-3 transition-colors border-t border-slate-100 dark:border-slate-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    <span id="btnMenuDownloadRegistryText">Descargar JSON</span>
+                </button>
+                
+                <!-- Separador físico 20px -->
+                <div class="h-[20px] bg-slate-50 dark:bg-slate-800/80 border-y border-slate-100 dark:border-slate-700"></div>
+            </div>
+
+            <!-- Grupo 3: Reseteo Total -->
+            <div class="flex flex-col">
+                <button onclick="resetApp(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 transition-colors focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <span id="resetAppBtnText">Repor Tudo</span>
+                </button>
+            </div>
+        </div>
+        <button id="menuToggleButton" onmouseenter="openMenu()" onclick="openMenu()" class="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 p-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all flex items-center justify-center relative z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
+    </div>
+
+    <div class="w-full max-w-6xl h-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden flex flex-col border border-transparent dark:border-slate-700 transition-colors duration-300">
+        <div class="bg-indigo-600 dark:bg-indigo-800 p-4 md:p-6 text-white text-center transition-colors duration-300 shrink-0">
+            <h1 class="text-xl md:text-3xl font-bold flex items-center justify-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
+                <span id="mainTitle">Dados</span>
+            </h1>
+            <p id="mainSubtitle" class="text-indigo-200 text-xs md:text-sm mt-1 md:mt-2"></p>
+        </div>
+
+        <div class="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto shrink-0">
+            <button id="tab-upload-btn" onclick="switchTab('upload')" class="flex-1 min-w-[150px] py-4 text-center font-semibold text-indigo-600 border-b-2 border-indigo-600 focus:outline-none flex items-center justify-center gap-2">
+                <span id="tab1Text">1. Carregar Dados</span>
+            </button>
+            <button id="tab-workspace-btn" onclick="switchTab('workspace')" class="flex-1 min-w-[150px] py-4 text-center font-semibold text-slate-500 border-b-2 border-transparent focus:outline-none flex items-center justify-center gap-2">
+                <span id="tab2Text">2. Área de Trabalho</span>
+            </button>
+            <button id="tab-table-btn" onclick="switchTab('table')" class="flex-1 min-w-[150px] py-4 text-center font-semibold text-slate-500 border-b-2 border-transparent focus:outline-none flex items-center justify-center gap-2">
+                <span id="tab3Text">3. Tabela Excel</span>
+            </button>
+        </div>
+
+        <div class="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50 dark:bg-slate-900 transition-colors duration-300 relative">
+            <!-- PESTAÑA 1 -->
+            <div id="tab-upload" class="h-full flex-col gap-6 fade-in flex">
+                <div class="flex flex-col lg:flex-row gap-6 flex-1 min-h-[400px] w-full">
+                    <div class="flex flex-col flex-1">
+                        <div class="flex justify-between items-end mb-2">
+                            <label id="lblRawInput" class="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase"></label>
+                            <button onclick="copyTextArea('rawInput')" class="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span id="btnCopyRawText" class="text-xs font-bold uppercase">Copiar</span>
+                            </button>
+                        </div>
+                        <textarea id="rawInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full" placeholder="ABXO&#10;44867621A&#10;SORIANO ALVAREZ, MARIA AMPARO&#10;ATC PATERNA&#10;18/05/2026"></textarea>
+                    </div>
+                    <div class="hidden lg:flex items-center justify-center text-slate-300 dark:text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
+                    </div>
+                    <div class="flex flex-col flex-1">
+                        <div class="flex justify-between items-end mb-2">
+                            <label id="lblJsonInput" class="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase"></label>
+                            <button onclick="copyTextArea('jsonInput')" class="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                <span id="btnCopyJsonText" class="text-xs font-bold uppercase">Copiar</span>
+                            </button>
+                        </div>
+                        <textarea id="jsonInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full" placeholder="[...]"></textarea>
+                    </div>
+                </div>
+                <div class="mt-2 flex justify-end shrink-0">
+                    <button onclick="handleProcess()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
+                        <span id="btnProcessText">Gerar e Processar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 2 -->
+            <div id="tab-workspace" class="hidden min-h-full flex-col lg:flex-row gap-4 md:gap-6 fade-in">
+                <div class="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col w-full lg:w-5/12 xl:w-1/3 flex-1 min-h-[400px] lg:min-h-0">
+                    <div class="mb-4">
+                        <label id="lblRoleSelect" class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase"></label>
+                        <select id="roleSelect" onchange="onRoleSelectChange()" class="w-full p-3 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                            <option value="" id="roleOptDefault"></option>
+                            <option value="role1" id="opt_role1"></option>
+                            <option value="role2" id="opt_role2"></option>
+                            <option value="role3" id="opt_role3"></option>
+                            <option value="role4" id="opt_role4"></option>
+                            <option value="role5" id="opt_role5"></option>
+                            <option value="role6" id="opt_role6"></option>
+                            <option value="role7" id="opt_role7"></option>
+                            <option value="role8" id="opt_role8"></option>
+                            <option value="role9" id="opt_role9"></option>
+                            <option value="role10" id="opt_role10"></option>
+                        </select>
+                    </div>
+                    <div class="flex items-center justify-between mb-3 shrink-0">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-2 text-sm uppercase">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                            <span id="accessListTitleText"></span>
+                        </h3>
+                        <button onclick="resetCheckboxes()" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold py-1.5 px-3 text-xs rounded-md border dark:border-slate-600 transition-colors">
+                            <span id="btnResetText"></span>
+                        </button>
+                    </div>
+                    <div id="accessCheckboxes" class="space-y-2.5 flex-1 overflow-y-auto pr-2"></div>
+                </div>
+
+                <div class="flex flex-col w-full lg:w-7/12 xl:w-2/3 flex-1 min-h-[400px] lg:min-h-0 bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 relative">
+                    <div id="noDataMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 rounded-xl z-10">
+                        <div class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 p-4 rounded-full mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        </div>
+                        <h3 id="noDataTitleText" class="text-lg font-bold mb-2"></h3>
+                        <p id="noDataDescText" class="text-slate-500 mb-6 text-sm"></p>
+                        <button onclick="switchTab('upload')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackText"></span></button>
+                    </div>
+                    <div id="analyzerContent" class="flex-1 flex flex-col">
+                        <div class="flex items-center justify-between mb-4 border-b dark:border-slate-700 pb-4 shrink-0">
+                            <button id="btnPrev" onclick="prevRecord()" class="p-2 md:px-4 bg-indigo-50 dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 rounded-lg flex items-center gap-2 hover:bg-indigo-100 dark:hover:bg-slate-600 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/></svg>
+                                <span id="btnPrevText" class="hidden md:inline font-bold"></span>
+                            </button>
+                            <span id="recordCounter" class="bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-full border dark:border-indigo-800 shadow-sm"></span>
+                            <button id="btnNext" onclick="nextRecord()" class="p-2 md:px-4 bg-indigo-50 dark:bg-slate-700 text-indigo-700 dark:text-indigo-300 rounded-lg flex items-center gap-2 hover:bg-indigo-100 dark:hover:bg-slate-600 transition-colors">
+                                <span id="btnNextText" class="hidden md:inline font-bold"></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/></svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between mb-4 shrink-0">
+                            <label class="flex items-center space-x-3 cursor-pointer bg-slate-50 dark:bg-slate-700/50 px-4 py-2 rounded-lg border dark:border-slate-600 shadow-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-700">
+                                <input type="checkbox" id="recordRegisteredChk" onchange="toggleRegisteredStatus()" class="form-checkbox h-5 w-5 text-green-500 rounded dark:bg-slate-900 border-slate-300">
+                                <span id="chkRegisteredText" class="text-slate-700 dark:text-slate-300 font-bold uppercase tracking-wider text-[11px]"></span>
+                            </label>
+                            <button id="btnNextGroup" onclick="nextGroup()" class="hidden bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-colors text-sm flex items-center gap-2">
+                                <span id="btnNextGroupText"></span>
+                            </button>
+                        </div>
+                        <div id="dataDisplay" class="flex-1 overflow-y-auto pr-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PESTAÑA 3 -->
+            <div id="tab-table" class="hidden h-full flex-col fade-in">
+                <div class="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col h-full">
+                    <div id="noDataTableMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 rounded-xl z-10 h-full">
+                        <div class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 p-4 rounded-full mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        </div>
+                        <h3 id="noDataTableTitleText" class="text-lg font-bold mb-2"></h3>
+                        <p id="noDataTableDescText" class="text-slate-500 mb-6 text-sm"></p>
+                        <div class="flex gap-3 flex-wrap justify-center">
+                            <button onclick="switchTab('upload')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackTextTable"></span></button>
+                        </div>
+                    </div>
+                    <div id="tableContentWrapper" class="flex-1 flex flex-col min-h-0">
+                        <!-- Barra de Búsqueda -->
+                        <div class="mb-4">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                                </div>
+                                <input type="text" id="searchInput" onkeyup="filterTable()" class="w-full p-2.5 pl-10 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 shrink-0">
+                            <div>
+                                <label id="lblTecnicoIniciales" class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider"></label>
+                                <input type="text" id="input-tecnico-iniciales" oninput="this.value = this.value.toUpperCase(); localStorage.setItem('savedTecnico', this.value);" class="w-full p-2 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold">
+                            </div>
+                            <div>
+                                <label id="lblSolicitante" class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider"></label>
+                                <input type="text" id="input-solicitante" class="w-full p-2 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold">
+                            </div>
+                            <div>
+                                <label id="lblFecAlta" class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider"></label>
+                                <input type="text" id="input-fec-alta" class="w-full p-2 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center w-full gap-3 mb-4 shrink-0 pb-4 border-b border-slate-200 dark:border-slate-700">
+                            <div class="flex gap-3">
+                                <button onclick="generateExcelTable()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm flex items-center gap-2">
+                                    <span id="btnGenerateTableText"></span>
+                                </button>
+                                <button onclick="copyTableToClipboard()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm flex items-center gap-2">
+                                    <span id="btnCopyTableText"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-auto rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <table id="generatedExcelTable" class="excel-table w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th id="th_fecpeticion"></th><th id="th_solicitante"></th><th id="th_nombrecompleto"></th>
+                                        <th id="th_iniciales"></th><th id="th_cargo"></th><th id="th_delegacion"></th>
+                                        <th id="th_fecalta"></th><th id="th_tecnico"></th><th id="th_mail"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="excelTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="alertBox" class="fixed bottom-4 right-4 z-50 p-4 rounded-lg shadow-2xl transform transition-all duration-300 opacity-0 translate-y-full flex items-center gap-3 hidden max-w-sm w-full border-l-4 dark:bg-slate-800">
+        <div id="alertIcon" class="flex-shrink-0"></div>
+        <div class="flex-1"><p id="alertMessage" class="text-sm font-bold"></p></div>
+    </div>
+
+    <script>
+        let currentLang = 'pt';
+        let isDarkMode = false;
+        let allParsedData = [];
+        let cargoGroups = [];
+        let currentGroupIndex = 0;
+        let appData = [];
+        let currentIndex = 0;
+
+        const i18n = {
+            pt: {
+                mainTitle: "Dados",
+                mainSubtitle: "Carregue o seu código JSON e navegue pelos registos de forma amigável.",
+                tab1Text: "1. Carregar Dados",
+                tab2Text: "2. Área de Trabalho",
+                tab3Text: "3. Tabela Excel",
+                lblRawInput: "Cole os dados brutos aqui (5 linhas por registo):",
+                lblJsonInput: "JSON Gerado (Edite se necessário):",
+                btnProcessText: "Gerar e Processar",
+                btnCopy: "Copiar",
+                noDataTitleText: "Não há dados carregados",
+                noDataDescText: "Para poder analisar a informação, primeiro deve carregar um JSON.",
+                btnBackText: "Voltar para Carregar",
+                btnPrevText: "Anterior",
+                btnNextText: "Seguinte",
+                recordCounterTpl: "Registo {0} de {1}",
+                lblRoleSelect: "Selecione o Cargo:",
+                roleOptDefault: "-- Selecione um cargo --",
+                opt_role1: "Armazéns, Operario-a Auxiliar, Higiene, Coolers",
+                opt_role2: "Distribuidor/Repartidor (RB, RZ)",
+                opt_role3: "Instalador",
+                opt_role4: "Comercial (SMALL, SALES)",
+                opt_role5: "CTOP",
+                opt_role6: "TOP",
+                opt_role7: "ATC",
+                opt_role8: "Sda, cobranças",
+                opt_role9: "BO, KA",
+                opt_role10: "IT",
+                btnResetText: "Repor Caixas",
+                accessListTitleText: "Lista de Acessos a Criar:",
+                accessListEmptyText: "Selecione um cargo na lista.",
+                langBtnText: "Cambiar a Español",
+                themeDark: "Modo Escuro",
+                themeLight: "Modo Claro",
+                resetAppText: "Repor Tudo",
+                chkRegistered: "Registado",
+                btnNextGroupText: "Próximo Grupo",
+                lbl_nombre: "APELIDOS/NOMES",
+                lbl_nomes_apelidos: "NOMES/APELIDOS",
+                lbl_nome_normalizado: "APELIDOS/NOMES NORMALIZADOS",
+                lbl_nombre_completo_normalizado: "NOME COMPLETO NORMALIZADO",
+                lbl_fecha: "DATA",
+                lbl_iniciales: "INICIAIS",
+                lbl_dni: "DNI/NIF",
+                lbl_cargo: "CARGO",
+                lbl_delegacion: "DELEGAÇÃO",
+                lbl_password: "PALAVRA-PASSE",
+                lbl_user: "UTILIZADOR",
+                lbl_email: "EMAIL",
+                alertAppReset: "Aplicação reposta.",
+                step1: "Passo 1",
+                reminderText: "Lembre-se de informar e fechar o ticket no Jira, enviar um email aos participantes do ticket e preencher o excel de novas contas.",
+                lblTecnicoIniciales: "Iniciais Técnico",
+                lblSolicitante: "Requerente",
+                lblFecAlta: "Data Alta",
+                btnGenerateTableText: "Gerar Tabela",
+                btnCopyTableText: "Copiar Tabela",
+                btnDownloadRegistryText: "Baixar JSON",
+                btnLoadRegistryText: "Carregar Registo",
+                searchPlaceholder: "Pesquisar por nome ou iniciais...",
+                alertSavedRegistry: "Guardado no registo local!",
+                alertEmptyRegistry: "O registo está vazio",
+                alertAllDuplicate: "Os registos já existem. Não foram duplicados.",
+                alertPartialDuplicate: "Tabela gerada. Só foram guardados registos novos.",
+                th_fecpeticion: "DatPEDIDO",
+                th_solicitante: "REQUERENTE",
+                th_nombrecompleto: "NOME COMPLETO",
+                th_iniciales: "INICIAIS",
+                th_cargo: "CARGO",
+                th_delegacion: "DELEGAÇÃO",
+                th_fecalta: "DatALTA",
+                th_tecnico: "TÉCNICO",
+                th_mail: "MAIL"
+            },
+            es: {
+                mainTitle: "Datos",
+                mainSubtitle: "Carga tu código JSON y navega por los registros de forma amigable.",
+                tab1Text: "1. Cargar Datos",
+                tab2Text: "2. Área de Trabajo",
+                tab3Text: "3. Tabla Excel",
+                lblRawInput: "Pega los datos brutos aquí (5 líneas por registro):",
+                lblJsonInput: "JSON Generado (Edita si es necesario):",
+                btnProcessText: "Generar y Procesar",
+                btnCopy: "Copiar",
+                noDataTitleText: "No hay datos",
+                noDataDescText: "Para poder analizar la información, primero debes cargar un JSON.",
+                btnBackText: "Volver a Cargar",
+                btnPrevText: "Anterior",
+                btnNextText: "Siguiente",
+                recordCounterTpl: "Registro {0} de {1}",
+                lblRoleSelect: "Selecciona el Cargo:",
+                roleOptDefault: "-- Selecione un cargo --",
+                opt_role1: "Almaceneros, Higienes, coolers",
+                opt_role2: "Distribuidor/Repartidor (RB, RZ)",
+                opt_role3: "Instalador",
+                opt_role4: "Comercial (SMALL, SALES)",
+                opt_role5: "CTOP",
+                opt_role6: "TOP",
+                opt_role7: "ATC",
+                opt_role8: "Sda, cobros",
+                opt_role9: "BO, KA",
+                opt_role10: "IT",
+                btnResetText: "Resetear",
+                accessListTitleText: "Lista de Accesos:",
+                accessListEmptyText: "Selecciona un cargo en la lista.",
+                langBtnText: "Mudar para Português",
+                themeDark: "Modo Oscuro",
+                themeLight: "Modo Claro",
+                resetAppText: "Reiniciar Todo",
+                chkRegistered: "Registrado",
+                btnNextGroupText: "Siguiente Grupo",
+                lbl_nombre: "APELLIDOS/NOMBRES",
+                lbl_nomes_apelidos: "NOMBRES/APELLIDOS",
+                lbl_nome_normalizado: "APELLIDOS/NOMBRES NORMALIZADOS",
+                lbl_nombre_completo_normalizado: "NOMBRE COMPLETO NORMALIZADO",
+                lbl_fecha: "FECHA",
+                lbl_iniciales: "INICIALES",
+                lbl_dni: "DNI",
+                lbl_cargo: "CARGO",
+                lbl_delegacion: "DELEGACIÓN",
+                lbl_password: "CONTRASEÑA",
+                lbl_user: "USUARIO",
+                lbl_email: "EMAIL",
+                alertAppReset: "Aplicación reiniciada.",
+                step1: "Paso 1",
+                reminderText: "Recuerda informar y cerrar el ticket en Jira, enviar un mail a los participantes del ticket y llenar el excel de nuevas cuentas.",
+                lblTecnicoIniciales: "Iniciales Técnico",
+                lblSolicitante: "Solicitante",
+                lblFecAlta: "Fecha Alta",
+                btnGenerateTableText: "Generar Tabla",
+                btnCopyTableText: "Copiar Tabla",
+                btnDownloadRegistryText: "Descargar JSON",
+                btnLoadRegistryText: "Cargar Registro",
+                searchPlaceholder: "Buscar por nombre o iniciales...",
+                alertSavedRegistry: "¡Guardado en el registro local!",
+                alertEmptyRegistry: "El registro está vacío",
+                alertAllDuplicate: "Los registros ya existen. No se duplicaron.",
+                alertPartialDuplicate: "Tabla generada. Solo se guardaron registros nuevos.",
+                th_fecpeticion: "FecPEDIDO",
+                th_solicitante: "SOLICITANTE",
+                th_nombrecompleto: "NOMBRE COMPLETO",
+                th_iniciales: "INICIALES",
+                th_cargo: "CARGO",
+                th_delegacion: "DELEGACIÓN",
+                th_fecalta: "FecALTA",
+                th_tecnico: "TECNICO",
+                th_mail: "MAIL"
+            }
+        };
+
+        function openMenu() {
+            document.getElementById('settingsMenu').classList.remove('hidden');
+        }
+
+        function closeMenu() {
+            document.getElementById('settingsMenu').classList.add('hidden');
+        }
+
+        function toggleTheme() { isDarkMode = !isDarkMode; document.documentElement.classList.toggle('dark'); applyTranslations(); }
+        function toggleLanguage() { currentLang = currentLang === 'pt' ? 'es' : 'pt'; applyTranslations(); }
+
+        function applyTranslations() {
+            const tr = i18n[currentLang];
+            const setTxt = (id, text) => { const el = document.getElementById(id); if (el && text) el.textContent = text; };
+            setTxt('mainTitle', tr.mainTitle); setTxt('mainSubtitle', tr.mainSubtitle);
+            setTxt('tab1Text', tr.tab1Text); setTxt('tab2Text', tr.tab2Text); setTxt('tab3Text', tr.tab3Text);
+            setTxt('lblRawInput', tr.lblRawInput); setTxt('lblJsonInput', tr.lblJsonInput);
+            setTxt('btnProcessText', tr.btnProcessText); setTxt('btnCopyRawText', tr.btnCopy); setTxt('btnCopyJsonText', tr.btnCopy);
+            setTxt('noDataTitleText', tr.noDataTitleText); setTxt('noDataTableTitleText', tr.noDataTitleText);
+            setTxt('noDataDescText', tr.noDataDescText); setTxt('noDataTableDescText', tr.noDataDescText);
+            setTxt('btnBackText', tr.btnBackText); setTxt('btnBackTextTable', tr.btnBackText);
+            setTxt('btnPrevText', tr.btnPrevText); setTxt('btnNextText', tr.btnNextText);
+            setTxt('lblRoleSelect', tr.lblRoleSelect); setTxt('roleOptDefault', tr.roleOptDefault);
+            setTxt('btnResetText', tr.btnResetText); setTxt('accessListTitleText', tr.accessListTitleText);
+            setTxt('chkRegisteredText', tr.chkRegistered); setTxt('btnNextGroupText', tr.btnNextGroupText);
+            setTxt('langBtnText', tr.langBtnText); setTxt('themeBtnText', isDarkMode ? tr.themeLight : tr.themeDark);
+            setTxt('resetAppBtnText', tr.resetAppText); setTxt('lblTecnicoIniciales', tr.lblTecnicoIniciales);
+            setTxt('lblSolicitante', tr.lblSolicitante); setTxt('lblFecAlta', tr.lblFecAlta);
+            setTxt('btnGenerateTableText', tr.btnGenerateTableText); setTxt('btnCopyTableText', tr.btnCopyTableText);
+            setTxt('btnMenuDownloadRegistryText', tr.btnDownloadRegistryText);
+            setTxt('btnMenuLoadRegistryText', tr.btnLoadRegistryText);
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) searchInput.placeholder = tr.searchPlaceholder;
+            setTxt('th_fecpeticion', tr.th_fecpeticion); setTxt('th_solicitante', tr.th_solicitante);
+            setTxt('th_nombrecompleto', tr.th_nombrecompleto); setTxt('th_iniciales', tr.th_iniciales);
+            setTxt('th_cargo', tr.th_cargo); setTxt('th_delegacion', tr.th_delegacion);
+            setTxt('th_fecalta', tr.th_fecalta); setTxt('th_tecnico', tr.th_tecnico); setTxt('th_mail', tr.th_mail);
+            for(let i=1; i<=10; i++) { setTxt(`opt_role${i}`, tr[`opt_role${i}`]); }
+            if (appData.length > 0) {
+                setTxt('recordCounter', tr.recordCounterTpl.replace('{0}', currentIndex + 1).replace('{1}', appData.length));
+                renderCurrentRecord();
+            }
+            if (document.getElementById('roleSelect').value) { renderRoleAccesses(true); }
+        }
+
+        function switchTab(tab) {
+            ['upload', 'workspace', 'table'].forEach(t => {
+                const el = document.getElementById(`tab-${t}`);
+                const btn = document.getElementById(`tab-${t}-btn`);
+                if (t === tab) { 
+                    el.classList.remove('hidden'); el.classList.add('flex'); 
+                    btn.classList.replace('border-transparent', 'border-indigo-600'); btn.classList.replace('text-slate-500', 'text-indigo-600'); 
+                } else { 
+                    el.classList.add('hidden'); el.classList.remove('flex'); 
+                    btn.classList.replace('border-indigo-600', 'border-transparent'); btn.classList.replace('text-indigo-600', 'text-slate-500'); 
+                }
+            });
+
+            if (tab === 'workspace') {
+                if (allParsedData.length === 0) { 
+                    document.getElementById('noDataMessage').classList.remove('hidden'); 
+                    document.getElementById('noDataMessage').classList.add('flex'); 
+                    document.getElementById('analyzerContent').classList.add('hidden'); 
+                    document.getElementById('analyzerContent').classList.remove('flex');
+                } else { 
+                    document.getElementById('noDataMessage').classList.add('hidden'); 
+                    document.getElementById('noDataMessage').classList.remove('flex'); 
+                    document.getElementById('analyzerContent').classList.remove('hidden'); 
+                    document.getElementById('analyzerContent').classList.add('flex');
+                    renderCurrentRecord(); 
+                }
+            }
+            
+            if (tab === 'table') {
+                if (allParsedData.length === 0 && document.getElementById('excelTableBody').children.length === 0) { 
+                    document.getElementById('noDataTableMessage').classList.remove('hidden'); 
+                    document.getElementById('noDataTableMessage').classList.add('flex'); 
+                    document.getElementById('tableContentWrapper').classList.add('hidden'); 
+                    document.getElementById('tableContentWrapper').classList.remove('flex');
+                } else { 
+                    document.getElementById('noDataTableMessage').classList.add('hidden'); 
+                    document.getElementById('noDataTableMessage').classList.remove('flex'); 
+                    document.getElementById('tableContentWrapper').classList.remove('hidden'); 
+                    document.getElementById('tableContentWrapper').classList.add('flex');
+                }
+            }
+        }
+
+        function handleProcess() {
+            const rawText = document.getElementById('rawInput').value.trim();
+            const jsonText = document.getElementById('jsonInput').value.trim();
+            if (!rawText && !jsonText) { showAlert(currentLang === 'pt' ? 'Insira dados brutos ou JSON' : 'Ingresa dados brutos o JSON', 'error'); return; }
+            if (rawText) generateJSON();
+            processJSON();
+        }
+
+        function generateJSON() {
+            const rawText = document.getElementById('rawInput').value;
+            if(!rawText.trim()) return;
+            const lines = rawText.split('\n').map(l => l.trim()).filter(l => l !== '');
+            document.getElementById('rawInput').value = lines.join('\n');
+            const results = [];
+            
+            const toTitleCase = (str) => str.toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' ');
+            
+            // Logic for Pronounceable Passwords
+            const components = [
+                "ba", "be", "bu", "ca", "ce", "cu", "da", "de", "du", "fa", "fe", "fu", "ga", "ge", "gu", "ha", "he", "hu", "ja", "je",
+                "ju", "ka", "ke", "ku", "ma", "me", "mu", "na", "ne", "nu", "pa", "pe", "pu", "qa", "qe", "qu", "ra", "re", "ru", "sa",
+                "se", "su", "ta", "te", "tu", "va", "ve", "vu", "wa", "we", "wu", "xa", "xe", "xu", "ya", "ye", "yu", "za", "ze", "zu",
+                "bra", "bre", "bru", "cra", "cre", "cru", "dra", "dre", "dru", "fra", "fre", "fru", "gra", "gre", "gru", "pra", "pre", "pru",
+                "tra", "tre", "tru", "vrea", "vru", "bla", "ble", "blu", "sma", "sme", "smu", "ste", "stu", "que", "qui", "tra", "tre", "tru", "za", "zu"
+            ];
+            
+            // Pool de caracteres especiales restringido exactamente a $, _, ?, !
+            const specialPool = ["$", "_", "?", "!"];
+            const numberPool = ["2", "3", "4", "5", "6", "7", "8", "9"];
+            const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
+            
+            for(let i = 0; i < lines.length; i += 5) {
+                if(i + 4 >= lines.length) break; 
+                const iniciales = lines[i]; const dni = lines[i+1]; const nombreFull = lines[i+2]; const cargoDelegacion = lines[i+3]; const fecha = lines[i+4].replace(/\//g, '-');
+                
+                // Procesar nombre: si tiene "*" usar ese formato, si no usar comas
+                let lastnames = '', firstnames = '';
+                
+                if (nombreFull.includes('*')) {
+                    // Formato: APELLIDOS*NOMBRES
+                    const nameParts = nombreFull.split('*');
+                    lastnames = (nameParts[0] || '').trim();
+                    firstnames = (nameParts[1] || '').trim();
+                } else if (nombreFull.includes(',')) {
+                    // Formato por defecto: APELLIDOS, NOMBRES
+                    const nameParts = nombreFull.split(',');
+                    lastnames = (nameParts[0] || '').trim();
+                    firstnames = (nameParts[1] || '').trim();
+                } else {
+                    // Solo un nombre
+                    firstnames = nombreFull.trim();
+                }
+                
+                let nombreSinComa, nombreNormalizado, nombresApellidos, nombreCompletoNormalizado, nombreNormalizadoSolo, apellidoNormalizado;
+                
+                nombreSinComa = `${toTitleCase(lastnames)} ${toTitleCase(firstnames)}`.trim();
+                nombreNormalizado = `${toTitleCase(lastnames)} ${toTitleCase(firstnames)}`.trim();
+                nombresApellidos = `${toTitleCase(firstnames)} ${toTitleCase(lastnames)}`.trim();
+                nombreCompletoNormalizado = `${toTitleCase(firstnames)} ${toTitleCase(lastnames)}`.trim();
+                nombreNormalizadoSolo = toTitleCase(firstnames);
+                apellidoNormalizado = toTitleCase(lastnames);
+                
+                const usuario = (firstnames && lastnames) ? `${firstnames.split(' ')[0]}.${lastnames.split(' ')[0]}`.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : (firstnames || nombreFull).split(' ')[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+                
+                // Dividir por "*" para separar cargo y delegación
+                let cargo = "", delegacion = "";
+                if (cargoDelegacion.includes("*")) {
+                    const parts = cargoDelegacion.split("*");
+                    cargo = (parts[0] || "").trim();
+                    delegacion = (parts[1] || "").trim();
+                } else {
+                    // Fallback: si no hay "*", usar el método anterior
+                    const cdParts = cargoDelegacion.trim().split(/\s+/);
+                    delegacion = cdParts.length > 0 ? cdParts.pop() : "";
+                    cargo = cdParts.join(' ');
+                }
+                
+                // Phonetic Password Generation Logic
+                let pairs = [];
+                for (let j = 0; j < 5; j++) pairs.push(getRand(components));
+                pairs[0] = pairs[0].charAt(0).toUpperCase() + pairs[0].slice(1);
+                
+                const spec1 = getRand(specialPool);
+                const spec2 = getRand(specialPool);
+                
+                let nums = "";
+                for (let j = 0; j < 4; j++) nums += getRand(numberPool);
+                
+                let p1to4 = pairs.slice(0, 4).join("");
+                let p5 = pairs[4];
+                
+                let password = p1to4 + spec1 + p5 + nums + spec2;
+                
+                // Adjustment logic 12-15 chars
+                if (password.length > 15) {
+                    let diff = password.length - 15;
+                    let adjustedNums = nums.substring(0, Math.max(1, nums.length - diff));
+                    password = p1to4 + spec1 + p5 + adjustedNums + spec2;
+                    if (password.length > 15) {
+                        password = password.substring(0, 14) + spec2;
+                    }
+                }
+
+                const upperCharsApp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; let passApp = ''; for(let p=0; p<3; p++) passApp += upperCharsApp.charAt(Math.floor(Math.random() * upperCharsApp.length));
+                
+                // Todas las claves del JSON unificadas al español y normalizadas (usando espacios)
+                results.push({
+                    "Iniciales": iniciales, 
+                    "DNI": dni, 
+                    "Nombre Normalizado": nombreNormalizadoSolo,
+                    "Apellido Normalizado": apellidoNormalizado,
+                    "Nombre Completo Normalizado": nombreCompletoNormalizado,
+                    "Nombres Apellidos": nombresApellidos, 
+                    "Email": `${usuario}@aquaservice.com`, 
+                    "Usuario": usuario, 
+                    "Cargo": cargo, 
+                    "Delegacion": delegacion, 
+                    "Fecha": fecha, 
+                    "Contraseña": password, 
+                    "Contraseña APP": passApp
+                });
+            }
+            document.getElementById('jsonInput').value = JSON.stringify(results, null, 2);
+        }
+
+        function processJSON() {
+            const rawText = document.getElementById('jsonInput').value.trim();
+            if (!rawText) return;
+            try {
+                const parsed = JSON.parse(rawText);
+                const rawArray = Array.isArray(parsed) ? parsed : [parsed];
+                let processedAll = rawArray.map(item => {
+                    const enhanced = { ...item };
+                    const toTitle = (str) => str.toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' ');
+                    
+                    // Retrocompatibilidad con nombres antiguos si se carga un JSON viejo
+                    if (!enhanced['Contraseña APP']) {
+                        if (enhanced['PASSWORD APP']) { enhanced['Contraseña APP'] = enhanced['PASSWORD APP']; delete enhanced['PASSWORD APP']; }
+                        else if (enhanced['Pass APP']) { enhanced['Contraseña APP'] = enhanced['Pass APP']; delete enhanced['Pass APP']; }
+                        else enhanced['Contraseña APP'] = Array.from({length:3}, () => String.fromCharCode(65 + Math.floor(Math.random()*26))).join('');
+                    }
+                    return enhanced;
+                });
+                allParsedData = [...processedAll];
+                processedAll.sort((a, b) => ((a.Cargo || "").toUpperCase() < (b.Cargo || "").toUpperCase() ? -1 : 1));
+                cargoGroups = [];
+                if(processedAll.length > 0) {
+                    let currentCargo = processedAll[0].Cargo; let currentGroup = [];
+                    processedAll.forEach(item => { if(item.Cargo === currentCargo) currentGroup.push(item); else { cargoGroups.push(currentGroup); currentCargo = item.Cargo; currentGroup = [item]; } });
+                    cargoGroups.push(currentGroup);
+                }
+                currentGroupIndex = 0; appData = cargoGroups.length > 0 ? cargoGroups[0] : []; currentIndex = 0;
+                showAlert(currentLang === 'pt' ? "Dados processados!" : "¡Datos procesados!", 'success');
+                switchTab('workspace');
+            } catch (e) { showAlert("Error JSON.", "error"); }
+        }
+
+        function nextGroup() { if (cargoGroups.length > 1) { currentGroupIndex = (currentGroupIndex + 1) % cargoGroups.length; appData = cargoGroups[currentGroupIndex]; currentIndex = 0; renderCurrentRecord(); } }
+
+        function renderCurrentRecord() {
+            if (appData.length === 0) return;
+            const record = appData[currentIndex];
+            document.getElementById('recordCounter').textContent = i18n[currentLang].recordCounterTpl.replace('{0}', currentIndex+1).replace('{1}', appData.length);
+            document.getElementById('recordRegisteredChk').checked = !!record._isRegistered;
+            const btnPrev = document.getElementById('btnPrev'), btnNext = document.getElementById('btnNext');
+            btnPrev.classList.toggle('cursor-not-allowed', currentIndex === 0);
+            btnNext.classList.toggle('cursor-not-allowed', currentIndex === appData.length - 1);
+            document.getElementById('btnNextGroup').classList.toggle('hidden', cargoGroups.length <= 1);
+            
+            // Determinar y preseleccionar el rol del registro
+            if (!record._selectedRole) {
+                record._selectedRole = autoSelectRoleByCargo(record.Cargo || '') || '';
+            }
+            document.getElementById('roleSelect').value = record._selectedRole;
+            renderRoleAccesses(false);
+            
+            const escapeHtml = (text) => String(text || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+            const sanitizeId = (text) => String(text || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+            let html = '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-4 fade-in">';
+            let groupedNamesInserted = false;
+
+            for (const [k, v] of Object.entries(record)) {
+                if (k.startsWith('_')) continue;
+                let dk = k, labelClasses = "text-slate-400", lk = k.toLowerCase();
+                const keyId = sanitizeId(k);
+                const fieldId = `field_${keyId}_${currentIndex}`;
+                const safeValue = escapeHtml(v);
+
+                if (lk === 'nombre normalizado' && !groupedNamesInserted) {
+                    const normalizedNameLabel = escapeHtml(record['Nombre Normalizado'] || record['nombre normalizado'] || '');
+                    const normalizedLastNameLabel = escapeHtml(record['Apellido Normalizado'] || record['apellido normalizado'] || '');
+                    const normalizedNameId = `field_Nombre_Normalizado_${currentIndex}`;
+                    const normalizedLastNameId = `field_Apellido_Normalizado_${currentIndex}`;
+                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-[10px] font-bold uppercase text-slate-400">NOMBRES NORMALIZADOS</span>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="toggleFieldCaseById('${normalizedNameId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>
+                                        <button onclick="copyFieldById('${normalizedNameId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div id="${normalizedNameId}" data-original="${normalizedNameLabel}" data-case-mode="title" class="font-bold text-sm break-words">${normalizedNameLabel}</div>
+                            </div>`;
+                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-[10px] font-bold uppercase text-slate-400">APELLIDOS NORMALIZADOS</span>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="toggleFieldCaseById('${normalizedLastNameId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>
+                                        <button onclick="copyFieldById('${normalizedLastNameId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"></path></svg></button>
+                                    </div>
+                                </div>
+                                <div id="${normalizedLastNameId}" data-original="${normalizedLastNameLabel}" data-case-mode="title" class="font-bold text-sm break-words">${normalizedLastNameLabel}</div>
+                            </div>`;
+                    groupedNamesInserted = true;
+                    continue;
+                }
+
+                if (lk === 'nombre normalizado' || lk === 'apellido normalizado') continue;
+                if (lk === 'nombres apellidos' || lk === 'nombres_apellidos' || lk === 'nomes apelidos' || lk === 'nomes_apelidos') continue;
+                if (lk === 'nombre' || lk === 'nome') continue;
+                if (lk === 'nombre completo normalizado') continue;
+
+                // Ocultar Contraseña APP si el tipo de cuenta (rol seleccionado) no es repartidor (role2) ni instalador (role3)
+                if (lk === 'contraseña app' || lk === 'pass app') {
+                    const selectedRole = record._selectedRole || '';
+                    const isRepInst = (selectedRole === 'role2' || selectedRole === 'role3');
+                    if (!isRepInst) continue;
+                    dk = "PASS APP"; 
+                    labelClasses = "text-orange-500 dark:text-orange-400"; // Color especial para identificarlo rápido
+                } 
+                else if(lk === 'nombre' || lk === 'nome') { dk = i18n[currentLang].lbl_nombre; labelClasses = "text-red-500 dark:text-red-400"; }
+                else if(lk === 'nombres apellidos' || lk === 'nombres_apellidos' || lk === 'nomes apelidos' || lk === 'nomes_apelidos') { dk = i18n[currentLang].lbl_nomes_apelidos; labelClasses = "text-slate-400"; }
+                else if(lk.includes('completo normalizado')) dk = i18n[currentLang].lbl_nombre_completo_normalizado;
+                else if(lk.includes('normalizado')) dk = i18n[currentLang].lbl_nome_normalizado;
+                else if(lk === 'fecha' || lk === 'data') dk = i18n[currentLang].lbl_fecha;
+                else if(lk === 'iniciales' || lk === 'iniciais') dk = i18n[currentLang].lbl_iniciales;
+                else if(lk === 'dni') dk = i18n[currentLang].lbl_dni;
+                else if(lk === 'cargo') dk = i18n[currentLang].lbl_cargo;
+                else if(lk === 'delegacion' || lk === 'delegação') dk = i18n[currentLang].lbl_delegacion;
+                else if(lk === 'contraseña' || lk === 'password' || lk === 'palavra-passe') dk = i18n[currentLang].lbl_password;
+                else if(lk === 'usuario' || lk === 'user' || lk === 'utilizador') dk = i18n[currentLang].lbl_user;
+                else if(lk === 'email') dk = i18n[currentLang].lbl_email;
+
+                const skipToggleCase = ['iniciales', 'dni', 'fecha', 'contraseña', 'contraseña app', 'pass app', 'password app', 'palavra-passe', 'cargo', 'email'].includes(lk);
+                const caseMode = (lk === 'usuario' || lk === 'user' || lk === 'utilizador') ? 'upper-lower' : 'title';
+                const toggleButtonHtml = skipToggleCase ? '' : `<button onclick="toggleFieldCaseById('${fieldId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>`;
+
+                html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group"><div class="flex justify-between items-center mb-1"><span class="text-[10px] font-bold uppercase ${labelClasses}">${dk}</span><div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">${toggleButtonHtml}<button onclick="copyFieldById('${fieldId}')" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400"><svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-4 w-4\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"9\" y=\"9\" width=\"13\" height=\"13\" rx=\"2\" ry=\"2\"></rect><path d=\"M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1\"></path></svg></button></div></div><div id="${fieldId}" data-original="${safeValue}" data-case-mode="${caseMode}" class="font-bold text-sm break-words">${safeValue}</div></div>`;
+            }
+            document.getElementById('dataDisplay').innerHTML = html + '</div>';
+        }
+
+        function nextRecord() { if(currentIndex < appData.length-1){ currentIndex++; renderCurrentRecord(); } }
+        function prevRecord() { if(currentIndex > 0){ currentIndex--; renderCurrentRecord(); } }
+        function toggleRegisteredStatus() { if(appData.length > 0) appData[currentIndex]._isRegistered = document.getElementById('recordRegisteredChk').checked; }
+
+        function resetApp() {
+            document.getElementById('rawInput').value = '';
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('input-solicitante').value = '';
+            
+            // Retener la fecha actual
+            const today = new Date();
+            document.getElementById('input-fec-alta').value = String(today.getDate()).padStart(2, '0') + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + today.getFullYear();
+            
+            appData = []; 
+            allParsedData = []; 
+            cargoGroups = []; 
+            currentGroupIndex = 0; 
+            currentIndex = 0;
+            
+            document.getElementById('roleSelect').value = '';
+            document.getElementById('accessCheckboxes').innerHTML = '';
+            document.getElementById('excelTableBody').innerHTML = '';
+            document.getElementById('dataDisplay').innerHTML = '';
+            document.getElementById('recordCounter').textContent = '';
+            document.getElementById('btnNextGroup').classList.add('hidden');
+            
+            checkRegistryVisibility(); 
+            
+            closeMenu();
+            
+            switchTab('upload');
+            showAlert(i18n[currentLang].alertAppReset, 'success');
+        }
+
+        function checkRegistryVisibility() {
+            const existing = localStorage.getItem('jsonRegistryControl');
+            const section = document.getElementById('menuRegistrySection');
+            if (existing && JSON.parse(existing).length > 0) {
+                section.classList.remove('hidden');
+                section.classList.add('flex');
+            } else {
+                section.classList.add('hidden');
+                section.classList.remove('flex');
+            }
+        }
+
+        function generateExcelTable() {
+            if (allParsedData.length === 0) return;
+            const tecIni = document.getElementById('input-tecnico-iniciales').value.trim(), sol = document.getElementById('input-solicitante').value.trim(), fecAlta = document.getElementById('input-fec-alta').value.trim();
+            const tbody = document.getElementById('excelTableBody'); tbody.innerHTML = '';
+            
+            const toTitleCase = (str) => str.toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' ');
+            const newRecords = [];
+
+            allParsedData.forEach(item => {
+                const tr = document.createElement('tr');
+                const createTd = (txt, isDate = false) => { const td = document.createElement('td'); if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); td.textContent = txt; return td; };
+                
+                const nomCompleto = item['Nombre Completo Normalizado'] || item['Nombres Apellidos'] || item['Nombre Normalizado'] || item['Nombre'] || '';
+                const delegacionFormateada = toTitleCase(item['Delegacion'] || '');
+                const FecPETICION = (item['Fecha'] || '').replace(/\//g, '-');
+
+                tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario (hoy)
+                tr.appendChild(createTd(sol)); // SOLICITANTE
+                tr.appendChild(createTd(nomCompleto));
+                tr.appendChild(createTd(item['Iniciales'] || ''));
+                tr.appendChild(createTd(item['Cargo'] || ''));
+                tr.appendChild(createTd(delegacionFormateada)); // DELEGACIÓN en Title Case
+                tr.appendChild(createTd(FecPETICION, true)); // FecALTA = Fecha del JSON
+                tr.appendChild(createTd(tecIni));
+                tr.appendChild(createTd((item['Email'] || '').split('@')[0]));
+                tbody.appendChild(tr);
+
+                // Preparar registro para ser guardado
+                newRecords.push({
+                    "FecPETICION": FecPETICION,
+                    "SOLICITANTE": sol,
+                    "NOMBRE COMPLETO": nomCompleto,
+                    "INICIALES": item['Iniciales'] || '',
+                    "CARGO": item['Cargo'] || '',
+                    "DELEGACIÓN": delegacionFormateada,
+                    "FecALTA": fecAlta,
+                    "TECNICO": tecIni,
+                    "MAIL": (item['Email'] || '').split('@')[0]
+                });
+            });
+            
+            // Guardar automáticamente en el registro local
+            let registry = [];
+            const existing = localStorage.getItem('jsonRegistryControl');
+            if (existing) {
+                try { registry = JSON.parse(existing); } catch(e) {}
+            }
+
+            // Validar duplicados comparando INICIALES y FecPETICION (Fecha del JSON)
+            const recordsToSave = newRecords.filter(newRec => {
+                return !registry.some(regRec => regRec.INICIALES === newRec.INICIALES && regRec.FecPETICION === newRec.FecPETICION);
+            });
+
+            if (recordsToSave.length === 0) {
+                // Todos los registros ya existían en el almacenamiento local
+                showAlert(i18n[currentLang].alertAllDuplicate, "error");
+            } else {
+                // Anexar únicamente los registros que no son duplicados
+                registry = registry.concat(recordsToSave);
+                localStorage.setItem('jsonRegistryControl', JSON.stringify(registry));
+
+                if (recordsToSave.length < newRecords.length) {
+                    showAlert(i18n[currentLang].alertPartialDuplicate, "success");
+                } else {
+                    showAlert(currentLang === 'pt' ? "Tabela gerada e guardada!" : "¡Tabla generada y guardada!", "success");
+                }
+            }
+
+            checkRegistryVisibility(); // Muestra el botón de descarga en el menú
+
+            // Limpiar buscador si hubiese algo escrito
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) { searchInput.value = ''; filterTable(); }
+        }
+
+        function copyTableToClipboard() {
+            const table = document.getElementById('generatedExcelTable'); if (table.rows.length <= 1) return;
+            const thead = table.querySelector('thead'); thead.style.display = 'none';
+            const range = document.createRange(); range.selectNode(table); window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+            try { document.execCommand('copy'); showAlert(currentLang === 'pt' ? "Tabela copiada!" : "¡Tabla copiada!", "success"); } catch (err) {}
+            thead.style.display = ''; window.getSelection().removeAllRanges();
+        }
+
+        function downloadRegistry() {
+            const existing = localStorage.getItem('jsonRegistryControl');
+            if (!existing || JSON.parse(existing).length === 0) {
+                showAlert(i18n[currentLang].alertEmptyRegistry, "error");
+                return;
+            }
+
+            const blob = new Blob([existing], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "registro_control.json";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function loadRegistry() {
+            const existing = localStorage.getItem('jsonRegistryControl');
+            if (!existing) {
+                showAlert(i18n[currentLang].alertEmptyRegistry, "error");
+                return;
+            }
+            let registry = [];
+            try { registry = JSON.parse(existing); } catch(e) { return; }
+            
+            if(registry.length === 0) {
+                showAlert(i18n[currentLang].alertEmptyRegistry, "error");
+                return;
+            }
+
+            const tbody = document.getElementById('excelTableBody'); 
+            tbody.innerHTML = '';
+
+            registry.forEach(item => {
+                const tr = document.createElement('tr');
+                const createTd = (txt, isDate = false) => { 
+                    const td = document.createElement('td'); 
+                    if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); 
+                    td.textContent = txt; 
+                    return td; 
+                };
+                
+                tr.appendChild(createTd(item['FecPETICION'] || '', true));
+                tr.appendChild(createTd(item['SOLICITANTE'] || ''));
+                tr.appendChild(createTd(item['NOMBRE COMPLETO'] || ''));
+                tr.appendChild(createTd(item['INICIALES'] || ''));
+                tr.appendChild(createTd(item['CARGO'] || ''));
+                tr.appendChild(createTd(item['DELEGACIÓN'] || ''));
+                tr.appendChild(createTd(item['FecALTA'] || '', true));
+                tr.appendChild(createTd(item['TECNICO'] || ''));
+                tr.appendChild(createTd(item['MAIL'] || ''));
+                
+                tbody.appendChild(tr);
+            });
+            
+            // Ocultar mensaje de "no hay datos" y mostrar tabla
+            document.getElementById('noDataTableMessage').classList.add('hidden'); 
+            document.getElementById('noDataTableMessage').classList.remove('flex'); 
+            document.getElementById('tableContentWrapper').classList.remove('hidden'); 
+            document.getElementById('tableContentWrapper').classList.add('flex');
+
+            // Limpiar buscador si hubiese algo escrito
+            const searchInput = document.getElementById('searchInput');
+            if(searchInput) { searchInput.value = ''; filterTable(); }
+
+            showAlert(currentLang === 'pt' ? "Registo carregado" : "Registro cargado", "success");
+        }
+
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const tbody = document.getElementById('excelTableBody');
+            const trs = tbody.getElementsByTagName('tr');
+
+            for (let i = 0; i < trs.length; i++) {
+                const tdNombre = trs[i].getElementsByTagName('td')[2];
+                const tdIniciales = trs[i].getElementsByTagName('td')[3];
+                if (tdNombre || tdIniciales) {
+                    const txtNombre = tdNombre.textContent || tdNombre.innerText;
+                    const txtIniciales = tdIniciales.textContent || tdIniciales.innerText;
+                    if (txtNombre.toUpperCase().indexOf(filter) > -1 || txtIniciales.toUpperCase().indexOf(filter) > -1) {
+                        trs[i].style.display = "";
+                    } else {
+                        trs[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        const taskDict = {
+            "cta_servidor": { pt: `Cta-Servidor <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/1189183502/Gu+a+para+Crear+usuario+repartidor+con+uphint" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Cta-Servidor <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/1189183502/Gu+a+para+Crear+usuario+repartidor+con+uphint" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "crm": { pt: `Criar Utilizador CRM <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/903184385/Alta+en+CRM" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Crear Usuario CRM <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/903184385/Alta+en+CRM" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "webserver": { pt: `Criar Utilizador Webserver <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/edit-v2/903151619" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Crear Usuario Webserver <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/edit-v2/903151619" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "instalador": { pt: "Criar Utilizador Instalador", es: "Crear Usuario Instalador" },
+            "correo": { pt: "Criar email: Servidor ValSystem / [Boton Rojo] para Sync - (Atualizar pass na Cta-Servidor)", es: "Crear correo: Servidor ValSystem / [Boton Rojo] para Sync - (Actualizar pass en Cta-Servidor)" },
+            "comercial": { pt: `Criar Utilizador Comercial <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/902856709/Crear+usuario+comercial" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Crear Usuario Comercial <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/902856709/Crear+usuario+comercial" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "attitude": { pt: "Criar Utilizador Attitude", es: "Crear Usuario Attitude" },
+            "pregunta_attitude_inin": { pt: "Perguntar se é Attitude ou ININ", es: "Preguntar si es Attitude o ININ" },
+            "salesforce": { pt: `Criar Utilizador Salesforce <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/891781244/Crear+usuario+salesforce+talkdesk+PRO" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Crear Usuario Salesforce <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/891781244/Crear+usuario+salesforce+talkdesk+PRO" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "fortitoken": { pt: `Fortitoken <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/892207109/Crear+usuario+forticlient" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>`, es: `Fortitoken <a href="https://aquaservice.atlassian.net/wiki/spaces/BCS/pages/892207109/Crear+usuario+forticlient" target="_blank" onclick="event.stopPropagation()" class="ml-2 text-[9px] bg-sky-100 text-sky-700 px-2 rounded hover:bg-sky-200">Guia</a>` },
+            "inin_soporte": { pt: "Criar Utilizador ININ (Suporte)", es: "Crear Usuario ININ (Soporte)" },
+            "carta_alta": { pt: "Criar carta de boas-vindas / Alimentar excel de altas", es: "Crear carta bienvenida / Alimentar excel altas" }
+        };
+
+        const roleData = { "role1": [], "role2": ["crm", "webserver"], "role3": ["crm", "instalador", "webserver"], "role4": ["correo", "crm", "comercial"], "role5": ["correo", "crm", "attitude", "fortitoken"], "role6": ["correo", "crm", "comercial", "pregunta_attitude_inin", "fortitoken"], "role7": ["correo", "crm", "salesforce", "fortitoken"], "role8": ["correo", "crm", "salesforce", "fortitoken"], "role9": ["correo", "crm", "fortitoken"], "role10": ["correo", "crm", "inin_soporte", "fortitoken"] };
+
+        function renderRoleAccesses(preserveState = false) {
+            const role = document.getElementById('roleSelect').value, container = document.getElementById('accessCheckboxes');
+            if(!role){ container.innerHTML = `<p class="text-slate-500 text-center py-8">${i18n[currentLang].accessListEmptyText}</p>`; return; }
+            
+            const record = appData[currentIndex];
+            if (record && !record._checkedAccesses) {
+                record._checkedAccesses = {};
+            }
+
+            let html = createChk('cta_servidor', taskDict['cta_servidor'][currentLang], true);
+            roleData[role].forEach(k => html += createChk(k, taskDict[k][currentLang]));
+            html += createChk('carta_alta', taskDict['carta_alta'][currentLang]) + `<div class="mt-4 p-3.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 rounded-lg flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p class="text-sm font-medium text-blue-800 dark:text-blue-200 leading-snug">${i18n[currentLang].reminderText}</p></div>`;
+            container.innerHTML = html;
+        }
+
+        function onRoleSelectChange() {
+            const role = document.getElementById('roleSelect').value;
+            const record = appData[currentIndex];
+            if (record) {
+                record._selectedRole = role;
+            }
+            renderRoleAccesses(false);
+            renderCurrentRecord();
+        }
+
+        function createChk(key, t, first=false) {
+            const record = appData[currentIndex];
+            const isChecked = record && record._checkedAccesses && record._checkedAccesses[key];
+            const checkedAttr = isChecked ? 'checked' : '';
+            const badge = first ? `<span class="ml-2 text-[10px] uppercase font-bold bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full">${i18n[currentLang].step1}</span>` : '';
+            return `<label class="flex items-start space-x-3 p-3 rounded-lg border dark:border-slate-700 ${first?'bg-indigo-50 dark:bg-indigo-900/20':''} hover:bg-slate-50 transition-colors cursor-pointer"><input type="checkbox" data-access-key="${key}" onchange="onAccessCheckboxChange(this)" ${checkedAttr} class="role-checkbox mt-1 h-4 w-4 text-indigo-600 rounded"><span class="text-slate-700 dark:text-slate-300 font-medium flex items-center flex-wrap gap-1.5 text-sm">${t} ${badge}</span></label>`;
+        }
+
+        function onAccessCheckboxChange(checkbox) {
+            const key = checkbox.dataset.accessKey;
+            const record = appData[currentIndex];
+            if (record) {
+                if (!record._checkedAccesses) {
+                    record._checkedAccesses = {};
+                }
+                record._checkedAccesses[key] = checkbox.checked;
+
+                // Si se marcan todas las casillas para este rol, marcar el registro como Registrado automáticamente
+                const role = document.getElementById('roleSelect').value;
+                if (role) {
+                    const requiredKeys = ['cta_servidor', ...roleData[role], 'carta_alta'];
+                    const allChecked = requiredKeys.every(k => record._checkedAccesses[k]);
+                    record._isRegistered = allChecked;
+                    document.getElementById('recordRegisteredChk').checked = allChecked;
+                }
+            }
+        }
+        
+        // Función para preseleccionar el cargo basado en el cargo del registro
+        function autoSelectRoleByCargo(cargoRecord) {
+            // Mapeo de cargos a roles
+            const cargoToRole = {
+                'role1': [/almacén|armazém|operario|auxiliar|higiene|cooler|almacenero/i],
+                'role2': [/distribuidor|repartidor|rb|rz/i],
+                'role3': [/instalador/i],
+                'role4': [/comercial|small|sales/i],
+                'role5': [/ctop/i],
+                'role6': [/top(?!\s*$)/i],  // TOP pero no solamente "TOP"
+                'role7': [/atc/i],
+                'role8': [/sda|cobro|cobran/i],
+                'role9': [/bo|ka\b/i],
+                'role10': [/it(?!\s*[a-z])/i]
+            };
+            
+            if (!cargoRecord) return;
+            
+            for (const [roleKey, patterns] of Object.entries(cargoToRole)) {
+                for (const pattern of patterns) {
+                    if (pattern.test(cargoRecord)) {
+                        return roleKey;
+                    }
+                }
+            }
+            return null;
+        }
+        
+        function resetCheckboxes() {
+            const record = appData[currentIndex];
+            if (record) {
+                record._checkedAccesses = {};
+                record._isRegistered = false;
+                document.getElementById('recordRegisteredChk').checked = false;
+            }
+            document.querySelectorAll('.role-checkbox').forEach(c => c.checked = false);
+        }
+        function copyTextArea(id) { const el = document.getElementById(id); if (el.value) { navigator.clipboard.writeText(el.value); showAlert(currentLang === 'pt' ? "Copiado" : "Copiado", "success"); } }
+        function copyToClipboard(k) { navigator.clipboard.writeText(appData[currentIndex][k]); showAlert(currentLang === 'pt' ? "Copiado" : "Copiado", "success"); }
+        function copyFieldById(id) { const el = document.getElementById(id); if (el) { navigator.clipboard.writeText(el.textContent.trim()); showAlert(currentLang === 'pt' ? "Copiado" : "Copiado", "success"); } }
+        function toTitleCaseStr(text) { return String(text || '').toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' '); }
+        function toggleFieldCaseById(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const current = el.textContent.trim();
+            const original = el.dataset.original || current;
+            const caseMode = el.dataset.caseMode || 'title';
+
+            let newText;
+            if (caseMode === 'upper-lower') {
+                newText = current === current.toUpperCase() ? current.toLowerCase() : current.toUpperCase();
+            } else {
+                if (current === current.toUpperCase()) {
+                    newText = toTitleCaseStr(original);
+                } else {
+                    newText = current.toUpperCase();
+                }
+            }
+            el.textContent = newText;
+
+            // Encontrar la clave correspondiente en el registro actual y actualizarla en memoria
+            const targetKeyId = id.substring(6, id.lastIndexOf('_'));
+            const record = appData[currentIndex];
+            if (record) {
+                const sanitizeId = (text) => String(text || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+                const realKey = Object.keys(record).find(k => sanitizeId(k) === targetKeyId);
+                if (realKey) {
+                    record[realKey] = newText;
+                    
+                    // Mantener sincronizados los campos de nombre completo si cambia Nombre o Apellido Normalizado
+                    if (realKey === 'Nombre Normalizado' || realKey === 'Apellido Normalizado') {
+                        const currentName = record['Nombre Normalizado'] || '';
+                        const currentLastName = record['Apellido Normalizado'] || '';
+                        
+                        if ('Nombre Completo Normalizado' in record) {
+                            record['Nombre Completo Normalizado'] = `${currentName} ${currentLastName}`.trim();
+                        }
+                        if ('Nombres Apellidos' in record) {
+                            record['Nombres Apellidos'] = `${currentName} ${currentLastName}`.trim();
+                        }
+                    }
+                }
+            }
+        }
+        function showAlert(m, type) { const box = document.getElementById('alertBox'); document.getElementById('alertMessage').textContent = m; box.classList.remove('hidden', 'translate-y-full', 'opacity-0'); box.classList.add('bg-white', type === 'error' ? 'border-red-500' : 'border-green-500'); setTimeout(() => { box.classList.add('translate-y-full', 'opacity-0'); }, 3000); }
+
+        // Ocultar menú de ajustes al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const menuContainer = document.getElementById('floating-menu-container');
+            const menu = document.getElementById('settingsMenu');
+            if (!menu.classList.contains('hidden') && !menuContainer.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            applyTranslations();
+            const today = new Date();
+            document.getElementById('input-fec-alta').value = String(today.getDate()).padStart(2, '0') + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + today.getFullYear();
+            
+            // Cargar iniciales guardadas en el navegador
+            const savedTecnico = localStorage.getItem('savedTecnico');
+            if (savedTecnico) {
+                document.getElementById('input-tecnico-iniciales').value = savedTecnico;
+            }
+
+            checkRegistryVisibility(); // Verifica si existe un registro histórico para mostrar la opción de descarga
+        });
+    </script>
+</body>
+</html>
