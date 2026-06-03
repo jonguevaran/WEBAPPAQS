@@ -118,7 +118,7 @@ Ender Guevara
                                 <span id="btnCopyRawText" class="text-xs font-bold uppercase">Copiar</span>
                             </button>
                         </div>
-                        <textarea id="rawInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full" placeholder="ABXO&#10;44867621A&#10;SORIANO ALVAREZ, MARIA AMPARO&#10;ATC PATERNA&#10;18/05/2026"></textarea>
+                        <textarea id="rawInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full" placeholder="ABXO&#10;44867621A&#10;SORIANO ALVAREZ, MARIA AMPARO&#10;ATC PATERNA&#10;18/05/2026&#10;JUAN PEREZ"></textarea>
                     </div>
                     <div class="hidden lg:flex items-center justify-center text-slate-300 dark:text-slate-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
@@ -278,6 +278,74 @@ Ender Guevara
         <div class="flex-1"><p id="alertMessage" class="text-sm font-bold"></p></div>
     </div>
 
+    <!-- Modal de Edición de Registros -->
+    <div id="editRecordModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm fade-in">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-2xl overflow-hidden flex flex-col transform transition-all duration-300">
+            <!-- Modal Header -->
+            <div class="bg-indigo-600 dark:bg-indigo-800 p-4 text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    <span id="editModalTitle">Editar Registro</span>
+                </h3>
+                <button onclick="closeEditModal()" class="text-white/80 hover:text-white transition-colors focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            
+            <!-- Modal Body / Form -->
+            <div class="p-6 overflow-y-auto max-h-[70vh] grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <input type="hidden" id="edit-record-index">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">FecPEDIDO</label>
+                    <input type="text" id="edit-fecpeticion" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Solicitante</label>
+                    <input type="text" id="edit-solicitante" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Nombre Completo</label>
+                    <input type="text" id="edit-nombrecompleto" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Iniciales</label>
+                    <input type="text" id="edit-iniciales" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm uppercase">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Cargo</label>
+                    <input type="text" id="edit-cargo" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Delegación</label>
+                    <input type="text" id="edit-delegacion" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">FecALTA</label>
+                    <input type="text" id="edit-fecalta" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Técnico</label>
+                    <input type="text" id="edit-tecnico" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm uppercase">
+                </div>
+                <div class="sm:col-span-2">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Mail</label>
+                    <input type="text" id="edit-mail" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 shrink-0">
+                <button id="btnCancelEdit" onclick="closeEditModal()" class="px-5 py-2.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors text-sm focus:outline-none">
+                    Cancelar
+                </button>
+                <button id="btnSaveEdit" onclick="saveEditChanges()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors text-sm flex items-center gap-2 shadow-md focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let currentLang = 'pt';
         let isDarkMode = false;
@@ -294,7 +362,7 @@ Ender Guevara
                 tab1Text: "1. Carregar Dados",
                 tab2Text: "2. Área de Trabalho",
                 tab3Text: "3. Tabela Excel",
-                lblRawInput: "Cole os dados brutos aqui (5 linhas por registo):",
+                lblRawInput: "Cole os dados brutos aqui (6 linhas por registo):",
                 lblJsonInput: "JSON Gerado (Edite se necessário):",
                 btnProcessText: "Gerar e Processar",
                 btnCopy: "Copiar",
@@ -360,7 +428,11 @@ Ender Guevara
                 th_delegacion: "DELEGAÇÃO",
                 th_fecalta: "DatALTA",
                 th_tecnico: "TÉCNICO",
-                th_mail: "MAIL"
+                th_mail: "MAIL",
+                editModalTitle: "Editar Registo",
+                btnCancelEdit: "Cancelar",
+                btnSaveEdit: "Gravar",
+                alertRecordUpdated: "Registo atualizado com sucesso!"
             },
             es: {
                 mainTitle: "Datos",
@@ -368,7 +440,7 @@ Ender Guevara
                 tab1Text: "1. Cargar Datos",
                 tab2Text: "2. Área de Trabajo",
                 tab3Text: "3. Tabla Excel",
-                lblRawInput: "Pega los datos brutos aquí (5 líneas por registro):",
+                lblRawInput: "Pega los datos brutos aquí (6 líneas por registro):",
                 lblJsonInput: "JSON Generado (Edita si es necesario):",
                 btnProcessText: "Generar y Procesar",
                 btnCopy: "Copiar",
@@ -434,7 +506,11 @@ Ender Guevara
                 th_delegacion: "DELEGACIÓN",
                 th_fecalta: "FecALTA",
                 th_tecnico: "TECNICO",
-                th_mail: "MAIL"
+                th_mail: "MAIL",
+                editModalTitle: "Editar Registro",
+                btnCancelEdit: "Cancelar",
+                btnSaveEdit: "Guardar",
+                alertRecordUpdated: "¡Registro actualizado con éxito!"
             }
         };
 
@@ -475,6 +551,9 @@ Ender Guevara
             setTxt('th_nombrecompleto', tr.th_nombrecompleto); setTxt('th_iniciales', tr.th_iniciales);
             setTxt('th_cargo', tr.th_cargo); setTxt('th_delegacion', tr.th_delegacion);
             setTxt('th_fecalta', tr.th_fecalta); setTxt('th_tecnico', tr.th_tecnico); setTxt('th_mail', tr.th_mail);
+            setTxt('editModalTitle', tr.editModalTitle);
+            setTxt('btnCancelEdit', tr.btnCancelEdit);
+            setTxt('btnSaveEdit', tr.btnSaveEdit);
             for(let i=1; i<=10; i++) { setTxt(`opt_role${i}`, tr[`opt_role${i}`]); }
             if (appData.length > 0) {
                 setTxt('recordCounter', tr.recordCounterTpl.replace('{0}', currentIndex + 1).replace('{1}', appData.length));
@@ -557,9 +636,38 @@ Ender Guevara
             const numberPool = ["2", "3", "4", "5", "6", "7", "8", "9"];
             const getRand = (arr) => arr[Math.floor(Math.random() * arr.length)];
             
-            for(let i = 0; i < lines.length; i += 5) {
-                if(i + 4 >= lines.length) break; 
+            // Detect if input uses 5 or 6 lines per record.
+            let stride = 5;
+            if (lines.length >= 6) {
+                const dateReg = /^\d{1,2}[-\/]\d{1,2}[-\/]\d{2,4}$/;
+                const hasDateAt4 = dateReg.test(lines[4]);
+                if (hasDateAt4) {
+                    if (lines.length >= 11) {
+                        const hasDateAt9 = dateReg.test(lines[9]);
+                        const hasDateAt10 = dateReg.test(lines[10]);
+                        if (hasDateAt10 && !hasDateAt9) {
+                            stride = 6;
+                        } else if (hasDateAt9) {
+                            stride = 5;
+                        } else {
+                            if (lines.length % 6 === 0 && lines.length % 5 !== 0) {
+                                stride = 6;
+                            }
+                        }
+                    } else {
+                        if (lines.length === 6) {
+                            stride = 6;
+                        } else if (lines.length % 6 === 0) {
+                            stride = 6;
+                        }
+                    }
+                }
+            }
+
+            for(let i = 0; i < lines.length; i += stride) {
+                if(i + (stride - 1) >= lines.length) break; 
                 const iniciales = lines[i]; const dni = lines[i+1]; const nombreFull = lines[i+2]; const cargoDelegacion = lines[i+3]; const fecha = lines[i+4].replace(/\//g, '-');
+                const solicitante = (stride === 6) ? lines[i+5] : "";
                 
                 // Procesar nombre: si tiene "*" usar ese formato, si no usar comas
                 let lastnames = '', firstnames = '';
@@ -645,7 +753,8 @@ Ender Guevara
                     "Delegacion": delegacion, 
                     "Fecha": fecha, 
                     "Contraseña": password, 
-                    "Contraseña APP": passApp
+                    "Contraseña APP": passApp,
+                    "Solicitante": solicitante || ""
                 });
             }
             document.getElementById('jsonInput').value = JSON.stringify(results, null, 2);
@@ -768,6 +877,7 @@ Ender Guevara
                 else if(lk === 'contraseña' || lk === 'password' || lk === 'palavra-passe') dk = i18n[currentLang].lbl_password;
                 else if(lk === 'usuario' || lk === 'user' || lk === 'utilizador') dk = i18n[currentLang].lbl_user;
                 else if(lk === 'email') dk = i18n[currentLang].lbl_email;
+                else if(lk === 'solicitante') dk = i18n[currentLang].lblSolicitante;
 
                 const skipToggleCase = ['iniciales', 'dni', 'fecha', 'contraseña', 'contraseña app', 'pass app', 'password app', 'palavra-passe', 'cargo', 'email'].includes(lk);
                 const caseMode = (lk === 'usuario' || lk === 'user' || lk === 'utilizador') ? 'upper-lower' : 'title';
@@ -833,28 +943,14 @@ Ender Guevara
             const newRecords = [];
 
             allParsedData.forEach(item => {
-                const tr = document.createElement('tr');
-                const createTd = (txt, isDate = false) => { const td = document.createElement('td'); if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); td.textContent = txt; return td; };
-                
                 const nomCompleto = item['Nombre Completo Normalizado'] || item['Nombres Apellidos'] || item['Nombre Normalizado'] || item['Nombre'] || '';
                 const delegacionFormateada = toTitleCase(item['Delegacion'] || '');
                 const FecPETICION = (item['Fecha'] || '').replace(/\//g, '-');
+                const itemSolicitante = item['Solicitante'] || sol;
 
-                tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario (hoy)
-                tr.appendChild(createTd(sol)); // SOLICITANTE
-                tr.appendChild(createTd(nomCompleto));
-                tr.appendChild(createTd(item['Iniciales'] || ''));
-                tr.appendChild(createTd(item['Cargo'] || ''));
-                tr.appendChild(createTd(delegacionFormateada)); // DELEGACIÓN en Title Case
-                tr.appendChild(createTd(FecPETICION, true)); // FecALTA = Fecha del JSON
-                tr.appendChild(createTd(tecIni));
-                tr.appendChild(createTd((item['Email'] || '').split('@')[0]));
-                tbody.appendChild(tr);
-
-                // Preparar registro para ser guardado
                 newRecords.push({
                     "FecPETICION": FecPETICION,
-                    "SOLICITANTE": sol,
+                    "SOLICITANTE": itemSolicitante,
                     "NOMBRE COMPLETO": nomCompleto,
                     "INICIALES": item['Iniciales'] || '',
                     "CARGO": item['Cargo'] || '',
@@ -891,6 +987,35 @@ Ender Guevara
                     showAlert(currentLang === 'pt' ? "Tabela gerada e guardada!" : "¡Tabla generada y guardada!", "success");
                 }
             }
+
+            // Reconstruir la tabla visual a partir de los datos, asociándolos a su índice real en el registro
+            allParsedData.forEach(item => {
+                const tr = document.createElement('tr');
+                const nomCompleto = item['Nombre Completo Normalizado'] || item['Nombres Apellidos'] || item['Nombre Normalizado'] || item['Nombre'] || '';
+                const delegacionFormateada = toTitleCase(item['Delegacion'] || '');
+                const FecPETICION = (item['Fecha'] || '').replace(/\//g, '-');
+                const itemSolicitante = item['Solicitante'] || sol;
+
+                // Buscar el índice correspondiente de este registro en el array completo guardado
+                const registryIdx = registry.findIndex(regRec => regRec.INICIALES === (item['Iniciales'] || '') && regRec.FecPETICION === FecPETICION);
+                
+                tr.setAttribute('data-registry-index', registryIdx);
+                tr.classList.add('hover:bg-slate-100', 'dark:hover:bg-slate-700/50', 'cursor-pointer', 'transition-colors');
+                tr.onclick = function() { openEditModal(this); };
+
+                const createTd = (txt, isDate = false) => { const td = document.createElement('td'); if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); td.textContent = txt; return td; };
+                
+                tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario (hoy)
+                tr.appendChild(createTd(itemSolicitante)); // SOLICITANTE
+                tr.appendChild(createTd(nomCompleto));
+                tr.appendChild(createTd(item['Iniciales'] || ''));
+                tr.appendChild(createTd(item['Cargo'] || ''));
+                tr.appendChild(createTd(delegacionFormateada)); // DELEGACIÓN en Title Case
+                tr.appendChild(createTd(FecPETICION, true)); // FecALTA = Fecha del JSON
+                tr.appendChild(createTd(tecIni));
+                tr.appendChild(createTd((item['Email'] || '').split('@')[0]));
+                tbody.appendChild(tr);
+            });
 
             checkRegistryVisibility(); // Muestra el botón de descarga en el menú
 
@@ -942,8 +1067,12 @@ Ender Guevara
             const tbody = document.getElementById('excelTableBody'); 
             tbody.innerHTML = '';
 
-            registry.forEach(item => {
+            registry.forEach((item, idx) => {
                 const tr = document.createElement('tr');
+                tr.setAttribute('data-registry-index', idx);
+                tr.classList.add('hover:bg-slate-100', 'dark:hover:bg-slate-700/50', 'cursor-pointer', 'transition-colors');
+                tr.onclick = function() { openEditModal(this); };
+                
                 const createTd = (txt, isDate = false) => { 
                     const td = document.createElement('td'); 
                     if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); 
@@ -996,6 +1125,90 @@ Ender Guevara
                     }
                 }
             }
+        }
+
+        function openEditModal(row) {
+            const registryIdx = row.getAttribute('data-registry-index');
+            if (registryIdx === null || registryIdx === undefined || registryIdx === "-1") return;
+            
+            const tds = row.getElementsByTagName('td');
+            if (tds.length < 9) return;
+            
+            document.getElementById('edit-record-index').value = registryIdx;
+            document.getElementById('edit-fecpeticion').value = tds[0].textContent.trim();
+            document.getElementById('edit-solicitante').value = tds[1].textContent.trim();
+            document.getElementById('edit-nombrecompleto').value = tds[2].textContent.trim();
+            document.getElementById('edit-iniciales').value = tds[3].textContent.trim();
+            document.getElementById('edit-cargo').value = tds[4].textContent.trim();
+            document.getElementById('edit-delegacion').value = tds[5].textContent.trim();
+            document.getElementById('edit-fecalta').value = tds[6].textContent.trim();
+            document.getElementById('edit-tecnico').value = tds[7].textContent.trim();
+            document.getElementById('edit-mail').value = tds[8].textContent.trim();
+            
+            const modal = document.getElementById('editRecordModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        
+        function closeEditModal() {
+            const modal = document.getElementById('editRecordModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+        
+        function saveEditChanges() {
+            const registryIdx = parseInt(document.getElementById('edit-record-index').value, 10);
+            if (isNaN(registryIdx)) return;
+            
+            const fecPeticion = document.getElementById('edit-fecpeticion').value.trim();
+            const solicitante = document.getElementById('edit-solicitante').value.trim();
+            const nombreCompleto = document.getElementById('edit-nombrecompleto').value.trim();
+            const iniciales = document.getElementById('edit-iniciales').value.trim().toUpperCase();
+            const cargo = document.getElementById('edit-cargo').value.trim();
+            const delegacion = document.getElementById('edit-delegacion').value.trim();
+            const fecAlta = document.getElementById('edit-fecalta').value.trim();
+            const tecnico = document.getElementById('edit-tecnico').value.trim().toUpperCase();
+            const mail = document.getElementById('edit-mail').value.trim();
+            
+            let registry = [];
+            const existing = localStorage.getItem('jsonRegistryControl');
+            if (existing) {
+                try { registry = JSON.parse(existing); } catch(e) {}
+            }
+            
+            if (registryIdx >= 0 && registryIdx < registry.length) {
+                registry[registryIdx] = {
+                    "FecPETICION": fecPeticion,
+                    "SOLICITANTE": solicitante,
+                    "NOMBRE COMPLETO": nombreCompleto,
+                    "INICIALES": iniciales,
+                    "CARGO": cargo,
+                    "DELEGACIÓN": delegacion,
+                    "FecALTA": fecAlta,
+                    "TECNICO": tecnico,
+                    "MAIL": mail
+                };
+                localStorage.setItem('jsonRegistryControl', JSON.stringify(registry));
+            }
+            
+            const row = document.querySelector(`tr[data-registry-index="${registryIdx}"]`);
+            if (row) {
+                const tds = row.getElementsByTagName('td');
+                if (tds.length >= 9) {
+                    tds[0].textContent = fecPeticion;
+                    tds[1].textContent = solicitante;
+                    tds[2].textContent = nombreCompleto;
+                    tds[3].textContent = iniciales;
+                    tds[4].textContent = cargo;
+                    tds[5].textContent = delegacion;
+                    tds[6].textContent = fecAlta;
+                    tds[7].textContent = tecnico;
+                    tds[8].textContent = mail;
+                }
+            }
+            
+            showAlert(i18n[currentLang].alertRecordUpdated || "Registro actualizado con éxito!", "success");
+            closeEditModal();
         }
 
         const taskDict = {
