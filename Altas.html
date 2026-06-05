@@ -322,7 +322,12 @@ Ender Guevara
                 </div>
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Mail</label>
-                    <input type="text" id="edit-mail" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                    <div class="flex items-center gap-2">
+                        <input type="text" id="edit-mail" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                        <button onclick="cycleEmailGeneration()" class="p-2.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors focus:outline-none" title="Cambiar formato de correo">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -346,7 +351,9 @@ Ender Guevara
         let cargoGroups = [];
         let currentGroupIndex = 0;
         let appData = [];
-        let currentIndex = 0;
+        let emailCycleStep = 1;
+        let viewEmailCycleStep = 1;
+        let originalEditMail = '';
 
         const i18n = {
             pt: {
@@ -671,7 +678,7 @@ Ender Guevara
                     lastnames = (nameParts[0] || '').trim();
                     firstnames = (nameParts[1] || '').trim();
                 } else if (nombreFull.includes(',')) {
-                    // Formato por defecto: APELLIDOS, NOMBRES
+                    // Formato: APELLIDOS, NOMBRES
                     const nameParts = nombreFull.split(',');
                     lastnames = (nameParts[0] || '').trim();
                     firstnames = (nameParts[1] || '').trim();
@@ -691,14 +698,18 @@ Ender Guevara
                 
                 const usuario = (firstnames && lastnames) ? `${firstnames.split(' ')[0]}.${lastnames.split(' ')[0]}`.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : (firstnames || nombreFull).split(' ')[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
                 
-                // Dividir por "*" para separar cargo y delegación
+                // Dividir por "," para separar cargo y delegación
                 let cargo = "", delegacion = "";
-                if (cargoDelegacion.includes("*")) {
+                if (cargoDelegacion.includes(",")) {
+                    const parts = cargoDelegacion.split(",");
+                    cargo = (parts[0] || "").trim();
+                    delegacion = (parts[1] || "").trim();
+                } else if (cargoDelegacion.includes("*")) {
                     const parts = cargoDelegacion.split("*");
                     cargo = (parts[0] || "").trim();
                     delegacion = (parts[1] || "").trim();
                 } else {
-                    // Fallback: si no hay "*", usar el método anterior
+                    // Fallback: si no hay delimitador, usar el método anterior
                     const cdParts = cargoDelegacion.trim().split(/\s+/);
                     delegacion = cdParts.length > 0 ? cdParts.pop() : "";
                     cargo = cdParts.join(' ');
@@ -785,7 +796,7 @@ Ender Guevara
             } catch (e) { showAlert("Error JSON.", "error"); }
         }
 
-        function nextGroup() { if (cargoGroups.length > 1) { currentGroupIndex = (currentGroupIndex + 1) % cargoGroups.length; appData = cargoGroups[currentGroupIndex]; currentIndex = 0; renderCurrentRecord(); } }
+        function nextGroup() { if (cargoGroups.length > 1) { currentGroupIndex = (currentGroupIndex + 1) % cargoGroups.length; appData = cargoGroups[currentGroupIndex]; currentIndex = 0; viewEmailCycleStep = 1; renderCurrentRecord(); } }
 
         function renderCurrentRecord() {
             if (appData.length === 0) return;
@@ -871,17 +882,77 @@ Ender Guevara
                 else if(lk === 'email') dk = i18n[currentLang].lbl_email;
                 else if(lk === 'solicitante') dk = i18n[currentLang].lblSolicitante;
 
+                let extraActionHtml = '';
+                if (lk === 'email') {
+                    extraActionHtml = `<button onclick="cycleEmailInView(); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400" title="Alternar formato de correo"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></button>`;
+                }
                 const skipToggleCase = ['iniciales', 'dni', 'fecha', 'contraseña', 'contraseña app', 'pass app', 'password app', 'palavra-passe', 'cargo', 'email'].includes(lk);
                 const caseMode = (lk === 'usuario' || lk === 'user' || lk === 'utilizador') ? 'upper-lower' : 'title';
-                const toggleButtonHtml = skipToggleCase ? '' : `<button onclick="toggleFieldCaseById('${fieldId}'); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>`;
+                const toggleButtonHtml = (skipToggleCase ? '' : `<button onclick="toggleFieldCaseById('${fieldId}'); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>`) + extraActionHtml;
 
                 html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" ondblclick="copyFieldById('${fieldId}')" title="Doble clic para copiar"><div class="flex justify-between items-center mb-1"><span class="text-[10px] font-bold uppercase ${labelClasses}">${dk}</span><div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">${toggleButtonHtml}</div></div><div id="${fieldId}" data-original="${safeValue}" data-case-mode="${caseMode}" class="font-bold text-sm break-words">${safeValue}</div></div>`;
             }
             document.getElementById('dataDisplay').innerHTML = html + '</div>';
         }
 
-        function nextRecord() { if(currentIndex < appData.length-1){ currentIndex++; renderCurrentRecord(); } }
-        function prevRecord() { if(currentIndex > 0){ currentIndex--; renderCurrentRecord(); } }
+        function nextRecord() { if(currentIndex < appData.length-1){ currentIndex++; viewEmailCycleStep = 1; renderCurrentRecord(); } }
+        function prevRecord() { if(currentIndex > 0){ currentIndex--; viewEmailCycleStep = 1; renderCurrentRecord(); } }
+        
+        function cycleEmailInView() {
+            if (appData.length === 0) return;
+            const record = appData[currentIndex];
+            if (!record._originalEmail) record._originalEmail = record['Email'];
+            
+            viewEmailCycleStep++;
+            if (viewEmailCycleStep > 4) viewEmailCycleStep = 1;
+            
+            let originalDomain = '@aquaservice.com';
+            if (record._originalEmail && record._originalEmail.includes('@')) {
+                originalDomain = '@' + record._originalEmail.split('@')[1];
+            }
+            
+            if (viewEmailCycleStep === 1) {
+                record['Email'] = record._originalEmail;
+            } else if (viewEmailCycleStep === 2 || viewEmailCycleStep === 3) {
+                const firstNameRaw = record['Nombre Normalizado'] || '';
+                const lastNameRaw = record['Apellido Normalizado'] || '';
+                
+                const fnParts = firstNameRaw.split(' ').filter(p => p);
+                const lnParts = lastNameRaw.split(' ').filter(p => p);
+                
+                const firstName = fnParts[0] ? fnParts[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                const firstLastName = lnParts[0] ? lnParts[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                const secondLastName = lnParts[1] ? lnParts[1].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                
+                let prefix = '';
+                if (viewEmailCycleStep === 2) {
+                    if (firstName && secondLastName) prefix = `${firstName}.${secondLastName}`;
+                    else if (firstName && firstLastName) prefix = `${firstName}.${firstLastName}`;
+                    else prefix = firstName;
+                } else if (viewEmailCycleStep === 3) {
+                    if (firstName && firstLastName) {
+                        const secondLastNameInitial = secondLastName ? secondLastName.charAt(0) : '';
+                        prefix = `${firstName}.${firstLastName}${secondLastNameInitial}`;
+                    } else prefix = firstName;
+                }
+                record['Email'] = prefix ? `${prefix}${originalDomain}` : record._originalEmail;
+            } else if (viewEmailCycleStep === 4) {
+                const manualEmail = prompt("Ingresa el correo manualmente:", record['Email']);
+                if (manualEmail !== null && manualEmail.trim() !== "") {
+                    record['Email'] = manualEmail.trim();
+                } else {
+                    viewEmailCycleStep = 3; // revert
+                }
+            }
+            
+            if (record['Email']) {
+                record['Usuario'] = record['Email'].split('@')[0];
+            }
+            
+            document.getElementById('jsonInput').value = JSON.stringify(allParsedData, null, 2);
+            
+            renderCurrentRecord();
+        }
         function toggleRegisteredStatus() { if(appData.length > 0) appData[currentIndex]._isRegistered = document.getElementById('recordRegisteredChk').checked; }
 
         function resetApp() {
@@ -1132,6 +1203,8 @@ Ender Guevara
             document.getElementById('edit-fecalta').value = tds[5].textContent.trim();
             document.getElementById('edit-tecnico').value = tds[6].textContent.trim();
             document.getElementById('edit-mail').value = tds[7].textContent.trim();
+            originalEditMail = tds[7].textContent.trim();
+            emailCycleStep = 1;
             
             const modal = document.getElementById('editRecordModal');
             modal.classList.remove('hidden');
@@ -1142,6 +1215,80 @@ Ender Guevara
             const modal = document.getElementById('editRecordModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+        }
+
+        function cycleEmailGeneration() {
+            emailCycleStep++;
+            if (emailCycleStep > 4) {
+                emailCycleStep = 1;
+            }
+            
+            const mailInput = document.getElementById('edit-mail');
+            
+            if (emailCycleStep === 1) {
+                mailInput.value = originalEditMail;
+            } else if (emailCycleStep === 2 || emailCycleStep === 3) {
+                const nombreFull = document.getElementById('edit-nombrecompleto').value.trim();
+                let lastnames = '', firstnames = '';
+                
+                const toTitleCase = (str) => str.toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' ');
+                const foundInData = allParsedData.find(item => 
+                    item['Nombre Completo Normalizado'] === nombreFull.toUpperCase() ||
+                    item['Nombre Completo Normalizado'] === toTitleCase(nombreFull) ||
+                    item['Nombres Apellidos'] === toTitleCase(nombreFull)
+                );
+                
+                if (nombreFull.includes('*')) {
+                    const parts = nombreFull.split('*');
+                    lastnames = (parts[0] || '').trim();
+                    firstnames = (parts[1] || '').trim();
+                } else if (nombreFull.includes(',')) {
+                    const parts = nombreFull.split(',');
+                    lastnames = (parts[0] || '').trim();
+                    firstnames = (parts[1] || '').trim();
+                } else if (foundInData) {
+                    firstnames = foundInData['Nombre Normalizado'] || '';
+                    lastnames = foundInData['Apellido Normalizado'] || '';
+                } else {
+                    const words = nombreFull.split(' ').filter(p => p);
+                    if (words.length >= 3) {
+                        firstnames = words.slice(0, words.length - 2).join(' ');
+                        lastnames = words.slice(words.length - 2).join(' ');
+                    } else if (words.length === 2) {
+                        firstnames = words[0];
+                        lastnames = words[1];
+                    } else {
+                        firstnames = nombreFull;
+                    }
+                }
+                
+                const fnParts = firstnames.split(' ').filter(p => p);
+                const lnParts = lastnames.split(' ').filter(p => p);
+                
+                const firstName = fnParts[0] ? fnParts[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                const firstLastName = lnParts[0] ? lnParts[0].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                const secondLastName = lnParts[1] ? lnParts[1].normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : '';
+                
+                if (emailCycleStep === 2) {
+                    if (firstName && secondLastName) {
+                        mailInput.value = `${firstName}.${secondLastName}`;
+                    } else if (firstName && firstLastName) {
+                        mailInput.value = `${firstName}.${firstLastName}`;
+                    } else {
+                        mailInput.value = firstName;
+                    }
+                } else if (emailCycleStep === 3) {
+                    if (firstName && firstLastName) {
+                        const secondLastNameInitial = secondLastName ? secondLastName.charAt(0) : '';
+                        mailInput.value = `${firstName}.${firstLastName}${secondLastNameInitial}`;
+                    } else {
+                        mailInput.value = firstName;
+                    }
+                }
+            } else if (emailCycleStep === 4) {
+                mailInput.focus();
+                mailInput.select();
+            }
         }
         
         function saveEditChanges() {
