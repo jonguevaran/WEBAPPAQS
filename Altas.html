@@ -85,7 +85,7 @@ Ender Guevara
             <!-- Grupo 3: Reseteo Total -->
             <div class="flex flex-col">
                 <button onclick="resetApp(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 transition-colors focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                     <span id="resetAppBtnText">Repor Tudo</span>
                 </button>
             </div>
@@ -362,8 +362,14 @@ Ender Guevara
     </div>
 
     <script>
-        let currentLang = 'pt';
-        let isDarkMode = false;
+        let currentLang = localStorage.getItem('appLang') || 'pt';
+        let isDarkMode = localStorage.getItem('appTheme') === 'dark';
+        if (isDarkMode) document.documentElement.classList.add('dark');
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            applyTranslations();
+        });
+
         let allParsedData = [];
         let cargoGroups = [];
         let currentGroupIndex = 0;
@@ -545,8 +551,8 @@ Ender Guevara
             document.getElementById('settingsMenu').classList.add('hidden');
         }
 
-        function toggleTheme() { isDarkMode = !isDarkMode; document.documentElement.classList.toggle('dark'); applyTranslations(); }
-        function toggleLanguage() { currentLang = currentLang === 'pt' ? 'es' : 'pt'; applyTranslations(); }
+        function toggleTheme() { isDarkMode = !isDarkMode; document.documentElement.classList.toggle('dark'); localStorage.setItem('appTheme', isDarkMode ? 'dark' : 'light'); applyTranslations(); }
+        function toggleLanguage() { currentLang = currentLang === 'pt' ? 'es' : 'pt'; localStorage.setItem('appLang', currentLang); applyTranslations(); }
 
         function applyTranslations() {
             const tr = i18n[currentLang];
@@ -1035,13 +1041,13 @@ Ender Guevara
                 const FecPETICION = (item['Fecha'] || '').replace(/\//g, '-');
 
                 newRecords.push({
-                    "FecPETICION": FecPETICION,
+                    "FecPETICION": fecAlta,
                     "SOLICITANTE": item['Solicitante'] || '',
                     "NOMBRE COMPLETO": nomCompleto,
                     "INICIALES": (item['Iniciales'] || '').toUpperCase(),
                     "CARGO": (item['Cargo'] || '').toUpperCase(),
                     "DELEGACIÓN": delegacionFormateada,
-                    "FecALTA": fecAlta,
+                    "FecALTA": FecPETICION,
                     "TECNICO": tecIni.toUpperCase(),
                     "MAIL": ((item['Email'] || '').split('@')[0]).toLowerCase()
                 });
@@ -1092,7 +1098,7 @@ Ender Guevara
 
                 const createTd = (txt, isDate = false) => { const td = document.createElement('td'); if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); td.textContent = txt; return td; };
                 
-                tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario (hoy)
+                tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario
                 tr.appendChild(createTd(item['Solicitante'] || ''));
                 tr.appendChild(createTd(nomCompleto));
                 tr.appendChild(createTd(inicialesFormatted));
