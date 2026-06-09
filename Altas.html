@@ -35,6 +35,12 @@ Ender Guevara
         .excel-table th { background-color: #e0f2fe; color: #0f172a; font-weight: bold; }
         .dark .excel-table th { background-color: #1e293b; color: #e2e8f0; border-color: #475569; }
         .dark .excel-table td { border-color: #475569; }
+        .excel-table th.sortable { cursor: pointer; position: relative; padding-right: 1.5rem; transition: background-color 0.2s; }
+        .excel-table th.sortable:hover { background-color: #bae6fd; }
+        .dark .excel-table th.sortable:hover { background-color: #334155; }
+        .excel-table th.sortable::after { content: '\2195'; position: absolute; right: 8px; color: #94a3b8; opacity: 0.5; }
+        .excel-table th.sortable.sorted-asc::after { content: '\2191'; color: #4f46e5; opacity: 1; }
+        .excel-table th.sortable.sorted-desc::after { content: '\2193'; color: #4f46e5; opacity: 1; }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 transition-colors duration-300 h-[100dvh] text-slate-800 dark:text-slate-100 font-sans p-2 sm:p-4 flex flex-col items-center justify-center overflow-hidden">
@@ -66,6 +72,10 @@ Ender Guevara
                 <button onclick="downloadRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 flex items-center gap-3 transition-colors border-t border-slate-100 dark:border-slate-700 focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                     <span id="btnMenuDownloadRegistryText">Descargar JSON</span>
+                </button>
+                <button onclick="deleteRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-3 transition-colors border-t border-slate-100 dark:border-slate-700 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    <span id="btnMenuDeleteRegistryText">Eliminar BD</span>
                 </button>
                 
                 <!-- Separador físico 20px -->
@@ -255,8 +265,11 @@ Ender Guevara
                             <table id="generatedExcelTable" class="excel-table w-full text-sm">
                                 <thead>
                                     <tr>
-                                        <th id="th_fecpeticion"></th><th id="th_nombrecompleto"></th>
-                                        <th id="th_iniciales"></th><th id="th_cargo"></th><th id="th_delegacion"></th>
+                                        <th id="th_fecpeticion" class="sortable" onclick="sortTable(0, true)" title="Ordenar por Fecha"></th>
+                                        <th id="th_solicitante" class="sortable" onclick="sortTable(1, false)" title="Ordenar por Solicitante"></th>
+                                        <th id="th_nombrecompleto"></th>
+                                        <th id="th_iniciales" class="sortable" onclick="sortTable(3, false)" title="Ordenar por Iniciales"></th>
+                                        <th id="th_cargo"></th><th id="th_delegacion"></th>
                                         <th id="th_fecalta"></th><th id="th_tecnico"></th><th id="th_mail"></th>
                                     </tr>
                                 </thead>
@@ -296,6 +309,10 @@ Ender Guevara
                     <input type="text" id="edit-fecpeticion" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
                 </div>
 
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Solicitante</label>
+                    <input type="text" id="edit-solicitante" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
+                </div>
                 <div>
                     <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 uppercase tracking-wider">Nombre Completo</label>
                     <input type="text" id="edit-nombrecompleto" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
@@ -415,6 +432,9 @@ Ender Guevara
                 btnCopyTableText: "Copiar Tabela",
                 btnDownloadRegistryText: "Baixar JSON",
                 btnLoadRegistryText: "Carregar Registo",
+                btnMenuDeleteRegistryText: "Eliminar BD",
+                confirmDeleteRegistry: "Tem a certeza que deseja eliminar a base de dados local?",
+                alertRegistryDeleted: "Base de dados eliminada.",
                 searchPlaceholder: "Pesquisar por nome ou iniciais...",
                 alertSavedRegistry: "Guardado no registo local!",
                 alertEmptyRegistry: "O registo está vazio",
@@ -493,6 +513,9 @@ Ender Guevara
                 btnCopyTableText: "Copiar Tabla",
                 btnDownloadRegistryText: "Descargar JSON",
                 btnLoadRegistryText: "Cargar Registro",
+                btnMenuDeleteRegistryText: "Eliminar BD",
+                confirmDeleteRegistry: "¿Estás seguro de que deseas eliminar la base de datos local?",
+                alertRegistryDeleted: "Base de datos eliminada.",
                 searchPlaceholder: "Buscar por nombre o iniciales...",
                 alertSavedRegistry: "¡Guardado en el registro local!",
                 alertEmptyRegistry: "El registro está vacío",
@@ -545,6 +568,7 @@ Ender Guevara
             setTxt('btnGenerateTableText', tr.btnGenerateTableText); setTxt('btnCopyTableText', tr.btnCopyTableText);
             setTxt('btnMenuDownloadRegistryText', tr.btnDownloadRegistryText);
             setTxt('btnMenuLoadRegistryText', tr.btnLoadRegistryText);
+            setTxt('btnMenuDeleteRegistryText', tr.btnMenuDeleteRegistryText);
             const searchInput = document.getElementById('searchInput');
             if(searchInput) searchInput.placeholder = tr.searchPlaceholder;
             setTxt('th_fecpeticion', tr.th_fecpeticion); setTxt('th_solicitante', tr.th_solicitante);
@@ -1012,6 +1036,7 @@ Ender Guevara
 
                 newRecords.push({
                     "FecPETICION": FecPETICION,
+                    "SOLICITANTE": item['Solicitante'] || '',
                     "NOMBRE COMPLETO": nomCompleto,
                     "INICIALES": (item['Iniciales'] || '').toUpperCase(),
                     "CARGO": (item['Cargo'] || '').toUpperCase(),
@@ -1068,6 +1093,7 @@ Ender Guevara
                 const createTd = (txt, isDate = false) => { const td = document.createElement('td'); if(isDate) td.setAttribute('style', 'mso-number-format: "\\@";'); td.textContent = txt; return td; };
                 
                 tr.appendChild(createTd(fecAlta, true)); // FecPEDIDO = Fecha del formulario (hoy)
+                tr.appendChild(createTd(item['Solicitante'] || ''));
                 tr.appendChild(createTd(nomCompleto));
                 tr.appendChild(createTd(inicialesFormatted));
                 tr.appendChild(createTd((item['Cargo'] || '').toUpperCase()));
@@ -1083,6 +1109,8 @@ Ender Guevara
             // Limpiar buscador si hubiese algo escrito
             const searchInput = document.getElementById('searchInput');
             if(searchInput) { searchInput.value = ''; filterTable(); }
+            
+            sortDirection[0] = "asc"; sortTable(0, true);
         }
 
         function copyTableToClipboard() {
@@ -1109,6 +1137,22 @@ Ender Guevara
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        function deleteRegistry() {
+            if(confirm(i18n[currentLang].confirmDeleteRegistry)) {
+                localStorage.removeItem('jsonRegistryControl');
+                checkRegistryVisibility();
+                document.getElementById('excelTableBody').innerHTML = '';
+                document.getElementById('noDataTableMessage').classList.remove('hidden'); 
+                document.getElementById('noDataTableMessage').classList.add('flex'); 
+                const tblWrap = document.getElementById('tableContentWrapper');
+                if (tblWrap) {
+                    tblWrap.classList.add('hidden'); 
+                    tblWrap.classList.remove('flex');
+                }
+                showAlert(i18n[currentLang].alertRegistryDeleted, "success");
+            }
         }
 
         function loadRegistry() {
@@ -1142,6 +1186,7 @@ Ender Guevara
                 };
                 
                 tr.appendChild(createTd(item['FecPETICION'] || '', true));
+                tr.appendChild(createTd(item['SOLICITANTE'] || ''));
                 tr.appendChild(createTd(item['NOMBRE COMPLETO'] || ''));
                 tr.appendChild(createTd(item['INICIALES'] || ''));
                 tr.appendChild(createTd(item['CARGO'] || ''));
@@ -1162,6 +1207,8 @@ Ender Guevara
             // Limpiar buscador si hubiese algo escrito
             const searchInput = document.getElementById('searchInput');
             if(searchInput) { searchInput.value = ''; filterTable(); }
+            
+            sortDirection[0] = "asc"; sortTable(0, true);
 
             showAlert(currentLang === 'pt' ? "Registo carregado" : "Registro cargado", "success");
         }
@@ -1173,8 +1220,8 @@ Ender Guevara
             const trs = tbody.getElementsByTagName('tr');
 
             for (let i = 0; i < trs.length; i++) {
-                const tdNombre = trs[i].getElementsByTagName('td')[1];
-                const tdIniciales = trs[i].getElementsByTagName('td')[2];
+                const tdNombre = trs[i].getElementsByTagName('td')[2];
+                const tdIniciales = trs[i].getElementsByTagName('td')[3];
                 if (tdNombre || tdIniciales) {
                     const txtNombre = tdNombre.textContent || tdNombre.innerText;
                     const txtIniciales = tdIniciales.textContent || tdIniciales.innerText;
@@ -1187,23 +1234,70 @@ Ender Guevara
             }
         }
 
+        let sortDirection = {};
+        function sortTable(n, isDate = false) {
+            const table = document.getElementById("generatedExcelTable");
+            let rows, switching, i, x, y, shouldSwitch, dir;
+            switching = true;
+            dir = sortDirection[n] === "asc" ? "desc" : "asc";
+            sortDirection[n] = dir;
+            
+            const ths = table.getElementsByTagName("th");
+            for (let j = 0; j < ths.length; j++) {
+                ths[j].classList.remove('sorted-asc', 'sorted-desc');
+            }
+            if (ths[n]) ths[n].classList.add(dir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("td")[n];
+                    y = rows[i + 1].getElementsByTagName("td")[n];
+                    if (!x || !y) continue;
+                    
+                    let valX = x.textContent || x.innerText;
+                    let valY = y.textContent || y.innerText;
+                    
+                    if (isDate) {
+                        const parseD = (s) => { const p = s.split('-'); return p.length === 3 ? new Date(p[2], p[1]-1, p[0]).getTime() : 0; };
+                        valX = parseD(valX); valY = parseD(valY);
+                    } else {
+                        valX = valX.toLowerCase(); valY = valY.toLowerCase();
+                    }
+
+                    if (dir === "asc") {
+                        if (valX > valY) { shouldSwitch = true; break; }
+                    } else if (dir === "desc") {
+                        if (valX < valY) { shouldSwitch = true; break; }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
         function openEditModal(row) {
             const registryIdx = row.getAttribute('data-registry-index');
             if (registryIdx === null || registryIdx === undefined || registryIdx === "-1") return;
             
             const tds = row.getElementsByTagName('td');
-            if (tds.length < 8) return;
+            if (tds.length < 9) return;
             
             document.getElementById('edit-record-index').value = registryIdx;
             document.getElementById('edit-fecpeticion').value = tds[0].textContent.trim();
-            document.getElementById('edit-nombrecompleto').value = tds[1].textContent.trim();
-            document.getElementById('edit-iniciales').value = tds[2].textContent.trim();
-            document.getElementById('edit-cargo').value = tds[3].textContent.trim();
-            document.getElementById('edit-delegacion').value = tds[4].textContent.trim();
-            document.getElementById('edit-fecalta').value = tds[5].textContent.trim();
-            document.getElementById('edit-tecnico').value = tds[6].textContent.trim();
-            document.getElementById('edit-mail').value = tds[7].textContent.trim();
-            originalEditMail = tds[7].textContent.trim();
+            document.getElementById('edit-solicitante').value = tds[1].textContent.trim();
+            document.getElementById('edit-nombrecompleto').value = tds[2].textContent.trim();
+            document.getElementById('edit-iniciales').value = tds[3].textContent.trim();
+            document.getElementById('edit-cargo').value = tds[4].textContent.trim();
+            document.getElementById('edit-delegacion').value = tds[5].textContent.trim();
+            document.getElementById('edit-fecalta').value = tds[6].textContent.trim();
+            document.getElementById('edit-tecnico').value = tds[7].textContent.trim();
+            document.getElementById('edit-mail').value = tds[8].textContent.trim();
+            originalEditMail = tds[8].textContent.trim();
             emailCycleStep = 1;
             
             const modal = document.getElementById('editRecordModal');
@@ -1296,6 +1390,7 @@ Ender Guevara
             if (isNaN(registryIdx)) return;
             
             const fecPeticion = document.getElementById('edit-fecpeticion').value.trim();
+            const solicitante = document.getElementById('edit-solicitante').value.trim();
             const nombreCompleto = document.getElementById('edit-nombrecompleto').value.trim();
             const iniciales = document.getElementById('edit-iniciales').value.trim().toUpperCase();
             const cargo = document.getElementById('edit-cargo').value.trim();
@@ -1313,6 +1408,7 @@ Ender Guevara
             if (registryIdx >= 0 && registryIdx < registry.length) {
                 registry[registryIdx] = {
                     "FecPETICION": fecPeticion,
+                    "SOLICITANTE": solicitante,
                     "NOMBRE COMPLETO": nombreCompleto,
                     "INICIALES": iniciales,
                     "CARGO": cargo,
@@ -1327,15 +1423,16 @@ Ender Guevara
             const row = document.querySelector(`tr[data-registry-index="${registryIdx}"]`);
             if (row) {
                 const tds = row.getElementsByTagName('td');
-                if (tds.length >= 8) {
+                if (tds.length >= 9) {
                     tds[0].textContent = fecPeticion;
-                    tds[1].textContent = nombreCompleto;
-                    tds[2].textContent = iniciales;
-                    tds[3].textContent = cargo;
-                    tds[4].textContent = delegacion;
-                    tds[5].textContent = fecAlta;
-                    tds[6].textContent = tecnico;
-                    tds[7].textContent = mail;
+                    tds[1].textContent = solicitante;
+                    tds[2].textContent = nombreCompleto;
+                    tds[3].textContent = iniciales;
+                    tds[4].textContent = cargo;
+                    tds[5].textContent = delegacion;
+                    tds[6].textContent = fecAlta;
+                    tds[7].textContent = tecnico;
+                    tds[8].textContent = mail;
                 }
             }
             
