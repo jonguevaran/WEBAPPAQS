@@ -1121,10 +1121,38 @@ Ender Guevara
 
         function copyTableToClipboard() {
             const table = document.getElementById('generatedExcelTable'); if (table.rows.length <= 1) return;
+            const tbody = table.querySelector('tbody');
+            const toTitleCase = (str) => str.toLowerCase().split(/\s+/).map(w => w ? w.charAt(0).toUpperCase() + w.slice(1) : '').join(' ');
+            
+            const originalTexts = [];
+            for (let i = 0; i < tbody.rows.length; i++) {
+                const row = tbody.rows[i];
+                let rowOrig = [];
+                for (let j = 0; j < row.cells.length; j++) {
+                    const cell = row.cells[j];
+                    rowOrig.push(cell.textContent);
+                    let text = cell.textContent || "";
+                    if (j === 3 || j === 7) {
+                        cell.textContent = text.toUpperCase();
+                    } else {
+                        cell.textContent = toTitleCase(text);
+                    }
+                }
+                originalTexts.push(rowOrig);
+            }
+
             const thead = table.querySelector('thead'); thead.style.display = 'none';
             const range = document.createRange(); range.selectNode(table); window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
             try { document.execCommand('copy'); showAlert(currentLang === 'pt' ? "Tabela copiada!" : "¡Tabla copiada!", "success"); } catch (err) {}
             thead.style.display = ''; window.getSelection().removeAllRanges();
+
+            for (let i = 0; i < tbody.rows.length; i++) {
+                const row = tbody.rows[i];
+                const rowOrig = originalTexts[i];
+                for (let j = 0; j < row.cells.length; j++) {
+                    row.cells[j].textContent = rowOrig[j];
+                }
+            }
         }
 
         function downloadRegistry() {
