@@ -141,7 +141,7 @@ Ender Guevara
                                 <span id="btnCopyJsonText" class="text-xs font-bold uppercase">Copiar</span>
                             </button>
                         </div>
-                        <textarea id="jsonInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full" placeholder="[...]"></textarea>
+                        <textarea id="jsonInput" class="flex-1 p-4 border rounded-xl font-mono text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 resize-none h-full bg-slate-50 cursor-not-allowed opacity-90" placeholder="[...]" readonly></textarea>
                     </div>
                 </div>
                 <div class="mt-2 flex justify-end shrink-0">
@@ -386,7 +386,7 @@ Ender Guevara
                 tab2Text: "2. Área de Trabalho",
                 tab3Text: "3. Tabela Excel",
                 lblRawInput: "Cole os dados brutos aqui (6 linhas por registo):",
-                lblJsonInput: "JSON Gerado (Edite se necessário):",
+                lblJsonInput: "JSON Gerado:",
                 btnProcessText: "Gerar e Processar",
                 btnCopy: "Copiar",
                 noDataTitleText: "Não há dados carregados",
@@ -400,7 +400,7 @@ Ender Guevara
                 opt_role1: "Armazéns, Operario-a Auxiliar, Higiene, Coolers",
                 opt_role2: "Distribuidor/Repartidor (RB, RZ)",
                 opt_role3: "Instalador",
-                opt_role4: "Comercial (SMALL, SALES)",
+                opt_role4: "Comercial (SMALL, SALES, AQUASTORE)",
                 opt_role5: "CTOP",
                 opt_role6: "TOP",
                 opt_role7: "ATC",
@@ -413,7 +413,7 @@ Ender Guevara
                 langBtnText: "Cambiar a Español",
                 themeDark: "Modo Escuro",
                 themeLight: "Modo Claro",
-                resetAppText: "Repor Tudo",
+                resetAppText: "Repor",
                 chkRegistered: "Registado",
                 btnNextGroupText: "Próximo Grupo",
                 lbl_nombre: "APELIDOS/NOMES",
@@ -467,7 +467,7 @@ Ender Guevara
                 tab2Text: "2. Área de Trabajo",
                 tab3Text: "3. Tabla Excel",
                 lblRawInput: "Pega los datos brutos aquí (6 líneas por registro):",
-                lblJsonInput: "JSON Generado (Edita si es necesario):",
+                lblJsonInput: "JSON Generado:",
                 btnProcessText: "Generar y Procesar",
                 btnCopy: "Copiar",
                 noDataTitleText: "No hay datos",
@@ -481,7 +481,7 @@ Ender Guevara
                 opt_role1: "Almaceneros, Higienes, coolers",
                 opt_role2: "Distribuidor/Repartidor (RB, RZ)",
                 opt_role3: "Instalador",
-                opt_role4: "Comercial (SMALL, SALES)",
+                opt_role4: "Comercial (SMALL, SALES, AQUASTORE)",
                 opt_role5: "CTOP",
                 opt_role6: "TOP",
                 opt_role7: "ATC",
@@ -494,7 +494,7 @@ Ender Guevara
                 langBtnText: "Mudar para Português",
                 themeDark: "Modo Oscuro",
                 themeLight: "Modo Claro",
-                resetAppText: "Reiniciar Todo",
+                resetAppText: "Reiniciar",
                 chkRegistered: "Registrado",
                 btnNextGroupText: "Siguiente Grupo",
                 lbl_nombre: "APELLIDOS/NOMBRES",
@@ -1523,7 +1523,7 @@ Ender Guevara
                 'role1': [/almacén|armazém|operario|auxiliar|higiene|cooler|almacenero/i],
                 'role2': [/distribuidor|repartidor|rb|rz/i],
                 'role3': [/instalador/i],
-                'role4': [/comercial|small|sales/i],
+                'role4': [/comercial|small|sales|aquastore/i],
                 'role5': [/ctop/i],
                 'role6': [/top(?!\s*$)/i],  // TOP pero no solamente "TOP"
                 'role7': [/atc/i],

@@ -1,0 +1,455 @@
+[
+  {
+    "ID": 1,
+    "tema": "Agregar / cambiar Supervisor del Usuario Comercial",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en Gestión Llamadas, CRM Ventas, Configuración, Usuarios comerciales.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=aa1a0c61-819a-496c-afed-b8819745af96&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390920&collection=contentId-8390920",
+          "nombre": "image2021-8-17_10-43-49.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Buscamos al usuario al que le queramos añadir o cambiar el supervisor y le damos a actualizar.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=25cda818-697e-496a-af62-c18f11c07a4e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390920&collection=contentId-8390920",
+          "nombre": "image2021-8-17_10-47-4.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "En la siguiente ventana, en el campo Supervisor, añadimos las iniciales del que queramos que sea su supervisor.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=1ef9132a-93a5-4a75-8f7c-95fafe24e41a&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390920&collection=contentId-8390920",
+          "nombre": "image2021-8-17_10-50-1.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "usuarios", "supervisores", "configuración"]
+  },
+  {
+    "ID": 2,
+    "tema": "Albarán sin fecha de confirmación",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Al importar albaranes puede salirnos un aviso de albarán sin fecha de confirmación.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=bdc3a95b-20b0-45cd-85bf-8a86167e361a&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390976&collection=contentId-8390976",
+          "nombre": "image2021-8-17_11-0-58.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entrar a caché, a los Globals, al SWALB(ALMACEN,NºDocumento, y comprobar qué cliente es.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=9550e7c8-85f0-4513-93f7-daa97482067e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390976&collection=contentId-8390976",
+          "nombre": "image2021-8-17_11-6-5.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Con esta información vamos al historial de entregas en la ficha del cliente y entramos en Albaranes pendientes.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=475424d3-4485-4e28-82c9-249b2e70685d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390976&collection=contentId-8390976",
+          "nombre": "image2021-8-17_11-7-24.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el albarán con estado confirmado pero sin fecha de confirmación y volvemos a confirmar para forzar el grabado de la fecha.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=67b918de-bf43-46ec-9926-bf1d0d38d540&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390976&collection=contentId-8390976",
+          "nombre": "image2021-8-17_11-7-48.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Comprobamos que ya tiene fecha de confirmación y avisamos a la gestora para que lo reintente.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5722ad75-16ce-4c5c-9e1b-d1871bc5a99a&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390976&collection=contentId-8390976",
+          "nombre": "image2021-8-17_11-8-14.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "albaranes", "confirmación", "operaciones"]
+  },
+  {
+    "ID": 3,
+    "tema": "Añadir almacén nuevo a delegación",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando un almacén nuevo no sale en el listado hay que abrir la configuración de la delegación y añadir el almacén.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=cb10497e-a661-4c49-9a07-8f538f1d98e1&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390470&collection=contentId-8390470",
+          "nombre": "image (4).png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Añadimos el almacén a los listados separado por comas.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b318e7be-26d2-4d97-9053-8afddd106fee&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390470&collection=contentId-8390470",
+          "nombre": "image-1.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "almacenes", "delegaciones", "configuración"]
+  },
+  {
+    "ID": 4,
+    "tema": "Eliminar bolas rojas",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a los globals de cache. Global SPAGESTA → ^SPAMSJVOZBYUSU(\"iniciales\"). Ponemos las iniciales y borramos.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "alertas", "interfaz", "cache"]
+  },
+  {
+    "ID": 5,
+    "tema": "Excluir de la campaña Cobros KA",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Abrimos CRM, Configuración, Valores variables. Ponemos el código LSTUSRKA y añadimos las iniciales con una coma detrás.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b3c7356b-eae3-4ec5-862a-694d8353b196&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390378&collection=contentId-8390378",
+          "nombre": "1.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos al global SPAGESTA ^SPAUSROPER y añadimos también su usuario.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=40c08edc-b7f8-4023-aaf9-99a41a55f04e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390378&collection=contentId-8390378",
+          "nombre": "2.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "campañas", "cobros", "exclusiones"]
+  },
+  {
+    "ID": 6,
+    "tema": "Eliminar promoción",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para poder ver el botón tenemos que tener aplicado el permiso 551 - Eliminar promociones.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=81b7191a-eabc-496b-9e16-2f84b3970603&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-184956.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Abrir la ficha del cliente en CRM y acceder al botón de precios.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b77f0335-29c4-40ec-9531-a2d25c12ba3d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185010.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Accedemos a la pestaña de Rappels y datos.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=6da4e530-8bba-481d-b65a-e7a205d57f7e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185025.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Hacemos doble click sobre la promoción que queremos eliminar en el Grid de promociones.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=daedb9b4-7981-4dfb-9686-a60ff9b05aef&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185039.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Se abre la ventana de detalle de la promoción con el botón para eliminar.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=cfa9c2d4-4d78-420f-b323-8133088c9472&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185054.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Pulsamos el botón de eliminar y confirmamos la acción.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=4aaa094b-7ccd-4c69-b0d6-bca27d00b4bd&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185106.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Para recuperar una promoción eliminada, editamos el global ^PROMOCIONCLIENTEBORR y lo renombramos a ^PROMOCIONCLIENTE.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=f749e308-c261-4d18-bab2-7c6350b6164b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185139.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Verificamos que la promoción ha sido recuperada correctamente.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=9d03b21d-2722-4054-8827-be7c80784567&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-892567553&collection=contentId-892567553",
+          "nombre": "image-20250317-185150.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "promociones", "permisos", "operaciones"]
+  },
+  {
+    "ID": 7,
+    "tema": "Copiar permisos",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Configuración → Gestión de usuarios permisos. Origen: Iniciales que queremos copiar de. Destino: Iniciales a las que queremos copiar. Le damos al icono de copiar y después a Guardar.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=582e7e76-94bc-4d32-ac1a-6bc1e650a2dd&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900202588&collection=contentId-900202588",
+          "nombre": "image-20250322-112438.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "permisos", "usuarios", "accesos"]
+  },
+  {
+    "ID": 8,
+    "tema": "Cambiar subfuente",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "CRM ventas → Gestión de trials. Ponemos número de prueba, buscamos la delegación, la abrimos y vemos el número de empresa. Si no deja vamos al global ^[MAIN]MSSREC(delegacion,numeroempresa,4,3) y lo cambiamos al que pidan.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "subfuentes", "trials", "configuración"]
+  },
+  {
+    "ID": 9,
+    "tema": "Añadir iniciales campo de Deuda en contratos",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "CRM → Configuración → Valores variables → LSTUSRKA – añadir iniciales.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=63f9e2c0-fbb5-49b1-b6d5-bc866facf32f&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900235493&collection=contentId-900235493",
+          "nombre": "image-20250322-115615.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Globals → APPCOMERCIAL → SPAUSROPER – Añadir el campo de las iniciales + nombre y guardar.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a62323f4-4d66-4bed-89b1-34f0d889a249&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900235493&collection=contentId-900235493",
+          "nombre": "image-20250322-115731.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Verificación del cambio realizado.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b567d435-8ac1-43e6-8da1-56fd0545f4b0&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900235493&collection=contentId-900235493",
+          "nombre": "image-20250322-115744.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "contratos", "deuda", "cobros-ka"]
+  },
+  {
+    "ID": 10,
+    "tema": "Autocompletar usuario cobros",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM Cobros → Configuración → Usuarios cobros → Añadimos iniciales y completar.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "cobros", "usuarios", "automatización"]
+  },
+  {
+    "ID": 11,
+    "tema": "Crear departamento comercial",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos a CRM Ventas → Configuración → Departamentos comerciales. En ID ponemos el nombre del departamento a crear. ID área la que indiquen. Almacén al que pertenece.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "departamentos", "estructura", "configuración"]
+  },
+  {
+    "ID": 12,
+    "tema": "Asignar tareas grupo tesorería",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM Llamadas → Configuración → Grupos de usuarios → Grupo GRTES, modificamos iniciales.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "tareas", "tesorería", "asignación"]
+  },
+  {
+    "ID": 13,
+    "tema": "CRM Medios - Permiso asignar ficha a persona",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Hay que ir al usuario comercial y poner S en el campo correspondiente.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=7a3f27cb-fea2-4a90-9825-19934d9f7f70&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-989691928&collection=contentId-989691928",
+          "nombre": "image-20250530-104125.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "medios", "permisos", "fichas", "accesos"]
+  },
+  {
+    "ID": 14,
+    "tema": "Error agenda",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando sale un error de subíndice fuera de intervalo, vamos a cache SPAGESTA SPAAGEVTA y buscamos el día: ^SPAAGEVTA(109,,20250731.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=ceba25a1-563a-4b0c-9cdf-a718e7e825f6&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060864006&collection=contentId-1060864006",
+          "nombre": "image-20250730-102005.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Buscamos otro día del mes con el dato correcto y copiamos la línea para corregir la incompleta.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=09890148-3f3e-4986-b6be-1520192f2ddf&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060864006&collection=contentId-1060864006",
+          "nombre": "image-20250730-102037.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "errores", "agenda", "cache", "soporte"]
+  },
+  {
+    "ID": 15,
+    "tema": "CRM Bajas - Cambio de categoría no permitido",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando sale este error al cambiar la categoría, hay que añadirlo en SPAGESTA ^SPACTRL(\"VARIABLES\",\"PERMISOCAMBIOMOTIVBAJA\").",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d91af706-b000-4001-8e42-0837bde1f695&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1113063465&collection=contentId-1113063465",
+          "nombre": "image-20250912-091056.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "bajas", "categorías", "restricciones", "cache"]
+  },
+  {
+    "ID": 16,
+    "tema": "Permiso datos contrato",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Es el permiso 530. Se gestiona desde la configuración de permisos del usuario.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=890ad00d-2a8d-4ba6-9203-2e3ca4039d68&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145897033&collection=contentId-1145897033",
+          "nombre": "image-20251022-095458.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "permisos", "contratos", "accesos"]
+  },
+  {
+    "ID": 17,
+    "tema": "Días festivos",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para modificar el festivo en CRM: CRM Llamadas → Configuración → Introducción días festivos. Seleccionamos el día, si lo queremos festivo o no en el almacén que nos digan, y guardamos.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=14b9993f-d2c6-4605-9d66-0ffeee505dc3&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1154121734&collection=contentId-1154121734",
+          "nombre": "image-20251030-171349.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "calendario", "festivos", "configuración"]
+  },
+  {
+    "ID": 18,
+    "tema": "Error 52 CRM",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando salta error 52 desde Salesforce hay que verificar que el archivo de logs de CRMHermes no sea descomunal. Si es así, eliminar y probar de nuevo.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "errores", "error52", "salesforce", "soporte"]
+  },
+  {
+    "ID": 19,
+    "tema": "Añadir correo reportes almacenes",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Accedemos a CRM → Configuración → Configuración Almacenes y Delegaciones → Almacenes de Reparto. Agregamos la cuenta de correo en la casilla correspondiente. En caso de no caber se le pide al usuario que lo solicita quién sustituir.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=65cb7d14-213f-4ab7-9265-1aad1213f762&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1117421574&collection=contentId-1117421574",
+          "nombre": "image-20250916-063814.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "correo", "reportes", "almacenes"]
+  },
+  {
+    "ID": 20,
+    "tema": "Permiso cambio motivo baja",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Añadimos iniciales en el global SPAGESTA → SPACTRL(\"VARIABLES\",\"PERMISOCAMBIOMOTIVBAJA\"). Tenemos que dejarlo con el ,# del final.",
+        "img": null
+      }
+    ],
+    "tags": ["CRM", "permisos", "bajas", "cache", "accesos"]
+  },
+  {
+    "ID": 21,
+    "tema": "Modificar Fuente Gestión de Medios",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a SPAGESTA → SPACRMMED(***). En los asteriscos ponemos el registro de la ficha que queremos modificar. Buscamos la fuente actual y la sustituimos por la que nos piden.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=86156852-2395-402c-965b-12bf1b21ff26&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1445363719&collection=contentId-1445363719",
+          "nombre": "image-20260430-160129.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "medios", "fuentes", "cache", "configuración"]
+  },
+  {
+    "ID": 22,
+    "tema": "Error 7 memoria insuficiente",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si aparece este error debemos ejecutar un CMD desde la carpeta de GestionLlamadas y ejecutar los comandos indicados.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c5302c3d-9791-4099-84b5-b18a4251fa10&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1452539943&collection=contentId-1452539943",
+          "nombre": "image-20260521-073243.png"
+        }
+      }
+    ],
+    "tags": ["CRM", "errores", "memoria", "soporte"]
+  }
+]

@@ -1,0 +1,4040 @@
+[
+  {
+    "ID": 1,
+    "tema": "No pueden imprimir en SAP:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Sería poner el nombre de PDF en MAYÚSCULAS, no en minúsculas."
+      }
+    ],
+    "tags": [
+      "SAP"
+    ]
+  },
+  {
+    "ID": 2,
+    "tema": "No puede hacer al mail la verificación en dos pasos.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Te metes en el admin de google, buscas el nombre del usuario y entras en Cambiar unidad organizativa y la primera opción= 2factor-no-activados."
+      }
+    ],
+    "tags": [
+      "Google",
+      "AD",
+      "Email"
+    ]
+  },
+  {
+    "ID": 3,
+    "tema": "VNC-Configurar SAP",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "seguir explicando cuando haya otro incidencia"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ponerles el tema en Blue, dejar el foco animado activado y desactivar el segundo check.Configurado el entorno, hay tres: Desarrollo, Producción y Calidad."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Producción: Servidor de aplicación es la IP que sale en la imagen, esta Ip solo es para producción. ID Sistema ponemos ASP para producción."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Calidad: Servidor de aplicación seria= 192.168.37.184 y la ID de sistema es ASQ."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Desarrollo: Servidor de aplicación sería= 192.168.37.183 y la ID de sistema es ASD."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[1].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[2].png"
+      }
+    ],
+    "tags": [
+      "SAP",
+      "Network"
+    ]
+  },
+  {
+    "ID": 4,
+    "tema": "Borrar cola de impresión.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entras al .bat LIMPIAR IMPRESIONES, en modo administrador, con cuenta de soporte y ya estaría solucionado."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no está en el escritorio, que es lo normal, tiene que estar en= \\\\valnas001\\DATOS\\Ins"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 5,
+    "tema": "Dar de alta matrículas.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en SAP con nuestro usuario y arriba a la izquierda ponemos zmm0003, copiamos una matrícula ponemos nuestro usuario, fecha del día que la estemos haciendo y la matrícula."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después, ponemos arriba a la izquierda LS01n en Nº de almacén ponemos el número del centro, Tipo de almacén lo mismo que arriba y en Ubicación la matrícula. En el área de almacenam ponemos 001."
+      }
+    ],
+    "tags": [
+      "SAP",
+      "Network"
+    ]
+  },
+  {
+    "ID": 6,
+    "tema": "Revisar emails doble factor",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el admin de google entramos a Directorio/Usuarios/ Usuarios de las Unidades Organizativas seleccionada y nos vamos a 2FACTOR-NO-ACTIVADOS todos los que no tengan el ext delante del correo lo tenemos que seleccionar -> más opciones ->cambiar unidad organizativa -> aquaservice.com= Continuar-> Cambiar."
+      }
+    ],
+    "tags": [
+      "Google",
+      "AD",
+      "Email"
+    ]
+  },
+  {
+    "ID": 7,
+    "tema": "Cambiar almacén CST (número de contrato)",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en CRM y vamos a CRM Ventas, entramos a gestión de Trials y ponemos el numero de contrato y lo buscamos de donde sea el contrato (nos tienen que poner en la incidencia de donde es), pulsamos en modo edición y nos vamos al apartado de INSTALACIÓN y cambiamos el que este puesto por él que nos piden en la incidencia."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 8,
+    "tema": "Error al abrir archivos.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Usuario:\nDebo tener una licencia office antigua ya que no me permite abrir PPT o algunas funciones en Excel. Salta el error adjunto"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Solución:\nAbre una hoja de Excel, dale a Archivo/Opciones/Centro de confianza seleccione configuración del centro de confianza, Vista protegida y desmarcas los 3 checks. Aceptas y ya te deja abrirlos."
+      }
+    ],
+    "tags": [
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 9,
+    "tema": "CREAR USUARIOS EN SALESFORCE.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para crear usuarios en salesforce tienen que pasarnos una plantilla (tienen que saber que plantilla es),si no la tienen se la podemos pasar nosotros para que la rellenen y que nos la devuelvan rellenada."
+      },
+      {
+        "tipo": "texto",
+        "valor": "La plantilla se encuentra en C:\\Users\\jorge.ballester\\Desktop\\Manuales\\Salesforce"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando nos lo pasen rellenado tendremos que seguir los pasos del manual de Creación Usuario Salesforce."
+      }
+    ],
+    "tags": [
+      "Salesforce"
+    ]
+  },
+  {
+    "ID": 10,
+    "tema": "Actualizar el Chromedriver/TAREAS POR LA MAÑANA",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-SI KRONOS PARPADEA."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Hay que ir a Chrome, tres puntos a la derecha->Configuración-> Información de Chrome y dejamos que termine de actualizarse."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Para eso hay que ir a M:\\Ins\\GrabacionesBorja\\Actualizar Chromedriver"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Copiamos el ChromeDriver y lo llevo a la carpeta que tenga el usuario de ININ. Que suele estar en C:\\Program Files (x86)\\Interactive Intelligence\\ICUserApps\\AddIns, lo copiamos aquí y borramos los ChromeDrivers que haya."
+      }
+    ],
+    "tags": [
+      "ININ",
+      "Microsoft",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 11,
+    "tema": "Cambio de ruta.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "->Nos vamos a web server-> Procesos->Procesos y Generación de rutas"
+      },
+      {
+        "tipo": "texto",
+        "valor": "->En almacén ponemos el almacén que os hayan puesto que quieren."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-> Pulsamos abajo a la derecha el modo EDICIÓN."
+      },
+      {
+        "tipo": "texto",
+        "valor": "->Y en la columna de la derecha en repartidor buscamos las iniciales del repartidor que nos hayan dicho"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-> Y en Número de RZ ponemos el número de ruta que nos hayan dicho."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y por último guardamos."
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 12,
+    "tema": "Reinicio de Albaranes",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Webserver logística->Tareas->Tareas, buscamos el almacén de donde es el repartidor, tenemos que preguntar el número de la pareja o sus iniciales y cuando tengamos el numero de pareja o sus iniciales, lo buscamos en la pantalla que nos sale, entramos en su registro con doble click, abajo a la derecha le damos a Seleccionar todo y después le damos a Reiniciar Albaranes. Y ya estaría."
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 13,
+    "tema": "Cierre ficticio.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cerrar el día solo poniendo el día y poniendo 0 en los kilómetros."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 14,
+    "tema": "CAMBIO DE DESDE CACHE.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM-> CRM ventas->Gestión de Trials."
+      },
+      {
+        "tipo": "texto",
+        "valor": "En Nº.de Prueba ponemos el número que nos han mandado en el ticket y en la delegación el número de delegación que nos hayan puesto."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando estemos dentro de la prueba copiamos el número que sale en EMPRESA."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Cache->EXPLORADOR->GLOBALS->MAIN y en el nombre de global ponemos MSSREC."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos a VER, y en el buscador de arriba sin borrar lo que pone abrimos un paréntesis ( y ponemos el número de delegación, una coma y el número de empresa ."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ejemplo="
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[3].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Aquí buscamos la Subfuente que es el número que acaba 4,3, y entre los dos asteriscos ponemos +20 USER."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[4].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y ya estaría."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Cache"
+    ]
+  },
+  {
+    "ID": 15,
+    "tema": "Cambiar vendedor, Televendedor y Captador desde CACHE.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "También se puede cambiar desde aquí Vendedor(1,1,2), Televendedor(1,1,2)"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[5].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "y captador(4,2). Esto último en caso de que nos lo pidan."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[6].png"
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 16,
+    "tema": "Cambio de Iniciales de comerciales.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cambiar iniciales de contrato."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entrar a CRM al contrato que piden para ver el código de cuenta."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Abrimos MINC."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al 1."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Seleccionas la delegación del contrato."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ponemos nuestras iniciales(LFY) y nuestra contraseña(JBL)."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Enter a la fecha."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al 1"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al 1"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al 2"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ponemos el código de cuenta (CRM->Gestión de llamadas> Ponemos el número de contrato y lo buscamos. El código de cuenta es el primer cuadro que sale en datos fiscales)."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos a S."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Enter"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Pulsamos al 7 (El siete es el campo de comercial)."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cambiamos las iniciales del comercial."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Enter hasta que pida confirmar cambios."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Tipo de solicitud."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Contrato-cambiar vendedor"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Network"
+    ]
+  },
+  {
+    "ID": 17,
+    "tema": "DLLs inin.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos aquí M:\\Ins\\ACT_DLL's y le damos al bat UPDATE_DLLS."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Revisamos que el ChromeDriver no se haya quitado de C:\\Program Files (x86)\\Interactive Intelligence\\ICUserApps\\AddIns, en caso de que no este el ChromeDriver lo volvemos a poner."
+      }
+    ],
+    "tags": [
+      "ININ",
+      "PDA",
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 18,
+    "tema": "RMA PDA estropeada.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Abrimos excel y buscamos la PDA a cambiar con el SN y la subimos arriba del todo, ponemos nuestras iniciales."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después vamos a esta página"
+      },
+      {
+        "tipo": "texto",
+        "valor": "https://repair.zebra.com/siebel/app/rma/esn?SWECmd=Login&SWEPL=1&SRN=&SWETS="
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a crear orden de reparación->Nuevo pedido de reparación->En contacto de envio le damos a la lupa-> Contacto le damos a la lupa y buscamos quien ha puesto la incidencia y lo seleccionamos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "En la dirección de devolución pulsamos encima de la lupa, buscamos la delegación que nos manden y la seleccionamos y le damos a siguiente."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[7].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "En el Número de serie ponemos el número de serie, vamos a categoría de problemas y ponemos que le pasa a la PDA, después vamos a Detalle del problema y lo ponemos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si vemos que el total del carro el 0€ podemos darle a siguiente, si pone el precio de lo que cuesta no podemos seguir."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[8].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "En la siguiente página marcamos los tres Checks de bajo y a enviar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[9].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cogemos el número de reparación, lo llevamos al excel y lo ponemos en el apartado donde pone RMA."
+      }
+    ],
+    "tags": [
+      "PDA",
+      "Microsoft",
+      "Zebra",
+      "Printer",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 19,
+    "tema": "Cerrar matrículas sin saber usuario.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "http://cache.aquaservice.com:57772/csp/sys/exp/%25CSP.UI.Portal.SQL.Home.zen?$NAMESPACE=SPAGESTA&"
+      },
+      {
+        "tipo": "texto",
+        "valor": "SELECT"
+      },
+      {
+        "tipo": "texto",
+        "valor": "VEHICULOS, V_MATRICULA, V_COD_REPART, D_FECHA, I_NUM_VEH, D_HORA_INI, F_KMS_INI, D_HORA_FIN, F_KMS_FIN, D_HORA_INI_STR, D_HORA_FIN_STR, V_PAREJA_DE_REPARTO, FECHA_REPARTO"
+      },
+      {
+        "tipo": "texto",
+        "valor": "FROM SQLUser.VEHICULOS"
+      },
+      {
+        "tipo": "texto",
+        "valor": "where v_matricula='1556HWM' order by d_fecha desc"
+      },
+      {
+        "tipo": "texto",
+        "valor": "WebServer -> Ficheros maestros -> Vehiculos -> Buscar iniciales del conductor que no ha cerrado el día y tabular -> Fecha de hoy."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[10].png"
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "Cache",
+      "ODBC/SQL"
+    ]
+  },
+  {
+    "ID": 20,
+    "tema": "Permisos escucha de ININ.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Ej:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[11].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en Interaction Administrator, en el apartado de funciones, elegimos el nombre de la función que nos hayan mandado."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[12].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Eliminamos todos los usuarios que estén y solo dejamos los que nos han puesto en la incidencia."
+      }
+    ],
+    "tags": [
+      "ININ"
+    ]
+  },
+  {
+    "ID": 21,
+    "tema": "No va el panel de altitud.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si no tiene instalado el Firefox se lo instalamos y entramos desde este buscador."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Copiamos el URL del otro navegador y se lo ponemos en el excel, cuando entremos saldrá un error, vamos arriba saldrá una pestaña que pone opciones, le damos a la primera opción y actualizamos la página."
+      }
+    ],
+    "tags": [
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 22,
+    "tema": "ELIMINAR AVISOS BOLA ROJA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Cache->Globals->Ponemos spagesta y después ponemos SPAMSJVOZBYUSU."
+      },
+      {
+        "tipo": "texto",
+        "valor": "ver"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Cuando nos salga abrimos paréntesis y ponemos dentro sus iniciales."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Para eliminar tenemos que ir eliminando de una en una, Check de permitir edición entramos y le damos al botón de eliminar."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 23,
+    "tema": "Le falta la pestaña de historial de llamadas en ININ.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos PLANTILLAS DE CLIENTE->Buscamos al user y seleccionamos la plantilla que nos hayan pedido."
+      }
+    ],
+    "tags": [
+      "ININ"
+    ]
+  },
+  {
+    "ID": 24,
+    "tema": "Cambio RZs delegación:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos al webserver Repartidor x Almacén ponemos el almacén que nos hayan marcado y ponemos la iniciales de los usuarios de las parejas que nos hayan pedido y abajo del todo en Parejas Reparto ponemos el número de delegación y después el de la pareja."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[13].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "EJ: la delegación era Córdoba(175) y la pareja era la 20, esto se tiene que hacer con los dos miembros de la pareja."
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 25,
+    "tema": "No estar en campaña en ININ.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entrar en Interaction Administrador-> Buscas el equipo del usuario y cuando lo encuentres, doble click, vamos a Licencias y tiene que tener el 2 (Interaction Scripter) y la 3 (Dialer Add-On) marcados tal y como está en la imagen."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[14].png"
+      }
+    ],
+    "tags": [
+      "ININ",
+      "Network"
+    ]
+  },
+  {
+    "ID": 26,
+    "tema": "Terminar Procesos por bloqueo CRM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos metemos en el caché vamos a operaciones-> bloqueos->Gestionar Bloqueos-> Buscamos por la delegación que nos digan->entrar y pulsamos en terminar procesos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Si tenemos la IP vamos a operaciones->Procesos->ponemos la IP que nos han dado en el buscador->detalles->entramos y terminamos el proceso."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Cache",
+      "Network"
+    ]
+  },
+  {
+    "ID": 27,
+    "tema": "Modificar contraseña de CRM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el AD buscamos el usuario y le restablecemos la contraseña."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "AD"
+    ]
+  },
+  {
+    "ID": 28,
+    "tema": "No puedes acceder a talkdesk ( no reconoce las credenciales).",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Miramos en el AD si en miembros de tienen el grupo de Salesforce_user, si no lo tiene se lo añadimos ya debería de funcionar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[15].png"
+      }
+    ],
+    "tags": [
+      "Salesforce",
+      "Talkdesk",
+      "AD",
+      "Network"
+    ]
+  },
+  {
+    "ID": 29,
+    "tema": "Si borran Microsoft authenticator",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Miramos el microsoft Authenticator su usuario->Métodos de authenticacion y borramos el teléfono que está puesto y por último le damos aquí y ya debería de poder entrar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[16].png"
+      }
+    ],
+    "tags": [
+      "Google",
+      "Microsoft",
+      "Microsoft Authenticator"
+    ]
+  },
+  {
+    "ID": 30,
+    "tema": "No deja entrar al dominio,EN SALESFORCE, cuando se intenta asociar el caso de Salesforce al llamado de Talkdesk.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando escribe el dominio tiene que escribir solo aquaservice."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos al administrador de tareas y finalizamos todos los procesos de talkdesk y reiniciamos el equipo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no pueden entrar al Talkdesk cierra sesión en Talkdesk y cierra sesión en salesforce, vuelve a entrar iniciando sesión en todo y estaría solucionado."
+      }
+    ],
+    "tags": [
+      "Salesforce",
+      "Talkdesk",
+      "AD",
+      "Network"
+    ]
+  },
+  {
+    "ID": 31,
+    "tema": "Si está en una delegación no puede utilizar el FortiVPN.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Si tiene DIGI tiene que probar a reiniciar el router."
+      }
+    ],
+    "tags": [
+      "FortiVPN",
+      "Network"
+    ]
+  },
+  {
+    "ID": 32,
+    "tema": "Cambio perfil.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Entramos en ININ-> Usuarios-> vamos a Información personal->Cambiamos el departamento."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Después vamos Grupo de trabajo->quitamos el que esté y ponemos el que nos piden."
+      },
+      {
+        "tipo": "texto",
+        "valor": "cambio"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Vamos a Funciones-> Borramos los que estén y ponemos los que nos manden."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Hay que poner los usuarios que hayamos hecho los cambios en la plantilla, entramos en plantilla de clientes-> seleccionamos el/los usuarios->seleccionamos la plantilla que necesite y le damos a aplicar plantilla.CRM"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "ININ"
+    ]
+  },
+  {
+    "ID": 33,
+    "tema": "Activar gestora que finalizó, en crm para reasignar tareas pdtes.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM vamos a Configuración->gestión de usuarios->alta usuarios-> la creamos como un usuario normal con todo lo que nos pidan y en delegación y almacenes le ponemos todos."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 34,
+    "tema": "Activar Usuario Mensajería/SMS/Movistar.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "https://www.mensajeriaintegrada.accesoweb.movistar.es/portal-tme-webapp/plantillas/administracion/miCuenta/usuarios/usuarioPortalList.zul"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a este link buscamos el usuario que nos piden y le restablecemos la contraseña."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y le mandamos por ticket la nueva contraseña."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 35,
+    "tema": "Cuando cambian una contraseña de windows.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Tienen que bloquear el equipo (CTRL+ALT+SUPR) y poner la nueva contraseña."
+      }
+    ],
+    "tags": [
+      "Network",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 36,
+    "tema": "Cuando se le salga del dominio un equipo que está trabajando desde casa.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Tenemos que sacarlo del dominio poniendo una “A” por ejemplo en el GRUPO DE TRABAJO."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Reinicia el equipo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Después nos metemos con el usuario =.\\administrador (Fragil$50) dentro del admin iniciamos el FortiVPN, metemos dentro del dominio otra vez."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Y por último, volvemos a entrar con el usuario =.\\administrador (Fragil$50), iniciamos sesión en FortiVPN con la cuenta del usuario, cambio de usuario, sin cerrar sesión, por el del usuario."
+      }
+    ],
+    "tags": [
+      "FortiVPN",
+      "AD",
+      "Network"
+    ]
+  },
+  {
+    "ID": 37,
+    "tema": "Cambiar captador.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM-> CRM ventas->Gestión de Trials."
+      },
+      {
+        "tipo": "texto",
+        "valor": "En Nº.de Prueba ponemos el número que nos han mandado en el ticket y en la delegación el número de delegación que nos hayan puesto."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando estemos dentro de la prueba copiamos el número que sale en EMPRESA."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Cache->EXPLORADOR->GLOBALS->MAIN y en el nombre de global"
+      },
+      {
+        "tipo": "texto",
+        "valor": "ponemos MSSREC."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ej: Aquí hemos puesto el primer número es la delegación y el segundo es el Número de Prueba del contrato."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[17].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[18].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y en este apartado en el 4,2 entramos y lo modificamos con las iniciales del captador que nos hayan mandado."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Cache"
+    ]
+  },
+  {
+    "ID": 38,
+    "tema": "Está en llamada en talkdesk y le sale que está conectada en salesforce.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Talkdesk/salesforce"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le sale este error."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[19].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cerramos sesión en Salesforce y en talkdesk y después volvemos a entrar primero en salesforce y después en talkdesk y ya debería funcionar."
+      }
+    ],
+    "tags": [
+      "Salesforce",
+      "Talkdesk"
+    ]
+  },
+  {
+    "ID": 39,
+    "tema": "PASAR TAREAS DESDE PDA ENTRE COMPAÑEROS/REASIGNAR -ALBARANES/PERMISOS ALMACENES ÁREA",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos a WEBSERVER->Ficheros Maestros->Usuarios->Buscamos el usuario y hacemos pantallazo de los almacenes que tenga asignado."
+      },
+      {
+        "tipo": "texto",
+        "valor": "EJ:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[20].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después, vamos a Logística->Repartidores X Almacén-> ponemos el almacén de la captura de la pantalla y buscamos el usuario con las iniciales y al final tenemos que marcar en JEFE DE EQUIPO el tick de SI."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[21].png"
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "PDA",
+      "Network"
+    ]
+  },
+  {
+    "ID": 40,
+    "tema": "ERROR A3 INNUVA.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[22].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Borrar las cookies de las últimas 24 horas y F5 ya debería funcionar."
+      }
+    ],
+    "tags": [
+      "Innova"
+    ]
+  },
+  {
+    "ID": 41,
+    "tema": "DAR PERMISOS EN CRM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Vamos a CRM->configuración->gestión de usuarios->permisos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Ponemos arriba el usuario que tenga todos los permisos, nos vamos abajo del todo donde pone Copiar permisos-> en origen ponemos el usuario que tenga todos los permisos y en destino el usuario a quien le queremos pasar los permisos, para que se pasen tenemos que darle a las cáritas de la izquierda."
+      },
+      {
+        "tipo": "texto",
+        "valor": "EJ= En este ejemplo queremos pasar los permisos de TAC a LYX"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[23].png"
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 42,
+    "tema": "Cambiar contraseña CRM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Pulsamos los botones: CTRL+ALT+Suprimir= Cambian la contraseña."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después tienen que entrar al CRM con la contraseña nueva."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 43,
+    "tema": "Permisos carpeta:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Se escala a sistemas."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 44,
+    "tema": "La PDA no tiene datos.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Hablar con Saray de Personas y Cultura."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 45,
+    "tema": "Cambiar puesto y extensión.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos al admin de google->Buscamos el usuario-> entramos al User->vamos a la información del usuario-> Y aquí dentro cambiamos lo que nos hayan pedido."
+      }
+    ],
+    "tags": [
+      "Google"
+    ]
+  },
+  {
+    "ID": 46,
+    "tema": "Borrado de albaranes.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Descargar documento."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Casilla de datos->filtrar-> filtramos por higiene sin maquina."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no hay ninguna de higiene sin máquina la cerramos poniendo que Nada por eliminar."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Buscar el número de contrato del cliente en el excel y ponerlo en el CRM."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Abrimos el contrato->Historial y stock->Albaranes pendientes->pinchamos el albarán que toca y eliminamos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "OJO: Comparar el número del albarán que sale en CRM con el del excel."
+      },
+      {
+        "tipo": "texto",
+        "valor": "OJO: Si filtramos y no está higiene sin máquina cerramos la incidencia."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 47,
+    "tema": "Cliente bloqueado.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Matamos, desde el administrador de tareas, los procesos de CRM y al volver a iniciar y buscar el contrato y el usuario debería de estar desbloqueado."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Primera opción= Entramos a cache->gestionar Bloqueos-> CTRL+F-> Buscamos el número de cliente y le damos a quitar."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Cache"
+    ]
+  },
+  {
+    "ID": 48,
+    "tema": "Al descargar le sale un error = 70 Permiso denegado.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Entramos en administrador de tareas y cerramos el ejecutable de CRMhermes o el de GLlamadas."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 49,
+    "tema": "Eliminar dato ZEUS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a cache->Explorador->Globals->APPCOMERCIAL/DATOSELIM->Permitir edición->editamos la fila -> y quitamos las AAA y ponemos las iniciales que nos han mandado y también quitamos el 845603 y ponemos el idDATO que nos han mandado."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-No lo borramos, lo añadimos y ya está. finalizada la tarea."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[24].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[25].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[26].png"
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 50,
+    "tema": "Ejemplo de incidencia para escalar a nivel 2.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Esta CAU la hemos ascendido a nivel 2:CAU-160003"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 51,
+    "tema": "Requisitos que tiene que haber en la CAU para que nos soliciten la activación de la PDA nueva.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Tienen que ponernos el Número de Serie, el IMEI y el número de seguimiento de NACEX de la PDA estropeada."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 52,
+    "tema": "No deja acceder al sms de movistar/SMS Movistar.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos tienen que pasar el usuario con el que entran al correo."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 53,
+    "tema": "Pasar a pendiente de instalar.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM ventas->gestión de trials->ponemos el número de contrato->modo edición-> abajo a la izquierda en Estado, lo cambiamos a CCFI=Contrato falta instalación."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 54,
+    "tema": "No puede conectarse al fortiVPN.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[27].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Si le sale este mensaje pueden ser varias opciones, que esté poniendo mal la contraseña o que su usuario esté bloqueado, revisamos los dos casos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "- Si en su usuario de FORTIVPN en el user_group pone el nombre de grupo acabado en PT o contiene PT hay que quitarlo de ahí añadirlo en el user_group sin PT."
+      }
+    ],
+    "tags": [
+      "FortiVPN"
+    ]
+  },
+  {
+    "ID": 55,
+    "tema": "Bloqueo de contador.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Abrimos cacheVamos aMAINCONponemos ^CON(X,\"WAAUTO\",\"CONT\") siendo X la delegación que falla"
+      },
+      {
+        "tipo": "texto",
+        "valor": "vamos a otra pestaña y ponemos^WACONT(X,YY siendo x la delegación que falla e yy el número devuelto en el CON vemos que ese numero muestra cosas raras y si ponemos el anterior va bien.añadimos : al final y si vemos que no hay nada nuevo es ese el enganchado"
+      },
+      {
+        "tipo": "texto",
+        "valor": "volvemos a ^CON(X,\"WAAUTO\",\"CONT\") y editamos, añadimos 1 al contador y guardamos"
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 56,
+    "tema": "Instalar Redtrust.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "1- Probar a Ejecutar él .bat que está dentro de la carpeta RedTrust 3.50.7 Configurado,"
+      },
+      {
+        "tipo": "texto",
+        "valor": "este \"rt-agent-x64-3.50.7-3fbd8cd4-MS.bat\""
+      },
+      {
+        "tipo": "texto",
+        "valor": "2- Si saca error tenemos que desinstalar \"Microsoft Visual C++ 2015-2022\" tanto el x64 como x86"
+      },
+      {
+        "tipo": "texto",
+        "valor": "3- Instalamos él .exe \"VC_redist.x86.exe\""
+      },
+      {
+        "tipo": "texto",
+        "valor": "4- Volvemos a lanzar él .bat \"rt-agent-x64-3.50.7-3fbd8cd4-MS.bat\""
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a iconos ocultos y le damos al botón derecho y activar."
+      }
+    ],
+    "tags": [
+      "RedTrust",
+      "Microsoft",
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 57,
+    "tema": "No le funciona la clave para entrar a la PDA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a webserver ponemos sus iniciales en Ficheros Maestros-> Usuarios y ahí vemos la contraseña que tiene."
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "PDA"
+    ]
+  },
+  {
+    "ID": 58,
+    "tema": "Impresora zebra.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si se atasca tenemos que poner el papel en 100x150 al imprimir."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[28].png"
+      }
+    ],
+    "tags": [
+      "Zebra",
+      "Printer"
+    ]
+  },
+  {
+    "ID": 59,
+    "tema": "ALTA EQUIPO ININ",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando instalamos un equipo nuevo en el cual nunca se han conectado a ININ debemos darlo de alta en el sistema."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Accedemos al administrador, vamos a “Teléfonos IP administrados”, ordenamos por número de teléfono y hacemos click con el botón derecho para elegir “nuevo”:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[29].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Lo primero que nos pide es el nombre de la nueva licencia, que debemos poner el siguiente libre en este caso de ejemplo el 6062, y dejamos las siguientes opciones marcadas:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[30].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después de esto nos saldrá una ventana para rellenar los datos, ahí ponemos el nombre del equipo con el dominio y le damos abajo a la derecha a editar:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[31].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "En la siguiente ventana nos vamos primero a la pestaña “Configuración” y rellenamos los 3 campos igual:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[32].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y por último nos vamos a la pestaña “Licencias” y marcamos las siguientes casillas:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[33].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Esto es para un usuario normal; en ocasiones nos piden otros permisos como escuchar buzón que habría que marcar la opción “Medios 3 Plus”."
+      },
+      {
+        "tipo": "texto",
+        "valor": "ATENCIÓN, SI ES UN AGENTE QUE VA A USAR CAMPAÑAS ASIGNARLE LAS DOS LICENCIAS ADICIONALES QUE VAN PRIMERO."
+      }
+    ],
+    "tags": [
+      "ININ",
+      "AD",
+      "Network"
+    ]
+  },
+  {
+    "ID": 60,
+    "tema": "No vuelca la instalación de los coolers.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "CAU-161776"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Hola buenos días, es este cst no vuelcan los dispensadores ni la cafetera y no pasa a alta, os paso el numero de serie para que los pongáis como instalados, por favor, en la imagen aparece la numeración de las máquinas y pertenece al cst 6-329401. gracias"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[34].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Respuesta:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Como bien sabes si tiene productos a pagar, el albarán no pasa al sistema hasta que no sea contrato."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 61,
+    "tema": "CAMBIAR PERMISOS EN FW LOGISTICS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "CAU-162013"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el AD, NO podemos ir a buscar y poner el nombre, tenemos que ir a la delegación a la que pertenece, al área al que pertenezca y buscarlo en su área, cuando lo encontremos, vamos a editor de atributos->employeeNumber y aqui añadimos la delegación que nos haya dicho separada por “|” y ponemos todo junto."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Por ejemplo:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Buscamos a Gustavo Llarena , lo buscamos en Paterna-Sede central en Logística, porque es su área, y vemos que nos sale ya."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[35].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Editor de atributos y buscamos employeeNumber y añadimos la delegación que nos pidan, en este caso es Logroño, se añade de la siguiente manera:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nombre de la delegación:Admin|"
+      },
+      {
+        "tipo": "texto",
+        "valor": "En este caso a sido: |Logrono:Admin|"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ojo porque hay que poner el “|” al final."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[36].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos fijamos bien en el formato como está puesto."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[37].png"
+      }
+    ],
+    "tags": [
+      "AD",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 62,
+    "tema": "Asignar Rutas/Crear Rutas:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Webserver-> Procesos->Gestión y generación de rutas."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[38].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Ahí te metes , buscas el almacén, le das a recargar y edición y en el otro lado buscas al rz y pones la ruta y recargar y compruebas que se le vaya a asignar la ruta correcta y le das a guardar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[39].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Si nos mandan, en la CAU, un número por ejemplo= 100, 700, 500, etc…, en apartado de número RZ ponemos= 01, 07, 05, etc… si nos mandan 1000, 7000, 5000, etc…, tendremos que poner en el número RZ= 10, 70, 50, etc…"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Las rutas normales solo tienen 75 registros."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Asignar rutas a parejas."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Para asignar la pareja es en donde los das de alta en el almacén"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[40].png"
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 63,
+    "tema": "Error al abrir facturas:",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[41].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si sale este error suele ser por la contraseña, que bloquee el usuario o que lo reinicie y pruebe a acceder."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Revisar por si acaso el administrador de tareas y si tiene algún proceso de CRMHermes abierto, lo cerramos"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 64,
+    "tema": "Sincronización de usuarios, problema con el cierre de Webserver.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Buenos días,"
+      },
+      {
+        "tipo": "texto",
+        "valor": "En la delegación de Vilanova hemos tenido un problema con la sincronización de tres usuarios: TZY; NZX; IDQ. El problema es que su cierre en Webserver no se corresponde con las tareas realizadas que muestra tanto la PDA como el CRM."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Por ejemplo, el cliente Eloi Garcia (103171) no aparece en el cierre de NZX pero, en CRM, aparece como confirmado por él."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Adjunto alguna captura de pantalla, saludos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "CAU-162092"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nuestra respuesta es = Los albaranes están en “revisados”, para revisar la ruta filtra en vez de No revisados, en TODO, esperamos respuesta."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Webserver",
+      "PDA"
+    ]
+  },
+  {
+    "ID": 65,
+    "tema": "METER A (usuario) EN GRUPO (que nos soliciten)/SACAR COMERCIALES DEL GRUPO",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Hemos entrado en CRM->CRM llamadas->Configuración-> Grupo de usuarios->Ponemos el grupo que nos hayan dicho y bajo, agregamos el usuario que nos hayan dicho separado por una coma."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ejemplo= Hemos añadido TFR en el grupo GRCAFB."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[42].png"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "AD"
+    ]
+  },
+  {
+    "ID": 66,
+    "tema": "Ubicación no disponible, El nombre de usuario o la contraseña no es correcto.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[43].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Este error sale cuando le hemos cambiado la contraseña al usuario y no ha bloqueado el equipo y ha puesto la nueva contraseña."
+      },
+      {
+        "tipo": "texto",
+        "valor": "RESOLUCIÓN= CTRL+ALT+SUPR le damos a bloquear equipo y para desbloquear que ponga su nueva contraseña que nosotros hemos cambiado."
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 67,
+    "tema": "Factura, Si no puede adjuntar la factura cuando quiere enviar el mail a las empresas.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Tiene que pulsar control y pinchar sobre la factura que quiera enviar y de ahí le da al sobre para enviarla."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 68,
+    "tema": "Cargar fichero de gestoras de operaciones",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Descargamos el archivo que nos hayan pasado y lo metemos en M->INS, nos vamos a valpcaux->explorador de archivos->y en la barra de arriba ponemos \\\\cache\\datos\\CLIENTESININ, una vez dentro de esta ruta abrimos otro explorador de archivos dentro de valpcaux y vamos a la ruta de M->INS, que es donde habíamos dejado el excel, lo cojemos y lo trasladamos a la ruta de \\\\cache\\datos\\CLIENTESININ. Por último le cambiamos el nombre a Gestoras_Operaciones_KA."
+      }
+    ],
+    "tags": [
+      "Cache",
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 69,
+    "tema": "Acceso consulta SAP transacción BP.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-La transacción BP está dentro de ZFFICLIENTES."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Accedemos a SAP, ponemos en el buscador PFCG, le damos a transacciones y ponemos el nombre de la transacción que nos hayan pedido y buscamos el ROL, por ejemplo ZFFICLIENTES, cuando lo tengamos lo copiamos, le damos al OK bajo a la derecha y lo copiamos en ROL, le damos a modificar y en modificar nos vamos a USUARIO, bajamos abajo del todo y vamos añadiendo los usuarios que nos hayan mandado."
+      }
+    ],
+    "tags": [
+      "SAP"
+    ]
+  },
+  {
+    "ID": 70,
+    "tema": "Pasar productos a gratis.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[44].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 71,
+    "tema": "Error 91",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si sale el error 91 es que las iniciales están mal puestas, revisamos Salesforce, revisamos CRM y revisamos el AD haber si están bien puestas. Una de las posibles soluciones es copiar los permisos de otra compañera a la persona que nos esté llamando."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[45].png"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Salesforce",
+      "AD"
+    ]
+  },
+  {
+    "ID": 72,
+    "tema": "No van los datos móviles en la PDA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Solución= Poner la tarjeta SIM en otra PDA, si funcionan los DATOS en la otra PDA, tenéis que solicitar el cambio de la PDA de la cual no van los datos, si en la PDA que habeis metido la SIM siguen sin ir los datos tienen que llamar a personas y cultura a SARAY GARCÍA y pedir que os activen los datos de esa SIM."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 73,
+    "tema": "Si hay fallo al escanear la PDA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Hay que escanear hasta que te deje o en caso de que no esté en la delegación deberá escanear el código QR desde la delegación."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 74,
+    "tema": "Falla el láser de la PDA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Desinstalamos Ulises y lo volvemos a instalar, en caso de que siga fallando el láser después de desinstalar y volver a instalar, que hable con su superior y pida el cambio."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 75,
+    "tema": "Error barcode en las PDAs.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si sale el error BARCODE en las PDAs es que tienen Android 13."
+      },
+      {
+        "tipo": "texto",
+        "valor": "SOLUCIÓN: Que nos manden la PDA a paterna, poniendo la incidencia y cuando nos llegue nosotros les mandaremos una PDA nueva."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Otra solución: Es ir probando hasta que ya no le de el error y pueda enrolarse la PDA."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 76,
+    "tema": "Konecta no les deja acceder a talkdesk/No se pueden validar sus credenciales.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Tenían el usuario de talkdesk deshabilitado, se vuelven a habilitar y ya les funcionaria."
+      }
+    ],
+    "tags": [
+      "Talkdesk",
+      "Network"
+    ]
+  },
+  {
+    "ID": 77,
+    "tema": "Cambiar de instalador a repartidor o de repartidor a instalador.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "En webserver ficheros maestros usuarios."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Pones las iniciales del tipo y en el rol creo que es pones ins o rep."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[46].png"
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "Network"
+    ]
+  },
+  {
+    "ID": 78,
+    "tema": "Los mensajes diarios de REPORTING y SALDO DE CAJA no los recibe.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Mirar si su correo está bien puesto en CRM Ventas->Configuración-> Usuario Comercial"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Mirar en el portal de Aquaservice (http://portal.aquaservice.com)"
+      },
+      {
+        "tipo": "texto",
+        "valor": "y administración->Corporate Reports y le pedimos que tipo de REPORTING es y le añadimos bajo el correo del chico/chica del cual no le están llegando los correos."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Email",
+      "Network"
+    ]
+  },
+  {
+    "ID": 79,
+    "tema": "Comando para buscar bajas que no están realizadas.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "=+BUSCAR(B31;[Bajas.xls]Hoja1!B$3:B$10974;1;0)"
+      }
+    ],
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "ID": 80,
+    "tema": "INCIDENCIAS PARA PEDIR APROBACIÓN/TICKET ANTES DE HACERLAS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si nos llaman y nos piden que instalemos el paquete de OFFICE tenemos que pedirle que nos lo ponga por un ticket y lo tiene que aprobar su superior."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si nos llaman y nos piden un alta para Rydoo, les tenemos que decir que nos la tiene que pasar por ticket."
+      }
+    ],
+    "tags": [
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 81,
+    "tema": "Forzar cierre Archivo Flota reparto",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si no podemos entrar a la ruta que nos han pasado se lo tendremos que escalar a sistemas."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[47].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 82,
+    "tema": "No puede firmar con el certificado digital. REDTRUST.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Entramos a las extensiones de Google Chrome y tenemos que activar las siguientes opciones."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-En caso de que en Google Chrome no funciona le pedimos que cambie el buscador a Microsoft Edge."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[48].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-En caso de que quiera firmar a un archivo y no le salga el certificado de ALBERTO, reiniciamos el ordenador y cuando vuelva, que vuelva a intentar firmar ya le saldrá el certificado."
+      }
+    ],
+    "tags": [
+      "Google",
+      "RedTrust",
+      "Microsoft",
+      "Network"
+    ]
+  },
+  {
+    "ID": 83,
+    "tema": "Le ha desaparecido la plantilla a una compañero/a en ININ.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Le cambiamos la resolución del equipo a 1600x900 y después vamos a Interaction Administration, vamos al apartado de Plantillas de cliente y le ponemos la plantilla que toca."
+      }
+    ],
+    "tags": [
+      "ININ",
+      "Network"
+    ]
+  },
+  {
+    "ID": 84,
+    "tema": "Ventana emergente= Error en CRM.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[49].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Este tipo de error nos tienen que pasar incidencia y se la tenemos que escalar al equipo de Control de Mejoras."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Network"
+    ]
+  },
+  {
+    "ID": 85,
+    "tema": "Calendario de entregas.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[50].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a Webserver-> informes->calendario de entregas-> y aquí filtramos por la delegación, le damos a imprimir arriba a la derecha y nos saldrá un archivo, lo cerramos, después saldrá un cartel le damos a qué SÍ y esperamos a que actualice, cuando termine el proceso ya habremos terminado."
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 86,
+    "tema": "Usuarios MINC",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "○ Opción 4 y luego 2 2 copiamos de otro usuario."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después de crear el usuario de MINC hay que meter sus iniciales en dos Variables que son las siguientes= USUNOBLQMINC1 y USUNOBLQMINC2 ."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Estas variables están en CRM->Configuración->Valores variables ."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 87,
+    "tema": "error en “Delegación” con incidencia número que nos pasen.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Pendiente de apuntar porque el que nos pasaron tenía un error."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 88,
+    "tema": "Si konecta tiene que actualizar el CRM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Extpcaux -> explorador de archivos - buscas tu ip y entras en tu carpeta de crm y pasas el gllamadas al c:/ del servidor"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-En mi caso es = \\\\192.168.33.196\\c$"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Asegurarnos de que lo tenemos actualizado."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Tenemos que meterlo en C:\\Aquaservice\\Aplicaciones\\Gestionllamadas"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 89,
+    "tema": "Estin Telefónico.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[51].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 90,
+    "tema": "Pasar tareas a RZ/VER CIERRES.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a WEBSERVER->ficheros maestros y usuarios."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[52].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Aquí dentro buscamos al compañero por sus iniciales y miramos que almacenes tiene asignados. En este caso tiene estos tres."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[53].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después, vamos a Logística->Repartidores X Almacen-> ponemos el almacén de la captura de la pantalla y buscamos el usuario con las iniciales y al final tenemos que marcar en JEFE DE EQUIPO el tick de SI. En todos los almacenes donde esté dado de alta."
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "Network"
+    ]
+  },
+  {
+    "ID": 91,
+    "tema": "Crear MegaRuta/pareja.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "- Crear usuario de windows (como si fuese un usuario normal)"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[54].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "- Crear usuario de crm (Lo creamos como un usuario normal, hacemos captura a otra pareja y la copiamos tal cual pero con los datos de la pareja nueva.)"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[55].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "- Creamos usuario webserver (ficheros maestros y repartidores por almacén)"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[56].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[57].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "procesos generar ruta (que sea sábado)"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Webserver",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 92,
+    "tema": "ERROR AL ACTUALIZAR QUERY.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Me meto en ODBC de 64 y en el 32 en administrador -> DNS del sistema-> MAIN configurar y probar y después a SPAGESTA configurar y probar conexión."
+      }
+    ],
+    "tags": [
+      "ODBC/SQL",
+      "Network"
+    ]
+  },
+  {
+    "ID": 93,
+    "tema": "Eliminar CLINS.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[58].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Hay que fijarse que a la derecha pone CLINS, si pone CLINS le damos a ELIMINAR ALBARÁN ."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 94,
+    "tema": "REVISIÓN MATINAL DE ININ.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a ININ y si cuando vas a llamar te sale Desactivado, Lo que tendremos que hacer es lo siguiente:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos abajo a la derecha a Opciones, en los casquitos, tiene que estar de la siguiente manera puesto."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[59].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le ponemos la hora correctamente y ya puede acceder a la PDA"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[60].png"
+      }
+    ],
+    "tags": [
+      "ININ",
+      "PDA"
+    ]
+  },
+  {
+    "ID": 95,
+    "tema": "REPORTING % NO LE LLEGA AL CORREO.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Brevo (https://app-smtp.brevo.com/log) y buscamos por el Destinatario el correo del compañero que nos lo está pidiendo, cuando nos salgan todo los mensajes en BREVO buscamos el que nos pidan, lo descargamos y se lo enviamos por el chat de google."
+      }
+    ],
+    "tags": [
+      "Google",
+      "Brevo",
+      "Email"
+    ]
+  },
+  {
+    "ID": 96,
+    "tema": "Configurar plataforma de licitación en JAVA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el CONFIGURACIÓN JAVA->SEGURIDAD, nos vamos al apartado de de abajo y tenemos que añadir lo siguiente."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[61].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y tener actualizado el JAVA a la última versión."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[62].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[63].png"
+      }
+    ],
+    "tags": [
+      "Java"
+    ]
+  },
+  {
+    "ID": 97,
+    "tema": "PDAs NO PUEDEN ACCEDER, DA ERROR EN EL SERVIDOR.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Simplemente cuando pase este error necesitamos cambiar el horario de la PDA en caso de que este mal puesto y debería de dejarle entrar al compañero que lleva la PDA."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 98,
+    "tema": "Dar acceso a la transacción. Ejemplo a la transacción: ZSD0003.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en SAP y buscamos PFCG"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[64].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en Transacciones-> dentro ponemos la transacción que nos han mandado y le damos al check verde y nos saldrá la siguiente pantalla."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[65].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Copiamos el AGR NAME."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Salimos hasta el inicio y en el inicio buscamos al usuario que nos han dicho al que tenemos que ponerle la transacción, nos metemos en su usuario y dentro de su usuario vamos al apartado de ROLES y agregamos la transacción que hemos copiado."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[66].png"
+      }
+    ],
+    "tags": [
+      "SAP"
+    ]
+  },
+  {
+    "ID": 99,
+    "tema": "NO PUEDE VER LOS COMENTARIO DE LOS CLIENTE.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Tiene que borrar lo que esta marcado y resumirlo mucho mas."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[67].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 100,
+    "tema": "COPIAR PERMISOS/ROL DE USUARIOS EN SAP YA CREADOS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos al usuario que nos han indicado, dentro de este usuario nos vamos a ROLES y copiamos todos los ROLES."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[68].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Los copiamos, nos vamos al usuario que le queramos poner los ROLES, nos vamos al apartado de ROLES y le pegamos todos los roles que habíamos cogido y los guardamos."
+      }
+    ],
+    "tags": [
+      "SAP"
+    ]
+  },
+  {
+    "ID": 101,
+    "tema": "ENTRAR AL DISCO LOCAL (C)",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Abrimos una carpeta nueva->escribimos arriba \\\\(el nombre del equipo o la IP al que queramos acceder)\\c$."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ponemos el usuario y contraseña de SOPORTE y ya estamos dentro."
+      }
+    ],
+    "tags": [
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 102,
+    "tema": "CAMBIAR ALMACÉN DEL CONTRATO DE UN CONTRATO.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos a CRM LLamadas-> Gestión de llamadas-> Buscamos el contrato->"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Plantilla de entregas->Edición-> y cambiamos el almacén por el que nos digan en la incidencia."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[69].png"
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 103,
+    "tema": "CORREOS QUE A LA COMPAÑERA/O NO LES LLEGAN DE PARTE DE PERSONAS EXTERNAS A LA EMPRESA/DE OTRA EMPRESA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "-Preguntar si tiene algún filtro= En la parte de REGLAS tienes algún filtro que pueda estar bloqueando?"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Preguntar por el asunto del correo, para cuando lo escalemos a Jerome ya lo sepa."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no tiene ningún bloqueo se lo escalamos a Jerome a nivel 2."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 104,
+    "tema": "DAR ACCESO A UNA CARPETA (A). -PERMISOS DE UN DEPARTAMENTO A OTROS A TRAVÉS DEL AD:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si nos llaman porque no pueden acceder a A , nos metemos en su usuario en ->Miembro de-> y le tenemos que poner el grupo que toque, ejemplo= Fidelizacion_Write, Cobros_write, etc…"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Después revisar que esté en la Unidad Organizativa que toque y con todo esto ya debería de poder entrar, si no le sale podemos añadirla manualmente desde AÑADIR UBICACIÓN DE RED."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Todo lo que sea dar permisos a usuarios de un departamento que quieran entrar a otros departamentos a través del AD, si solicitan los permisos en escalar a NIVEL 2."
+      }
+    ],
+    "tags": [
+      "AD",
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 105,
+    "tema": "Instalar CRM en Valpcaux.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si nos piden instalar CRM en VALPCAUX tenemos que mandarlo a aprobar a su coordinador."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 106,
+    "tema": "Para crear usuarios de Salesforce.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para crear usuarios de Salesforce tiene que dar el visto bueno primero JESSICA SEVILLA."
+      }
+    ],
+    "tags": [
+      "Salesforce"
+    ]
+  },
+  {
+    "ID": 107,
+    "tema": "VALIDACIÓN DE CARGA ERROR/Reiniciar tablas",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[70].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "1. Caso de los MINIS (sólo se muestran los minis en la ventana de validación de cargas):"
+      },
+      {
+        "tipo": "texto",
+        "valor": "El problema es la tabla de productos del terminal, que no está actualizada y no sabe qué productos debe mostrar en la validación de cargas."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Forzar la sincronización de tablas del terminal. El RZ debe cerrar la aplicación con el botón de cerrar aplicación (no haciendo el cierre de día), y volver a iniciarla indicando el login."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[71].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[72].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "2. Marcado de usuarios para la validación de cargas:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "- El usuario debe tener la versión 1.65.3"
+      },
+      {
+        "tipo": "texto",
+        "valor": "- En el usuario debe estar configurado lo siguiente:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "o Campos Activo SAP, y Stock Vehículo = Sí"
+      },
+      {
+        "tipo": "texto",
+        "valor": "o Almacén por defecto."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[73].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "3. Al usuario no le aparece la validación de cargas, pero sí está marcado como Activo SAP."
+      },
+      {
+        "tipo": "texto",
+        "valor": "El problema está en la tabla de “repartidores” de ese terminal, no se ha actualizado correctamente, y no entiende que ese usuario debe validar las cargas."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Forzar la sincronización de tablas del terminal. El RZ debe cerrar la aplicación con el botón de cerrar aplicación (no haciendo el cierre de día), y volver a iniciarla indicando el login."
+      }
+    ],
+    "tags": [
+      "SAP",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 108,
+    "tema": "RUTA DEL INSTALADOR DE (AFO).",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "\\\\valnas001\\datos\\Ins\\SOFTWARE\\CORPORATIVO\\SAP\\SAP ANALYSIS FOR OFFICE."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[101].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Abrir un programa que tiene el mismo símbolo que el EXCEL pero se llama ANALYSIS FOR OFFICE. Después, cerrarlo y abrir el excel normal y ya debería de funcionar todo."
+      }
+    ],
+    "tags": [
+      "SAP",
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 109,
+    "tema": "Cambio de fecha de inicio servicio.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Cache-> Global-> MAIN=WACONT y buscamos ejemplo= ^WACONT(delegación, Número de Contrato, Ejemplo= ^WACONT(7,179185."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[74].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando salga vamos a la línea 12 la editamos y cambiamos la fecha que nos sale a la fecha que nos solicitan."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[75].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[76].png"
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 110,
+    "tema": "Forzar actualizaciones en Windows 11.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[77].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Instala el módulo si no lo tienes= Install-Module -Name PSWindowsUpdate"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Ejecuta el comando para buscar actualizaciones= Get-WindowsUpdate -Instal l"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Uso del comando UsoClient= UsoClient StartScan"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[78].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Verifica la política actual= Get-ExecutionPolicy -List"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Cambia la política de ejecución= Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
+      },
+      {
+        "tipo": "texto",
+        "valor": "O para permitir la ejecución de cualquier script= Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Confirma el cambio : Si te pide confirmación, escribe S y presiona Enter."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Vuelve a importar el módulo= Import-Module PSWindowsUpdate"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[79].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Comando= Get-ExecutionPolicy -List"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Comando= Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser"
+      }
+    ],
+    "tags": [
+      "PDA",
+      "Network",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 111,
+    "tema": "Comando para actualizar controladores (PowerShell o CMD)",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Puedes usar PowerShell o el Símbolo del sistema para buscar y actualizar controladores."
+      },
+      {
+        "tipo": "texto",
+        "valor": "PowerShell"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Abre PowerShell como administrador."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ejecuta el siguiente comando para buscar controladores"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[80].png"
+      }
+    ],
+    "tags": [
+      "Windows"
+    ]
+  },
+  {
+    "ID": 112,
+    "tema": "No puedo cargar información del datalake en power BI",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Hacer esto hasta que Fermín haya solucionado este error."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Solo hacer esto cuando están conectados por la VPN."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en Azure->itaqsdata->seguridad y redes->redes-> que nos diga la IP y agregamos a la lista en redes y guardamos."
+      }
+    ],
+    "tags": [
+      "VPN",
+      "Power BI",
+      "Azure",
+      "Network"
+    ]
+  },
+  {
+    "ID": 113,
+    "tema": "ELIMINAR PROMOCIONES.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para acceder a este botón tenemos que:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Abrir la ficha del cliente en CRM"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Dentro de la ficha del cliente, acceder al botón de precios"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[81].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Accedemos a la pestaña de Rappels y datos"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[82].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Hacemos doble click sobre la promoción que queremos eliminar en el Grid de promociones."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[83].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Se nos abrirá una ventana con la información de la promoción y 2 botones abajo a la derecha de la misma donde podemos ver el nuevo botón para eliminar las promociones"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[84].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Para eliminarla simplemente hay que pulsar sobre el botón de eliminar la promoción y confirmar la acción"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[85].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "● Veremos que la promoción se ha eliminado del Grid"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[86].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y ya estaría eliminado."
+      }
+    ],
+    "tags": [
+      "CRM"
+    ]
+  },
+  {
+    "ID": 114,
+    "tema": "Validar los BIDIs.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Webserver->Terminales->Confirmación de terminales."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[87].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Buscamos la PDA por el SN o por el IMEI y cuando la encontremos vamos a abajo a la derecha y reiniciamos las tablas."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[88].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no funciona nos vamos al Reiniciar los albaranes."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Webserver logística->Tareas->Tareas, buscamos el almacén de donde es el repartidor, tenemos que preguntar el número de la pareja o sus iniciales y cuando tengamos el numero de pareja o sus iniciales, lo buscamos en la pantalla que nos sale, entramos en su registro con doble click, abajo a la derecha le damos a Seleccionar todo y después le damos a Reiniciar Albaranes. Y ya estaría."
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "PDA",
+      "Windows",
+      "BIDI"
+    ]
+  },
+  {
+    "ID": 115,
+    "tema": "CMDB:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "En activos->CMDB-> Buscamos si el equipo existe->"
+      },
+      {
+        "tipo": "texto",
+        "valor": "->si no existe lo creamos y lo rellenamos con los campos necesarios."
+      },
+      {
+        "tipo": "texto",
+        "valor": "->Si si que está simplemente revisamos si esta bien si no lo rellenamos con los datos nuevos."
+      }
+    ],
+    "tags": [
+      "ODBC/SQL",
+      "CMDB",
+      "Network",
+      "File Access",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 116,
+    "tema": "Todos los accesos a Cualquier carpeta A:, B:, etc…",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Ponemos pendientes de aprobar y cuando la aprueben la escalamos a Nivel 2 a jerome, le avisamos por chat y la ponemos en Espera."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[89].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[90].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "No hemos pedido aprobación porque EVA MARIA MARCOS sí que puede pedir el acceso a esta carpeta, pero de normal hay que pedir aprobación."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 117,
+    "tema": "Copiar permisos en el AD.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Preguntamos de quién podemos copiarle los permisos, buscamos el usuario-> miembro de captura de pantalla y vamos al usuario donde tenemos que implementar los permisos y los ponemos los mismos que en la captura que hemos realizado."
+      }
+    ],
+    "tags": [
+      "AD"
+    ]
+  },
+  {
+    "ID": 118,
+    "tema": "ININ no le salen las plantillas.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos al admin de ININ-> Plantillas-> buscamos la que ella necesita y su usuario y la aplicamos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "En en caso de que no funcione vamos a la resolución de la pantalla y tiene que estar en 1600x900."
+      }
+    ],
+    "tags": [
+      "ININ"
+    ]
+  },
+  {
+    "ID": 119,
+    "tema": "Activar BIDI.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Webserver->Artículos-> BOTBIDI20 - Envase BIDI 20L-> Buscamos la delegación que nos digan y la activamos y le damos a guardar."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Activarlo tiene que hacerlo el Project Manager."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[91].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando damos de alta a los instaladores tienen que estar activado el número 1."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[92].png"
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "BIDI"
+    ]
+  },
+  {
+    "ID": 120,
+    "tema": "INVOIC",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Escalamos a Nivel 2 a Jerome y ponemos en ESPERA."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 121,
+    "tema": "No conecta GMAO LINX",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Escalamos al equipo de SISTEMAS."
+      }
+    ],
+    "tags": [
+      "Network",
+      "GMAO/LINX"
+    ]
+  },
+  {
+    "ID": 122,
+    "tema": "Llamadas entrecortadas y se cuelga EN TOP EMPRESA Y TOP HOGAR/ SUBSISTEMA",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Por ahora avisar a Manu. No está en confluence el manual, lo he buscado con manu."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 123,
+    "tema": "No funciona página bloqueo teléfonos",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en el Servidor ValcontrolAcceso con usuario SOPORTE y entremos XAMPP y revisar si el MYSQL está en START, si no está lo ponemos en START."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[93].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[94].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 124,
+    "tema": "Acceder panel de control de Redtrust.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos a lastpass y escribimos REDTRUST, entramos y dentro vamos a Acceso-> entramos a Aquaservice.com->usuarios y ahí buscamos el usuario que necesitamos."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[95].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si esta el usuario, solo tiene que ir a abajo a la derecha y darle al botón derecho conectar redtrust, pero siempre con el chrome cerrado."
+      }
+    ],
+    "tags": [
+      "RedTrust",
+      "Microsoft",
+      "Network"
+    ]
+  },
+  {
+    "ID": 125,
+    "tema": "Crear usuario en Teams.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "No creamos usuarios en Teams, ponemos respuesta automática que tenemos preparada y cerramos la CAU."
+      }
+    ],
+    "tags": [
+      "Teams"
+    ]
+  },
+  {
+    "ID": 126,
+    "tema": "ruta aviso- ruta cambio / Ruta Rara.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "En confluence está como Cambiar iniciales rutas raras"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Enunciado."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[96].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Resolución:"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cache"
+      },
+      {
+        "tipo": "texto",
+        "valor": "spagesta"
+      },
+      {
+        "tipo": "texto",
+        "valor": "WSROUTE"
+      },
+      {
+        "tipo": "texto",
+        "valor": "poner (almacén, AVISO/CAMBIO). Y nos saldrán las iniciales que debemos cambiar por las iniciales que nos han pasado."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 127,
+    "tema": "Cuentas genéricas.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "No se cambian las contraseñas y en caso de que las cambiemos tenemos que mandarle contraseña a Manu por Correo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Tratar de no cambiar las contraseñas genéricas, a menos que tengas claro que lo usa solo una persona."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Si la utiliza una persona solo la cuenta genérica = si podemos cambiar la contraseña."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Si la utilizan Varias personas la cuenta genérica= No podemos cambiar la contraseña."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 128,
+    "tema": "Permission Denied FortiVPN.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[97].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Es por que la contraseña se está poniendo mal. Y tiene que desmarcar el check de GUARDAR CONTRASEÑA"
+      }
+    ],
+    "tags": [
+      "FortiVPN"
+    ]
+  },
+  {
+    "ID": 129,
+    "tema": "No aparece A cuando preparamos el equipo.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si no sale A buscamos \\\\valdataserver\\AQS\\IT\\SOPORTE\\Claves Recuperacion Bitlocker."
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 130,
+    "tema": "Delegaciones bloqueadas / archivo de facturación en la delegación está bloqueado.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a Cache y revisamos que en donde pone ^WAINV(número de la delegación) o en ^WACONT(número de la delegación, número de contrato) está bloqueado, si lo están bloqueando entramos y las desbloqueamos. En la incidencia nos tienen que poner el número de la delegación."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 131,
+    "tema": "Saber si un almacén es un XPO.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Preguntarles a los del almacén si son un XPO. Si XPO se tienen que conectar al FortiVPN para poder acceder a CRM y Webserver."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Almacen Gijón= XPO"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Almacén almoradí= XPO"
+      }
+    ],
+    "tags": [
+      "CRM",
+      "FortiVPN",
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 132,
+    "tema": "Terminología.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "APs= son los platillos que están en el techo y dan señal wifi."
+      },
+      {
+        "tipo": "texto",
+        "valor": "PATCH PANEL= Parte de atrás del MIKROTIC donde están las conexiones que van desde la pared hasta el equipo."
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 133,
+    "tema": "MAPA CONEXIONES DE LAS DELEGACIONES",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "ROUTER-> MIKROTIC-> PATCH PANEL-> BOCAS DE LA PARED-> TANPOS."
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 134,
+    "tema": "COMANDO para ver el número de serie de un equipo",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "wmic bios get serialnumber"
+      }
+    ],
+    "tags": [
+      "Network",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 135,
+    "tema": "Dar acceso a base de datos/OBDC de APPCOMERCIAL",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Buscamos OBDC en el equipo donde lo vamos a crear nos vamos al OBDC de 32/64 bits->DNS de sistemas->agregar-> InterSystems OBDC y lo rellenamos como en la siguiente captura de pantalla."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Contraseña : donotuse"
+      },
+      {
+        "tipo": "texto",
+        "valor": "InterSystems OBDC35= NO"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[98].png"
+      }
+    ],
+    "tags": [
+      "ODBC/SQL",
+      "Network"
+    ]
+  },
+  {
+    "ID": 136,
+    "tema": "Aperturas de delegaciones.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Las aperturas de las delegaciones se escalan a Jerome siempre."
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 137,
+    "tema": "POWER BI",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Aprobación de Manuel Couso y cuando dé el OK se la escala a Sistemas"
+      }
+    ],
+    "tags": [
+      "Power BI"
+    ]
+  },
+  {
+    "ID": 138,
+    "tema": "INSTALAR IMPRESORA ZEBRA / Instalar Drivers",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "La ruta para empezar la instalación de la impresora zebra es A:\\Ins\\DRIVERS\\Impresoras\\Zebra ZD420"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[99].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "A partir de aquí empezamos la instalación, cuando terminemos tendrán que desconectar la impresora y volverla a conectar del puerto USB."
+      }
+    ],
+    "tags": [
+      "Zebra",
+      "Printer",
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 139,
+    "tema": "Acceso en SAP fiori a Gestión órdenes flete.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Preguntamos al compañero que nos pase un usuario de SAP que si pueda ver en SAP fiori"
+      },
+      {
+        "tipo": "texto",
+        "valor": "el FLETE y nos vamos a ese usuario que nos hayan dicho->roles->copiamos los roles, los pegamos en un excel, nos vamos al usuario de SAP del compañero que nos haya puesto la incidencia y copiamos los roles que tiene en el mismo excel y comprobamos que tengo roles distintos, copiamos los roles que el usuario que nos han dicho si tiene y que el usuario de la incidencia no tiene y se los pasamos al usuario de SAP de user de la incidencia que no los tiene."
+      }
+    ],
+    "tags": [
+      "SAP",
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 140,
+    "tema": "COMPROBAR GLOBLAS VENDEDORES/TELEVENDEDORES.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos a Cache->globals->Ponemos MAIN y ^MSSPROM(1,1,10,) y por último añadimos en MÁXIMO DE FILAS= 7000. Nos vamos abajo del todo y vemos el número de vendedores/televendedores que hay. El máximo es de 6500."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 141,
+    "tema": "Si nos mandan que el CST no se ha enrutado.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[100].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si nos mandan esta captura con ese error básicamente es que le falta el tipo de plantilla para que se enrute el CST. Y la cerramos poniendo lo que está en negrita."
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 142,
+    "tema": "EL GPS de la PDA no funciona/ Google Maps.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Reinstalamos el kiosko, si con eso no funciona será por los datos de la PDA que no están funcionando, también revisamos si tiene actualizaciones de Google Maps o de Google play, para actualizar no tiene que estar con ninguna cuenta de correo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no le funcionan algo de la tarjeta SIM de la PDA que ponga los datos de su teléfono con internet compartido y si no que llame a Aritz de P&C."
+      }
+    ],
+    "tags": [
+      "Google",
+      "PDA",
+      "Email",
+      "Network"
+    ]
+  },
+  {
+    "ID": 143,
+    "tema": "Carpeta de TACÓGRAFO / VDO.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "A:\\Ins\\SOFTWARE\\CORPORATIVO\\Tacógrafo"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Lo sacamos al escritorio e instalamos del 1 al 8."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Van a haber 2 que den fallo, no pasa nada."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 144,
+    "tema": "Eliminar Trial",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Desde CACHE="
+      },
+      {
+        "tipo": "texto",
+        "valor": "SPAGESTA - SPAAGEVTA -"
+      },
+      {
+        "tipo": "texto",
+        "valor": "(ALMACÉN,FECHA EMPEZANDO POR AÑO"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Ejemplo (171,,20240920"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al botón de eliminar."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 145,
+    "tema": "Los archivos que estan en M:\\backoffice aún no está migrado revisamos lo siguiente si los archivos que le salen salen con una X en gris en el icono..",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Revisamos cuánto tiempo lleva activo el equipo y si tiene la VPN activa."
+      }
+    ],
+    "tags": [
+      "VPN",
+      "Microsoft",
+      "Network"
+    ]
+  },
+  {
+    "ID": 146,
+    "tema": "Si le aparecen errores raros.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Revisar la VPN."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Mirar los días activos del equipo. Si lleva muchos reiniciar."
+      }
+    ],
+    "tags": [
+      "VPN",
+      "Network"
+    ]
+  },
+  {
+    "ID": 147,
+    "tema": "Instalar autofirma.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos en la carpeta= A:\\Ins\\SOFTWARE\\UTILIDADES\\AutoFirma"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y lo instalamos"
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 148,
+    "tema": "MIGRACIÓN de M a A",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Valnass001 es M y estamos migrando todo M a A."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cualquier archivo o carpeta que intenten acceder en Valnass001(M) no les va a dejar, tienen que entrar en A y buscar el archivo/carpeta."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 149,
+    "tema": "Cuando Google sale que no han podido comprobar que la cuenta sea suya",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos al admin de google ponemos su correo electrónico, si está en 2factor-NO-ACTIVADOS->seguridad->en verificación en dos pasos si está en ACTIVADO entramos y lo ponemos en DESACTIVADO."
+      }
+    ],
+    "tags": [
+      "Google",
+      "Email"
+    ]
+  },
+  {
+    "ID": 150,
+    "tema": "Errores sobre el correo/ERROR DE REPORTING",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Mirar si están entrando en Valnas001, en ese caso tienen que entrar en A:, otra comprobación que podemos hacer es preguntarle cuál es el asunto del correo para ver si le está llegando bien y a quien le llega ese correo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Revisar en BREVO si está el correo bloqueado en ese caso lo desbloqueamos y se lo volvemos a enviar."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Pedirle por la incidencia al compañero que nos pasen la ruta de la carpeta/archivo donde están intentando acceder."
+      },
+      {
+        "tipo": "texto",
+        "valor": "En el caso de que estén intentando acceder a Valnas001(M) no es así, tienen que acceder a A:\\\\"
+      }
+    ],
+    "tags": [
+      "Brevo",
+      "Email",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 151,
+    "tema": "Bloqueo en el CST",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos tienen que pasar el número de contrato y la delegación, vamos a CACHE->bloqueos->CTRL+F y ponemos el número de contrato->entramos y lo desbloqueamos."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 152,
+    "tema": "No puede acceder a ININ error al acceder al host.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si no puede tampoco acceder a A o a M es fallo de la VPN que no está bien conectada."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Desconectar y volver a conectar la VPN hasta que funcione."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si es de DIGI pedirle que reinicie el router, porque el con DIGI tenemos problemas."
+      }
+    ],
+    "tags": [
+      "ININ",
+      "VPN",
+      "Network"
+    ]
+  },
+  {
+    "ID": 153,
+    "tema": "Si un equipo no tiene instalado el MDM.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si un equipo no tiene MDM instalado no se puede conectar a las carpetas en RED."
+      }
+    ],
+    "tags": [
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 154,
+    "tema": "SI NOS PIDEN GENERAR RUTAS AVISO/CAMBIO.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si nos piden generar la Ruta, no está que no está en cache, se lo decimos a Jerome que la genere, cuando la haya generado comprobamos que estab bien generada y cambiamos las iniciales al usuario que nos hayan pasado."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 155,
+    "tema": "PERMISOS EN WEBSERVER",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Webserver->configuration->asignación de permisos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y en la CAU nos tienen que poner de quien se tienen que copiar las iniciales y las iniciales de para quién van esos permisos."
+      }
+    ],
+    "tags": [
+      "Webserver"
+    ]
+  },
+  {
+    "ID": 156,
+    "tema": "MAGICLINK / ACTIVAR ENVIO MENSAJE Y CORREO EN CRM",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos a CRM-> CRM llamadas-> gestión de llamadas -> ponemos en número de contrato el 1 y le damos al contrato de ALAS-> Gestión-> Notificación Cliente"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[101].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[102].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "->Nos vamos a la primera opción de SMS-> y nos vamos al apartado de SEGURIDAD y bajo a la derecha tendremos que poner el usuario que nos haya dicho para copiar los permisos al nuevo usuario que nos hayan pedido."
+      }
+    ],
+    "tags": [
+      "CRM",
+      "Email"
+    ]
+  },
+  {
+    "ID": 157,
+    "tema": "Hacer Ping a M:\\\\",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[103].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 158,
+    "tema": "Inicio de sesión en SMARTOSH.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Entramos al equipo y si al iniciar sesion en Aquasalud sigue sin dejarle poner otra contraseña, limpiamos las cookies del navegador y volvemos a probar a acceder por AQUASALUD y ahora si tiene que dejar poner otra cuenta de correo corporativo y acceder a la cuenta."
+      }
+    ],
+    "tags": [
+      "Email",
+      "Network"
+    ]
+  },
+  {
+    "ID": 159,
+    "tema": "DASHBOARD en la PDA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si en una PDA al repartidor/instalador no le sale el dashboard, nos vamos a WEBSERVER"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[104].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "buscamos la delegación del compañero, entramos y en esa delegación no están sus iniciales las añadimos y ya le tiene que salir el dashboard."
+      }
+    ],
+    "tags": [
+      "Webserver",
+      "PDA"
+    ]
+  },
+  {
+    "ID": 160,
+    "tema": "No abre el archivo Excel, comprobamos los caracteres de las carpetas donde esta guardado el archivo.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "El las carpetas donde esta guardado el Excel supera los 240 caracteres, tiene que ocupar menos de 240 caracteres el nombre de las carpetas donde esta guardado el archivo Excel, si no no se podrá abrirse el archivo."
+      }
+    ],
+    "tags": [
+      "Microsoft",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 161,
+    "tema": "Dar acceso a las carpetas en caso de que no pueda entrar a ININ:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Nos vamos al usuario SOPORTE, entramos en, entramos en ->SEGURIDAD->EDITAR->AGREGAR-> y escribimos USUARIOS DEL DOM y agregamos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "le marcamos el check de Control total y después desmarcarlo. Hay que hacerlo en las dos rutas marcadas bajo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "C:\\ProgramData\\Microsoft\\Crypto\\RSA"
+      },
+      {
+        "tipo": "texto",
+        "valor": "C:\\ProgramData\\Microsoft\\Crypto\\RSA\\MachineKeys"
+      }
+    ],
+    "tags": [
+      "ININ",
+      "Microsoft",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 162,
+    "tema": "No pudo acceder al servidor de Ulises. PDA",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Preguntamos la HORA y de normal estará mal, cuando salta este error es que la hora está mal, le decimos que la ponga bien desde ajustes y ya podrá acceder a ULISES."
+      }
+    ],
+    "tags": [
+      "PDA"
+    ]
+  },
+  {
+    "ID": 163,
+    "tema": "Configurar impresora ZEBRA.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Descargamos esta aplicación"
+      },
+      {
+        "tipo": "texto",
+        "valor": "https://www.zebra.com/es/es/support-downloads/software/printer-software/printer-setup-utilities.html?downloadId=3b7879b0-5037-4840-9d6a-b71b6f5c819a"
+      },
+      {
+        "tipo": "texto",
+        "valor": "La ponemos en 100x150 y ya estaría."
+      }
+    ],
+    "tags": [
+      "Zebra",
+      "Printer"
+    ]
+  },
+  {
+    "ID": 164,
+    "tema": "REDES INTERNET y encontrar la contraseña sin saberla.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Saber redes WIFI: netsh wlan show profile"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Saber contraseña de la red Wifi: netsh wlan show profile name=\"nombre de la red\" key=\"clear\""
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[105].png"
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 165,
+    "tema": "APN PDA que no conectan con el servidor:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "si pasa lo de los datos de la pda que no conecta con el servidor"
+      },
+      {
+        "tipo": "texto",
+        "valor": "en ajustes de la pda, redes móviles hay que configurar la APN de nuevo, solo poner esas 2 cosas"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[106].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "y seleccionar la configuración nueva."
+      }
+    ],
+    "tags": [
+      "PDA",
+      "Network"
+    ]
+  },
+  {
+    "ID": 166,
+    "tema": "Al instalar redtrust no le sale en iconos ocultos el icono de redtrust.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[107].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "C:\\Program Files\\RedTrust y ejecuta el que se llama RTTrayApp"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y ya debería de salirle el icono de redtrust."
+      }
+    ],
+    "tags": [
+      "RedTrust",
+      "Network"
+    ]
+  },
+  {
+    "ID": 167,
+    "tema": "DIGI, JAZZTEL, MASMOVIL Capan nuestros puertos/ Que llamen a su compañía y abran los puertos.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si no pueden entrar a la VPN, o si que pueden a la VPN pero no pueden acceder/o les tarda mucho en acceder a A:, si no pueden acceder a Cache ni webserver y la prueba definitiva: hacer PING a ping valcicserverpri. Si no se comunica con el servidor tienen que hacer lo siguiente."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Algunas compañías como másmóvil, jazztel, DIGI capan los puertos de internet por lo que tienes que solicitar a tu compañía que abra el puerto 10443 y 8900 tanto en TCP como en UDP para la dirección IP 5.40.227.130 Es algo que debes de hacer la compañía de teléfonos."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Esto solo cuando intentan acceder a carpetas en RED como A:\\\\ y no pueden acceder aunque estén conectados a la VPN. Les salta un error y preguntan qué compañía tienen."
+      }
+    ],
+    "tags": [
+      "VPN",
+      "Webserver",
+      "Cache",
+      "Network",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 168,
+    "tema": "No puede acceder a A:\\\\",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "A veces el usuario de fortiVPN se ralla, nos vamos a su usuario de FortiVPN lo deshabilitamos, le quitamos el grupo y al volverlo a habilitar y poner su grupo ya debería de funcionar."
+      }
+    ],
+    "tags": [
+      "FortiVPN",
+      "File Access"
+    ]
+  },
+  {
+    "ID": 169,
+    "tema": "Manual de Utilidad CAU en caché/ cambiar fecha inicio de servicio",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "La Utilidad CAU, sirve para realizar procesos por rutina, preestablecidos en una lista."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Para iniciar la utilidad, vamos al cubo de cache y hacemos click derecho"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[108].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Escribimos AQUIS, y despues ZN “SPAGESTA”"
+      },
+      {
+        "tipo": "texto",
+        "valor": "escribir el comando Do ProcesoV1^AQSUtils.CAU"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[109].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Opción 1: Eliminar Aquamigo."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Introduce el ID del AquaAmigo para eliminar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[110].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Confirma si deseas eliminar."
+      },
+      {
+        "tipo": "texto",
+        "valor": "2.Opción 2: Venta Perdida"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Para esta opción, es necesario que se cree un CSV con el nombre ventaPerdida.csv en la ruta \" E:\\datos\\INFEXCELCRM\\ventaPerdida.csv\"."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-El CSV tiene que estar con el formato delegacion;contrato"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Creara en el Piece 4 de ^MSSREC(delegacion,MSSREC,1,2)=\"BT\""
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[111].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "3.Opción 3: Registrar Fecha Inicio Servicio"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Para esta opción, es necesario que se cree un CSV con el nombre fechaInicioServicio.csv en la ruta \" \\\\cache\\datos\\INFEXCELCRM\\ fechaInicioServicio.csv\"."
+      },
+      {
+        "tipo": "texto",
+        "valor": "-El CSV tiene que estar con el formato delegacion;contrato;fechaInicioServicio (AAAAMMDD)"
+      },
+      {
+        "tipo": "texto",
+        "valor": "-Creará o editara el nivel ^WACONT(DL,CL,\"FECHAINICIOSERVICIO\")=Fecha Inicio Servicio"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[112].png"
+      }
+    ],
+    "tags": [
+      "Cache",
+      "Microsoft",
+      "Windows"
+    ]
+  },
+  {
+    "ID": 170,
+    "tema": "No se le asignan correos.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "No se le asignan correos electrónicos ni a los Técnicos de Laboratorio, ni almaceneros, ni repartidores."
+      }
+    ],
+    "tags": [
+      "Email"
+    ]
+  },
+  {
+    "ID": 171,
+    "tema": "Agregar transacción a rol:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Vamos a la transacción pfcg y buscamos el rol y le damos al lápiz"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[113].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a la pestaña de Menú, seleccionamos la carpeta donde queremos meter la transacción y le damos a Transacción"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[114].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Añadimos la transacción y le damos a enter y asignar. Le damos a guardar. La pestaña autorizaciones cambia a rojo y la seleccionamos, le damos al lápiz para modificar datos de autorización y revisamos que todo este en verde o amarillo. (Si está en rojo tendríamos que deshabilitar el objeto, preguntar en caso de duda)"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al círculo blanco y rojo y aceptamos, guardamos, le damos atrás y en la ventanita otra vez al círculo y luego al check y ya está."
+      }
+    ],
+    "tags": [
+      "File Access"
+    ]
+  },
+  {
+    "ID": 172,
+    "tema": "ERROR Altitude.",
+    "descripcion": [
+      {
+        "tipo": "imagen",
+        "valor": "img/[115].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si le salta este error al acceder a Altitude hay que darle a Principal->Opciones->y si tiene marcada la opción de Usar conexión segura, se lo tenemos que desmarcar y ya podrá acceder a Altitude."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[116].png"
+      }
+    ],
+    "tags": [
+      "Network"
+    ]
+  },
+  {
+    "ID": 173,
+    "tema": "Cuando un usuario de Portugal no puede conectarse al WIFI de AQS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Revisar en el usuario, si no tiene lo que está marcado en rojo no podrá acceder."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si no lo tiene se lo activamos y que prueben a conectarse."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[117].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 174,
+    "tema": "FORTIVPN.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si nos llaman porque no se puede conectar a la VPN y no tienen usuario creado, si tiene equipo para poder conectarse si le podemos crear usuario de la VPN, si no tiene equipo para conectarse no se la podemos crear."
+      }
+    ],
+    "tags": [
+      "FortiVPN",
+      "VPN",
+      "Network"
+    ]
+  },
+  {
+    "ID": 175,
+    "tema": "Error agenda",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando sale un error de este estilo"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[118].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a cache SPAGESTA SPAAGEVTA y buscamos el día ^SPAAGEVTA(109,,20250731 Como falla top residencial, la línea estaba incompleta, buscamos otro día del mes con top residencial y copiamos la línea de SCA…."
+      }
+    ],
+    "tags": [
+      "Cache"
+    ]
+  },
+  {
+    "ID": 176,
+    "tema": "Comprobar las bajas los SÁBADOS.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Sábado 02-08-2025 hacer este proceso desde cero. Entrar en nuestro excel y en el de personas y cultura, cogemos de nuestro excel las iniciales de este último mes, entramos al excel de P&C en el mes en el que estemos y pegamos las iniciales, seleccionamos con el CNTRL las iniciales que hayamos pegado en el excel y seleccionamos también las iniciales del mes en el que estemos del excel de P&C, tenemos que seguir esta ruta para saber si han añadido al excel más bajas de las que han pasado."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[119].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si han añadido mas son las iniciales que salen de color gris en la columna de las iniciales de las bajas, no en la columna de las iniciales que hayamos pegado nosotros."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Realizamos las bajas de las iniciales que nos han pasado que están en gris y las anotamos en nuestro excel de BAJAS."
+      }
+    ],
+    "tags": [
+      "Microsoft"
+    ]
+  },
+  {
+    "ID": 177,
+    "tema": "Eliminar línea del albarán.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Uno de los casos por los que deberíamos de eliminar una línea seria por que al importar el albarán saliese el siguiente error:"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[120].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si nos salta este error y dentro del albarán tiene un producto a pagar lo pasaremos a gratis y si lo tiene en Recog le preguntaremos si podemos eliminar la línea del producto de Recog."
+      },
+      {
+        "tipo": "texto",
+        "valor": "Para eliminarlo seleccionamos la línea y le damos al lápiz de abajo a la derecha."
+      },
+      {
+        "tipo": "texto",
+        "valor": "(Ejemplo): Marcamos la línea que tenemos que borrar, vamos abajo al lápiz y le damos a eliminar."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[121].png"
+      },
+      {
+        "tipo": "texto",
+        "valor": "(Esta captura indica como subir/importar un albarán)"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[122].png"
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[123].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 178,
+    "tema": "Reagendar un albarán de un día a otro que nos pidan.",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Es seguir los mismos pasos que se siguen para pasar los productos a GRATIS, pero en la primera línea, donde pone la fecha, sería quitarla y poner la fecha que nos están pidiendo."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[124].png"
+      }
+    ],
+    "tags": []
+  },
+  {
+    "ID": 179,
+    "tema": "Para agregar una unidad de red en esta caso A:",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Botón derecho en Conectar unidad de RED, buscamos letra A: y ponemos \\\\valdataserver\\AQS\\ y le damos al Enter. Y así se agrega."
+      },
+      {
+        "tipo": "imagen",
+        "valor": "img/[125].png"
+      }
+    ],
+    "tags": [
+      "Network",
+      "File Access"
+    ]
+  }
+]

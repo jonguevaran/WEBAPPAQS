@@ -1,0 +1,716 @@
+[
+  {
+    "ID": 1,
+    "tema": "Entornos SAP",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Conexiones clic derecho añadir nueva entrada", "img": null},
+      {"tipo": "texto", "valor": "Produccion", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=cbebd98f-f928-45c8-98b8-66c429748381&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891977815&collection=contentId-891977815", "nombre": "image-20250317-173606.png"}},
+      {"tipo": "texto", "valor": "Calidad", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2eecc9ed-e99c-49a4-9a45-77d0062ea957&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891977815&collection=contentId-891977815", "nombre": "image-20250317-173618.png"}},
+      {"tipo": "texto", "valor": "Desarrollo", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d6be6f10-90d0-47aa-bf4d-d557c9c04870&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891977815&collection=contentId-891977815", "nombre": "image-20250317-173641.png"}}
+    ],
+    "tags": ["SAP", "entornos", "sap", "conexiones", "produccion", "calidad", "desarrollo"]
+  },
+  {
+    "ID": 2,
+    "tema": "Listado de abonos confirmados por clientes",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Paso 1. Desde de la transacción SE16N accedo a la tabla ZTT_SD_LOGMAIDOC con la variante ABONOS LEIDOS, y la descargo en excel.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=f2349236-affa-419a-8fed-27e76f78d05d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1139638319&collection=contentId-1139638319", "nombre": "image-20250903-120308.png"}},
+      {"tipo": "texto", "valor": "Paso 2. Añado al excel la columna del DOC CONTABLE buscando en la tabla VBRK el campo BELNR:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2b7a00a7-5637-444d-a8d1-4f0bf58d00a6&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1139638319&collection=contentId-1139638319", "nombre": "image-20250905-082312.png"}},
+      {"tipo": "texto", "valor": "Paso 3. Selecciono en la columna \"FECHA ABIERTO\" los meses solicitados,", "img": null}
+    ],
+    "tags": ["SAP", "abonos", "clientes", "SE16N", "VBRK", "listado", "contabilidad"]
+  },
+  {
+    "ID": 3,
+    "tema": "Alta de usuarios para SAP",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Contexto: Lo primero a tener en cuenta es que SAP tiene 3 entornos que son: Desarrollo, Calidad y Productivo por lo que si un usuario debe entrar en los tres entornos se debe de crear tres veces el usuario uno en cada entorno.", "img": null},
+      {"tipo": "texto", "valor": "Entramos en SAP, y accedemos en el entorno que requiera el Alta.", "img": null},
+      {"tipo": "texto", "valor": "Gestión de Usuarios → Actualización de Usuarios", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b879edf7-9c3f-4b87-97f9-f756c23fc557&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-11-21.png"}},
+      {"tipo": "texto", "valor": "Introducimos el usuario que queramos crear. El usuario es la primera letra del nombre y el apellido en mayúsculas ej: (Juan Pérez sería JPEREZ) y le damos a crear", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=bc4c570b-b8a2-46ef-81f6-590230164753&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-16-23.png"}},
+      {"tipo": "texto", "valor": "Rellenamos los datos", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a067cf57-4720-43ae-98cf-943fe394db01&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-17-25.png"}},
+      {"tipo": "texto", "valor": "En la pestaña de datos logon creamos la contraseña", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=64c5c38d-a3c5-4476-b7cb-5292f8b59387&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-17-57.png"}},
+      {"tipo": "texto", "valor": "Copiamos los datos de un usuario ya creado copiamos lo que hay en Parámetros y lo que hay en roles a veces los parámetros estarán vacios se hace con copia y pega", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=0c843f88-fac2-45d3-a67f-9cc3acc63d0b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-18-22.png"}},
+      {"tipo": "texto", "valor": "Finalmente en la pestaña de valores fijos en control SPOOL escribimos PDF", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=83667667-e968-4e4c-8243-26d144b15b86&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8391139&collection=contentId-8391139", "nombre": "image2021-8-18_11-19-1.png"}},
+      {"tipo": "texto", "valor": "Ya tenemos dado de alta el usuario", "img": null}
+    ],
+    "tags": ["SAP", "sap", "usuario", "entorno", "alta-usuario", "SU01", "roles", "permisos"]
+  },
+  {
+    "ID": 4,
+    "tema": "Alta masiva usuarios sap",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Vamos a la transaccion SU10", "img": null},
+      {"tipo": "texto", "valor": "En la columna usuarios se ponen todos los usuarios a crear:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c913c50e-13ec-42f2-b1bb-fcb9ac7b5b0d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-172546.png"}},
+      {"tipo": "texto", "valor": "Se da a Nuevo usuario:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2e0c1428-bdc2-4cb9-9948-2507a4f4703b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-172600.png"}},
+      {"tipo": "texto", "valor": "Se modifican los datos en dirección para añadir la delegación y el puesto y se copian los roles de otro usuario.", "img": null},
+      {"tipo": "texto", "valor": "Le das a grabar y aparece el siguiente log:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=6edb7392-8918-4144-a07b-193f3e801d95&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-172655.png"}},
+      {"tipo": "texto", "valor": "Seleccionais la columna y pulsais en filtrar:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=6e0a8346-5cc4-4584-880b-8ac1289ad2fc&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-173324.png"}},
+      {"tipo": "texto", "valor": "Ponéis \"Clave*\" y le dais a ejecutar:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a4fba89f-71c7-4048-bf53-66a7cd7e25e4&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-173341.png"}},
+      {"tipo": "texto", "valor": "Os aparecerá solo los usuarios y su contraseña generada:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b3f0fb0e-4049-485a-910d-bfc28ab448e4&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-173356.png"}},
+      {"tipo": "texto", "valor": "Le dais al botón exportará hoja de calculo:", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c569092d-9931-4df8-acd2-8c67a4f09dde&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891748368&collection=contentId-891748368", "nombre": "image-20250317-173407.png"}},
+      {"tipo": "texto", "valor": "Y una vez exportado en Excel saldrán los datos con los usuarios y sus claves", "img": null}
+    ],
+    "tags": ["SAP", "alta-sap", "alta-usuarios-sap", "sap", "alta-masiva", "SU10", "usuarios", "creacion-masiva"]
+  },
+  {
+    "ID": 5,
+    "tema": "Instalación autenticar SAP dominio",
+    "descripcion": [
+      {"tipo": "texto", "valor": "En primer lugar para configurara el CCO de SAP es necesario instalar \"SAPSetupSLC02_12-80001954\" Está en la ruta \"M:\\Ins\\SOFTWARE\\CORPORATIVO\\SAP\\Autenticacion SAP\"", "img": null},
+      {"tipo": "texto", "valor": "Copiamos el .EXE al escritorio del usuario final y lo ejecutamos, la primera pantalla seleccionamos \"Next\"", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=6a5638c1-e96c-4cf1-8baf-37a04e6016fb&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-910786569&collection=contentId-910786569", "nombre": "image-20250331-095005.png"}},
+      {"tipo": "texto", "valor": "En la siguiente ventana solo tenemos que seleccionar el primer check \"SAP Secure Login Client\", tal y como ves en la imagen, y presionamos \"Next\".", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c8ad57fc-844b-46b4-8011-d5a95d7dfa4b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-910786569&collection=contentId-910786569", "nombre": "image-20250331-095016.png"}},
+      {"tipo": "texto", "valor": "Por último aparecerá una barra de instalación la cual debes esperar a que se complete al 100% para poder presionar el botón \"Close\"", "img": null},
+      {"tipo": "texto", "valor": "Una vez instalado el .exe, ejecutamos \"AutenticacionSAP.reg\" que encontramos en la misma ruta de instalación, \"M:\\Ins\\SOFTWARE\\CORPORATIVO\\SAP\\Autenticacion SAP\". Copiamos el archivo al escritorio y lo ejecutamos, aparecerá un mensaje del editor de registro que deberás aceptar presionando \"Si\"", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5d91c2fe-c4ad-4646-b21a-b300b3a6cf0b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-910786569&collection=contentId-910786569", "nombre": "image-20250331-095036.png"}},
+      {"tipo": "texto", "valor": "Si se ha agregado correctamente aparecerá esta ventana.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=bc7ed8dc-ce8d-4cf2-8d64-fb7941ace557&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-910786569&collection=contentId-910786569", "nombre": "image-20250331-095050.png"}}
+    ],
+    "tags": ["SAP", "sap", "instalar-autenticar-dominio", "autenticar-dominio-sap", "instalacion", "SNC", "dominio", "autenticacion"]
+  },
+  {
+    "ID": 6,
+    "tema": "Autenticación SAP dominio",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Vamos a la aplicación de SAP e iniciamos sesión como lo hacemos habitualmente y nos dirigimos a \"Menú de usuarios > Gestión usuarios > Actualización de usuarios\". Esto se debe hacer en cada una de las interfaces de SAP (CALIDAD, DESARROLLO Y PRODUCCIÓN)", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=8bfb58fb-e203-4742-9a52-ca1659e62b66&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891912265&collection=contentId-891912265", "nombre": "image-20250317-171701.png"}},
+      {"tipo": "texto", "valor": "Ahora buscamos el usuario que tenemos que configurar y entramos en su configuración con doble clic en el usuario y seleccionamos \"Modif.\" en la barra superior.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c23dc95c-4b06-40bf-8e5e-0110d854df7e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891912265&collection=contentId-891912265", "nombre": "image-20250317-171716.png"}},
+      {"tipo": "texto", "valor": "Una vez dentro de la configuración del usuario, seleccionamos la pestaña \"SNC\" y rellenanos el dato de \"Nombre SNC\" lo que tenemos que poner es p:CN=NOMBRE.APELLIDO@AQUASERVICE.COM, recordar que debe estar en mayúsculas. También tenemos que activar la casilla de \"Permitir acceso clave de acceso para SAP GUI\". Por último presionamos el botón de Grabar y cerramos SAP.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d031ceba-dd54-4bf4-84a0-bd33e93ae3c2&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891912265&collection=contentId-891912265", "nombre": "image-20250317-171736.png"}},
+      {"tipo": "texto", "valor": "Volvemos a abrir SAP y hacemos click derecho sobre la entrada en la que queramos aplicarlo, (Producción, Calidad y Desarrollo).", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=8716e7a8-0200-4c69-9153-424cbedc1cfc&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891912265&collection=contentId-891912265", "nombre": "image-20250317-171750.png"}},
+      {"tipo": "texto", "valor": "Una vez dentro de las propiedades vamos a la pestaña de Red y configuramos la casilla de \"Activar Secure Network Communication\" y en Nombre de SNC ponemos En DESARROLLO = \"p:CN=ASD-SNC\", En CALIDAD = \"p:CN=ASQ-SNC\", En PRODUCCIÓN = \"p:CN=ASP-SNC\". Ahora marcamos la casilla de \"Solo autenticación\" y presionamos OK para que se guarde.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=ae5204c0-f9d2-43ce-a75b-5d5c5824b269&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891912265&collection=contentId-891912265", "nombre": "image-20250317-171802.png"}},
+      {"tipo": "texto", "valor": "Por último cerramos completamente SAP y los volvemos a abrir ya debería dejar acceder sin ningún problema.", "img": null}
+    ],
+    "tags": ["SAP", "sap", "dominio-sap", "autenticacion", "SNC", "dominio", "configuracion"]
+  },
+  {
+    "ID": 7,
+    "tema": "Cerrar sesión usuario SAP",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Vamos a la transaccion sm04. Buscas usuario, doble click, listado actualizacion listas, borrar sesion", "img": null}
+    ],
+    "tags": ["SAP", "sap", "cerrar-sesion-sap", "sesion", "sm04", "usuario"]
+  },
+  {
+    "ID": 8,
+    "tema": "Transportar orden ot83",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Objetivo: Transportar ordenes desde compras.", "img": null},
+      {"tipo": "texto", "valor": "Entramos en SAP Desarrollo y lo primero que debemos hacer es liberar la orden y para ello entramos en la transacción SE10", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=1183d3b5-63ab-4574-a47e-45200ea0a69e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_7-59-47.png"}},
+      {"tipo": "texto", "valor": "Introducimos el usuario que lo generó (inicial del nombre + apellido) y le damos a visualizar", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2d7bbc89-a1f3-4fbb-9fe7-546d2c66d3e5&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-1-38.png"}},
+      {"tipo": "texto", "valor": "Desplegamos (icono de la carpeta con +) las carpetas hasta encontrar la orden que buscamos. Abrimos sus subtareas y transportamos todas las subtareas (ASDK....) que aparezcan seleccionándolas y haciendo click en el icono del camión. (Primero todas las subtareas y después la tarea)", "img": null},
+      {"tipo": "texto", "valor": "Copiamos el codigo de la orden de transporte", "img": null},
+      {"tipo": "texto", "valor": "Salimos de la transacción SE10 (hasta volver al inicio) y entramos en la STMS o podemos abrir una ventana nueva (/OSTMS)", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=0afe2668-aa37-4279-8d61-2624f1216839&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-6-27.png"}},
+      {"tipo": "texto", "valor": "Una vez en la STMS, clickamos en el icono del camión de la izquierda para seleccionar el entorno y marcamos CALIDAD (ASQ)", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=1d0dfbe6-10c4-43b4-8ea6-04b6d0ec20af&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-14-37.png"}},
+      {"tipo": "texto", "valor": "Filtramos por orden el listado y refrescamos.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=68f76650-1fe1-4b2b-bc05-20bda4d46420&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-10-10.png"}},
+      {"tipo": "texto", "valor": "Buscamos en el listado el código de la orden de transporte y lo seleccionamos con el icono del cuadrado con el puntito rojo.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=0e451ad0-e4ec-419e-8970-e4cb4566f820&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-11-3.png"}},
+      {"tipo": "texto", "valor": "En la ventana de \"Importar Orden de Transporte\", rellenamos \"Mandante destino\" con 100, y damos click al check verde.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=563e7678-2ed9-4b60-b2d2-c52d6a7e51da&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-12-58.png"}},
+      {"tipo": "texto", "valor": "Aceptamos la siguiente pregunta, y en la nueva pestaña repetimos mandante 100 y metemos nuestra contraseña", "img": null},
+      {"tipo": "texto", "valor": "Esperamos hasta que el icono de la última columna sea un check verde (puede que haya que refrescar un par de veces)", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a35fc070-aaa3-44ca-a42e-3124580eb330&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-8390719&collection=contentId-8390719", "nombre": "image2022-6-20_8-18-0.png"}},
+      {"tipo": "texto", "valor": "Volvemos con el botón verde con las dos flechitas hacia atrás a elegir entorno y elegimos Producción (ASP)", "img": null},
+      {"tipo": "texto", "valor": "Repetimos desde el punto 7. Cuidado: Si después de esperar a que se transporte la orden, no sale un check verde. Avisar al equipo de SAP", "img": null}
+    ],
+    "tags": ["SAP", "sap", "orden", "transporte", "ot", "ot83", "SE10", "STMS", "compras"]
+  },
+  {
+    "ID": 9,
+    "tema": "Ver a que rol pertenece una transaccion",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Vamos a SUIM", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d2fab594-c01e-494e-8b4b-2448cde77b4e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891781206&collection=contentId-891781206", "nombre": "image-20260505-113612.png"}},
+      {"tipo": "texto", "valor": "desde transaccion se busca, y arriba si buscas en rol, puedes buscar que transacciones tiene cada rol", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=8ea14eea-69c3-4923-ba2e-321d21c194ff&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-891781206&collection=contentId-891781206", "nombre": "image-20260505-113556.png"}}
+    ],
+    "tags": ["SAP", "sap", "sap-rol", "transacciones", "sap-transaccion", "SUIM", "roles"]
+  },
+  {
+    "ID": 10,
+    "tema": "Alta de matrícula",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Abrir SAP, producción, abrir transacción zmm0003, copiamos la matricula que sea y ponemos el fin, en transacción LS01N, NUM ALMACEN y TIPO ALMACEN pones CXX, ubicación = matricula, área de almacenamiento poner 001", "img": null},
+      {"tipo": "texto", "valor": "En ZMM003 copiamos de un vehículo y creamos la matricula nueva.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2e581885-7336-41c4-9893-65a40e568d74&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900006010&collection=contentId-900006010", "nombre": "image-20250515-063720.png"}},
+      {"tipo": "texto", "valor": "En LS01, tenemos que dejar la matrícula guardada con su núm. almacén y tipo almacén correspondiente y guardar los cambios.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=229290de-124d-42cb-a8bb-a19dd021cbee&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900006010&collection=contentId-900006010", "nombre": "image-20250515-063637.png"}},
+      {"tipo": "texto", "valor": "En LS02N buscamos la matrícula, actualizamos y en área de almacenamiento ponemos el 001 y guardamos.", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=374a38ee-4bec-4109-b36e-69cad939fa84&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-900006010&collection=contentId-900006010", "nombre": "image-20250515-063849.png"}}
+    ],
+    "tags": ["SAP", "alta-matricula", "sap", "matricula", "zmm0003", "LS01N", "LS02N", "almacen", "vehiculo"]
+  },
+  {
+    "ID": 11,
+    "tema": "Desbloquear usuario SAP",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Entramos a sap. SU01. Buscamos el usuario y le damos al candado para desbloquear", "img": null}
+    ],
+    "tags": ["SAP", "desbloquear-usuario", "sap", "SU01", "usuario", "bloqueo"]
+  },
+  {
+    "ID": 12,
+    "tema": "Listado usuarios SAP",
+    "descripcion": [
+      {"tipo": "texto", "valor": "Para sacar el listado podéis hacerlo por la transacción USMM2, nos abrira una web en microsoft edge, copiamos la direccion y la pegamos en el Chrome, nos solicitara el usuario hasta 2 veces.", "img": null},
+      {"tipo": "texto", "valor": "Desde el paso 2 User Classification se puede exportar a Excel", "img": null},
+      {"tipo": "texto", "valor": "También se puede hacer desde dentro de SAP. Poner transacción LRFMD y desde ese listado - Imprimir - Microsoft Excel", "img": null}
+    ],
+    "tags": ["SAP", "sap", "listado-usuarios", "USMM2", "LRFMD", "usuarios", "exportar"]
+  },
+  {
+    "ID": 13,
+    "tema": "Listado usuarios SAP Departamento y Funcion Delegacion",
+    "descripcion": [
+      {"tipo": "texto", "valor": "En SAP accedemos a la transaccion SUIM, desplegamos Usuario y vamos a Usuario segun criterios de seleccion complejos, damos al relojito de la opcion Usuarios segun criterios de seleccion complejos marcado en azul en la img", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=35807e83-5019-4430-bdab-26a908a7beda&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1140588601&collection=contentId-1140588601", "nombre": "image-20251009-063939.png"}},
+      {"tipo": "texto", "valor": "en la siguiente ventana le damos al reloj de nuevo para que muestre todos los datos", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=b8a3ee08-e8af-4f26-911b-22815937188e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1140588601&collection=contentId-1140588601", "nombre": "image-20251009-064043.png"}},
+      {"tipo": "texto", "valor": "en la siguiente ventena hacemos CTRL+F8 para sacar la ventana y agregar las columnas marcadas de DPTO y Funcion", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5c405026-4be6-4a35-8621-6364480e4bd0&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1140588601&collection=contentId-1140588601", "nombre": "image-20251009-064317.png"}},
+      {"tipo": "texto", "valor": "Una vez agregadas le damos a Previsualizacion", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=608b3fe3-8334-457d-ac0f-c141255eeb29&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1140588601&collection=contentId-1140588601", "nombre": "image-20251009-064445.png"}},
+      {"tipo": "texto", "valor": "Y finalmente exportamos el resultado a excel", "img": {"url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=29bc861e-bdb8-48d9-a704-237821ef2246&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1140588601&collection=contentId-1140588601", "nombre": "image-20251009-064534.png"}},
+      {"tipo": "texto", "valor": "Con esto ya tenemos el listado", "img": null}
+    ],
+    "tags": ["SAP", "usuarios", "departamento", "funcion", "sap", "usuario", "listado-usuarios", "delegación", "SUIM", "exportar"]
+  },
+ {
+    "ID": 14,
+    "tema": "Listado Usuarios SAP con Roles",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Accedemos a la Tx SUIM y vamos a Usuarios segun criterios de seleccion complejos>Usuarios segun criterios de seleccion complejos le damos al relojito",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a05969da-ba5b-4b06-9eee-f503e75b1c69&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1142358099&collection=contentId-1142358099",
+          "nombre": "image-20251013-112259.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Sin rellenar ningun dato le damos al relojito de nuevo",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=4b3be755-6e92-4093-a67f-ccfa78d71f18&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1142358099&collection=contentId-1142358099",
+          "nombre": "image-20251013-112341.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "A continuacion para que saque los roles por cada usuario le damos al boton de Roles",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d6df615a-0cb7-4b38-bc7f-b290ecf29c70&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1142358099&collection=contentId-1142358099",
+          "nombre": "image-20251013-112444.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Una vez tengamos la lista poemos exportartla con el boton de exportar",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d9492eb5-bdd1-4856-84f7-0ace524c4e75&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1142358099&collection=contentId-1142358099",
+          "nombre": "image-20251013-112532.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "o bien el de pasa a fichero local sin convertir",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=1ad4498a-8e8d-4a81-9fea-98161ce2dfe3&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1142358099&collection=contentId-1142358099",
+          "nombre": "image-20251013-112630.png"
+        }
+      }
+    ],
+    "tags": ["SAP", "sap", "listado-usuarios", "roles", "SUIM", "exportar", "usuarios-con-roles"]
+  },
+  {
+    "ID": 15,
+    "tema": "Agregar transacción a rol",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para ver en que Rol está una transacción tenemos que meternos en la SE16N → AGR_USERS y según necesidad rellenamos o ROL o Usuario para ver los datos y para ver en que rol está una transacción entramos a la PFCG pero en desarrollo",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a la transaccion pfcg y buscamos el rol y le damos al lapiz",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=642c8941-37e5-4c2b-8443-3bc53c2b69c9&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-924123171&collection=contentId-924123171",
+          "nombre": "image-20250409-073411.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a la pestaña de Menu, seleccionamos la carpeta donde queremos meter la transaccion y le damos a Transacción",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c4e6f223-cee5-4a75-a2ea-872275ed865f&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-924123171&collection=contentId-924123171",
+          "nombre": "image-20250409-073515.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Añadimos la transsacion y le damos a enter y asignar. Le damos a guardar. La pestaña autorizaciones cambia a rojo y la seleccionamos, le damos al lápiz para modificar datos de autorización y revisamos que todo este en verde o amarillo. (Si esta en rojo tendríamos que deshabilitar el objeto, preguntar en caso de duda)",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos al circulo blanco y rojo y aceptamos, guardamos, le damos atrás y en la ventanita otra vez al circulo y luego al check y ya esta.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "transaccion", "sap-rol", "transacciones", "rol", "sap", "rol-sap", "PFCG", "SE16N", "AGR_USERS"]
+  },
+  {
+    "ID": 16,
+    "tema": "Bloqueos ventanas sap",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cuando vayan por ejemplo a exportar unos datos a Excel y se deniegue el acceso es porque en la configuración de SAP/seguridad/opciones de seguridad/abrir configuración de seguridad, aparecen las reglas que tiene dicho usuario en SAP. Desde ahí estará puesto en no permitir y es cambiarlo a permitir",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=690050e7-4ba1-490d-9b15-69c986513bca&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1018494979&collection=contentId-1018494979",
+          "nombre": "image-20250623-082555.png"
+        }
+      }
+    ],
+    "tags": ["SAP", "sap", "bloqueos", "ventanas", "seguridad", "permisos", "exportar-excel"]
+  },
+  {
+    "ID": 17,
+    "tema": "Creación de Repartidores Ulises SAP Portugal",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Antes de iniciar el alta debemos de tener la siguiente información: INICIALES, NOMBRE COMPLETO, ALMACÉN DE REPARTO, MATRÍCULA DE VEHÍCULO",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Alta de repartidores en Webserver. En Webserver se dan de alta en 2 sitios: 1- Logística → repartidores x almacén. Seleccionamos el almacén en el que lo queremos dar de alta y lo rellenamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "2- Ficheros Maestros → Usuarios. OJO debemos asegurarnos de escribir el usuario en mayúsculo sino no nos aparecerá el campo almacenes. Creamos una contraseña de 3 mayúsculas y el resto de configuración cómo en la foto. RECORDAR cambiar la sociedad a Portugal",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Alta de repartidores Parte SAP. Debemos darlo de alta en 4 transacciones. 1- Entramos a SAP Producción.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "1 Damos de alta los repartidores entrando en la transacción: ZTT_MM_REPDESCRI y le damos a Actual. Entrada nueva y sólo introducimos las columnas de Cod. Repa. → Iniciales y Descripción Repartidor → Nombre Completo. Guardamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "2 Damos de alta las matrículas en la transacción ZMM0003 y le damos a Actual. Le damos a entradas nuevas. Columna 1: Matrícula, Columna 2: Modelo o puesto del conductor, Columna 3: Fecha de hoy, Columna 4: Siempre ponemos 31.12.9999, Columna 5: No se hace nada, Columna 6: Usuario que creó la Línea, Columna 7: Centro (C051 o C052 para Portugal), Columna 8: Delegación. Guardamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Listado de centros y delegación Portugal: Centro C051: D201-OPORTO, D202-MAIA, D203-OVAR, D204-LEIRIA, D205-VILA REAL. Centro C052: D206-SEIXAL, D207-AUTO EUROPA, D208-FAMOES, D209-TUNES, D210-MONTEMOR.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "3 Damos de alta las matrículas y datos del usuario en la transacción: ZTT_MM_REPALM y le damos a Actual. Columna 1: Almacén SAP, Columna 2: Iniciales Repartidor, Columna 4: Matrícula, Columna 8: Ponemos un 1 para dejarlo activado, Columna 9: indicamos el puesto del trabajador. Guardamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos en la transacción LS01N para crear un almacén local de las matrículas. En Num. Almacén y Tipo Almacén se pone el centro pero sin el 0 (ej: C051 → C51), en ubicación ponemos la matrícula, le damos a intro y en area de almacenamiento ponemos 001. Guardamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si da error de matrícula es porque hay una matrícula en ZTT_MM_REPALM que no está creada en la ZMM0003. Para averiguar cual es descargamos los datos de ambas transacciones a Excel. Juntamos los datos de matrícula de la ZMM0003 en columna A y los de ZTT_MM_REPALM en columna B. Seleccionamos ambas columnas con CTRL y le damos a formato condicional → reglas para resaltar celdas → Valores duplicados. La matrícula que no cambie de color en columna B hay que crearla en la ZMM0003.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=79a1432c-329c-4351-84a1-8b4417b8de59&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1028194305&collection=contentId-1028194305",
+          "nombre": "image-20251118-090452.png"
+        }
+      }
+    ],
+    "tags": ["SAP", "sap", "asignar-matricula-portugal", "repartidor-portugal", "repartidores", "ulises", "portugal", "webserver", "ZTT_MM_REPDESCRI", "ZMM0003", "ZTT_MM_REPALM", "LS01N"]
+  },
+  {
+    "ID": 18,
+    "tema": "Traslado de clientes en SAP",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Traslado de Cliente. Si el traslado de cliente está en el mismo Centro de SAP: Si no nos informan del centro lo pedimos. Centros: C051 (D201, D202, D203, D204, D205, D211, D252, D551), C052 (D206, D207, D208, D209, D210, D212, D258).",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Accedemos a SAP a la transacción SM30 y entramos a la tabla ZTT_REPCLIEN",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=621a646e-8f2f-42b9-86de-95d1079a692c&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-sm30.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Le damos a actualizar y le damos a posicionar donde introducimos el número de cliente",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2ee7d649-937a-4336-8f16-bc6dd7e3d5af&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-posicionar.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "El cliente aparecera el primero arriba. En la segunda columna modificamos el almacen de origen por el de destino.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=59fa91f6-1a39-4a8e-a744-f0801ce7df92&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-almacen.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Si el traslado de cliente cambia de Centro: 1. Debemos de comprobar si tiene Coolers o cafeteras en stock. Accedemos a la transacción SE16N y en la tabla MSKU. En la fila cliente introducimos el número de cliente y le damos al reloj. Si pone que no existen valores ir directamente al paso 6.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=dcb68d2c-5ea7-4a93-8424-53714b0c348e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-msku.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "2. Nos apuntamos los datos que aparecen.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5c77025d-0294-4a60-9d6e-181b2a8acc4a&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-datos.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "3. Nos salimos de la transacción SE16N y vamos a la MIGO. OJO arriba a la derecha debe aparecer TR Trasladar ce.a ce (301) (W). Le damos a traspaso, a la izquierda ponemos los datos de Origen y a la derecha los de destino: Material (código del material de la 1 columna de MSKU), Centro (origen y destino), Almacén en blanco, Lote (tercera columna del MSKU), Consignación Cliente (número de cliente), Ctd en UME (unidades de la 9 columna de MSKU → LibrUtilz). Finalmente le damos a Contabilizar. Repetir con cada línea de MSKU.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c3ff4f57-2be7-4ede-94c9-57e0f21a654e&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-migo.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "4. Entramos en la transacción SE16N en la tabla IHPA. En interlocutor ponemos el número de cliente entre asteriscos.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=21769e59-2c4f-4d59-9d33-2f43bbd8f3b5&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-ihpa.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cogemos cada número de objeto al cual le tenemos que quitar IE000000. Una vez tenemos los nº de objeto pasamos a la transacción SE16N tabla MPOS, buscamos el número (sin el IE0000) en el campo Equipo para conseguir el plan de mantenimiento. Nota: si son cafeteras o POU no tienen plan de mantenimiento.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=c1fc2d20-3431-495f-816f-0a8c681d72d5&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-mpos.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "5. Entramos en la transacción IP02. Introducimos el plan mant.prev. y modificamos el Centro planif. y la segunda parte del Pto.tbjo.resp. Esto hay que hacerlo con cada producto que aparezca.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=64600ed1-3405-4c15-a824-a11599627893&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-ip02.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "6. Este paso lo debes de hacer tenga o no productos de stock. Entramos en la transacción BP e introducimos en socio comercial el número de cliente y le damos a inicio y doble click sobre el cliente.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=f6b90897-5369-4a62-bd29-b1ebdf01cf5d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-bp.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "En modificar en función seleccionamos la opción Cliente Aqua SD (actualizado) y le damos arriba a la derecha a la opción Comercial.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=9882d70c-8c52-49fc-98c2-f8e063bdf032&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-comercial.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Finalmente le damos a Áreas de ventas y seleccionamos una detrás de otra las 4 opciones y le damos a transferir y en la pestaña de Expedición cambiamos el centro suministrador. Guardamos en cada uno de los cuatro y ya lo tendríamos.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=a2a0a5ba-8a92-498d-aec8-21a16d194143&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1060438034&collection=contentId-1060438034",
+          "nombre": "image-traslado-expedicion.png"
+        }
+      }
+    ],
+    "tags": ["SAP", "mover", "almacen", "cambiar", "sap", "clientes", "traslado", "SM30", "ZTT_REPCLIEN", "SE16N", "MSKU", "MIGO", "IHPA", "MPOS", "IP02", "BP"]
+  },
+  {
+    "ID": 19,
+    "tema": "BLOQUEO MATRÍCULA POR INVENTARIO WM (SAP)",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Si desde los almacenes nos avisan que tienen una matrícula bloqueada que no les permite realizar cargas/descargas mediante la PDA, tendremos que seguir los siguientes pasos:",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "1. Comprobar que realmente tenemos dada de alta bien la matrícula en el sistema SAP. 2. Acceder a la transacción ZLX22. a. Si conocemos el número de almacén lo ponemos y ejecutamos. En caso de no conocerlo, seleccionamos el rango de números de almacén (C01-C15).",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=013bafce-2c3c-4b6c-a302-5fbd28742264&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1036845070&collection=contentId-1036845070",
+          "nombre": "image-20250708-100708.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "b. Cuando tengamos alguna matrícula con un inventario activo, aparece marcada la columna con una X y verificaremos que realmente es la matrícula que nos están solicitando desbloquear. Veremos a la izquierda el número de inventario al que deberemos acceder pulsando encima del número de inventario.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=9ec4e27c-6b2b-4f12-8922-3f291f05ba64&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1036845070&collection=contentId-1036845070",
+          "nombre": "image-20250708-100726.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "c. Al entrar en el número de inventario que queremos borrar, seleccionamos la opción \"Documento para inventario\" de las opciones de arriba, pulsando en \"Borrar\" para eliminar por completo el inventario.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=62258a95-70b3-4627-9aee-c682329d0599&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1036845070&collection=contentId-1036845070",
+          "nombre": "image-20250708-100738.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "3. Con esto habremos desbloqueado la matrícula permitiendo poder seguir registrando cargas/descargas.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "sap", "bloqueo", "matricula", "inventario", "WM", "PDA", "ZLX22", "almacen", "desbloquear"]
+  },
+  {
+    "ID": 20,
+    "tema": "Cambiar ruta cliente",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Ojo, suelen pedir tb el cambio de almacen (ver página Traslado de clientes en SAP).",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Primero revisamos el tipo de ruta que tiene el cliente, entramos en la se16n a ZTT_CLIENTES y buscamos el cliente. SI el tp.factur es TR es que es aun es un trial y no se puede modificar la ruta, solo almacen.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=6027d7fa-f1bf-4e87-92cf-9adaf2207c8c&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1121517569&collection=contentId-1121517569",
+          "nombre": "image-20250918-073423.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Entramos a sap a la zmm_gestion_rutas. Rellenamos el almacén y código repartido y le damos a buscar, nos anotamos el cod ruta (ej: B04).",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=005cf3ff-66df-47ea-9a5d-80cc1f46cc0b&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1121517569&collection=contentId-1121517569",
+          "nombre": "image-20250918-071839.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Modificamos el almacen si es necesario y nos anotamos del cod ruta los 2 ultimos numeros, y la fecha de proximo reparto. Entramos a zmm_cambio_ruta, seleccionamos el almacen, ponemos el cliente y le damos a buscar, seleccionamos el cliente, le damos a cambiar ruta. Ponemos la fecha de proximo reparto, en frecuencia la letra se basa en (M mensual, T trimestral, B bimensual). Le damos a buscar ruta y seleccionamos la que corresponde (ej: B04 + los 2 últimos números anotados). Aceptamos y guardar.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "cambio-ruta-portugal", "ruta-sap", "ruta-portugal", "ruta-cliente-portugal", "cambiar-ruta-sap", "sap", "zmm_gestion_rutas", "zmm_cambio_ruta", "SE16N", "ZTT_CLIENTES", "clientes", "ruta"]
+  },
+  {
+    "ID": 21,
+    "tema": "Correos de contratos direct",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Cambiar correos al que se le envía una copia del mail de bienvenida de Contratos Direct Portugal. SM30 --> TABLA: ZTT_ALL_CONST. Buscamos: Programa de llamada: Z_RFC_AQS_MAIL_BIENVENIDA, Constante: CORREOS_CCO_EMAIL_BIENVENIDA. Modificamos los correos, el campo tiene limite de caracteres.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "correos-contratos-direct", "sap-correos-contratos", "correos-direct", "direct", "sap", "SM30", "ZTT_ALL_CONST", "email", "portugal"]
+  },
+  {
+    "ID": 22,
+    "tema": "IHPA - Asignar numero de serie de las maquinas a los clientes y activar el plan de mantenimiento",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "zmm_historial_client. Ponemos el cliente que dicen y marcamos info 2 - stock en consigna.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=768cea4c-09b9-4bcd-b821-243ad7d422e6&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-160438.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Comprobamos el numero y nombre de las maquinas. Vamos a la se16n y en tabla escribimos: ihpa, presionamos [Enter].",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d28886ac-7732-4836-b93b-6f0bcddb8545&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-161020.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "En el campo interlocutor ponemos el Numero Cliente entre **, luego hacemos clic en el reloj.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5518a15e-bb9e-4321-86cc-5de5c47ed80d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-161759.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "En el campo que tiene la x",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=bcbfb137-13d1-4022-9ff4-c7f3cddfb685&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-161959.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Hacemos doble click y en nº objeto copiamos despues de los ie000…",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=5622ef4a-570d-4aa1-ab11-abb694ac642d&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-162049.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos a la transaccion ie02, pegamos el nº objeto de antes. Abrimos pestaña nueva.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=24bc905f-311a-4bb6-af2a-49eebcca1748&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20260519-162518.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Con la transaccion se16n y en el campo tabla escribimos: mpos. Y en el campo equipo de la tabla pegamos tambien el nº objeto. Volvemos a la ie02. Verificamos que el nombre de maquina esta en el listado del zmm_historial_client + Info 2 Stock en consigna.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=51f78dbb-68fb-4162-9b87-0be6c9335d45&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20251021-095736.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Y vemos que coincide con una máquina.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=aba8ee23-f70a-4765-bf9e-99b6cac49d69&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1145373028&collection=contentId-1145373028",
+          "nombre": "image-20251021-095806.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Volvemos a la ie02 le damos a los 2 muñequitos que salen arriba. En funcion solicitante y en interlocutor el cliente, damos enter y volvemos para atras con la flecha verde y guardamos.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Vamos al mpos que teniamos abierto. Copiamos el pl.mantprv (es la 2da columna). Vamos a la ip02, pegamos lo copiado arriba y enter. Damos click arriba del todo para que salga un menu. Plan de mantenimiento, funciones activo inactivo → activar.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Cuando dicen de activar máquina vendidas es lo mismo, es activar el IHPA y para comprobar lo que está vendido una vez hecho el proceso de IHPA vamos a la transaccion ZMM_HISTORIAL_CLIENT + Info 2 Stock en consigna Info2 y veremos una columna en que ponga VEND.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "ihpa", "mantemiento-sap", "quitar-x-de-ihpa", "x", "sap", "SE16N", "IE02", "IP02", "MPOS", "ZMM_HISTORIAL_CLIENT", "maquinas", "mantenimiento", "numero-serie"]
+  },
+  {
+    "ID": 23,
+    "tema": "Sacar albaranes y o ficheros de Higiene en SAP",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Aunque siempre van a pedir albaranes, estos sólo existen si hay entregas de productos. Si sólo hay higienes se saca un documento de higiene.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "1- Sacar el número de cliente independientemente del dato. Nos lo pueden pedir por numero de cliente y fecha o por cualquiera de los documentos: Oferta (empieza por 24**** → transacción VA22), Pedido (empieza por 50***** → transacción VA02), Entrega (empieza por 15***** → transacción VL02N). Con el número de cliente usar ZMM_HISTORIAL_CLIENT → Info1 Historial de Entregas.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=37e62956-353d-47f2-8170-2f7fa9f651d5&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1201700865&collection=contentId-1201700865",
+          "nombre": "image-20251118-100222.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Los albaranes se sacan en la VL02N con el número de entrega y las higienes con el número de pedido en la VA02.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=94b9e133-357d-4f93-93e7-a837a7268108&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1201700865&collection=contentId-1201700865",
+          "nombre": "image-20251118-100333.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "2- Sacar albaranes. Una vez conseguido el número de entrega(15*) vamos a la VL02N y metemos el número de entrega → Entrega de salida → Dar salida a mensajes de entrega → seleccionamos el albarán y le damos a imprimir. Si indica que no existe documento: 1- le damos a intro y vemos si el botón de contabilizar no está en gris claro.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=2703451c-5acf-4afd-8cb2-784f0862f4ea&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1201700865&collection=contentId-1201700865",
+          "nombre": "image-20260407-072738.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "2- Ya está en gris claro pero no sale el documento: le damos a intro y a guardar simplemente.",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=ed234407-2c55-43cb-bf02-68b2ba61de9f&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1201700865&collection=contentId-1201700865",
+          "nombre": "image-20260407-072814.png"
+        }
+      },
+ {
+    "ID": 24,
+    "tema": "Cambio de repartidor de ruta en SAP",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "La transacción a usar es la ZMM_GESTION_RUTAS",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Pero para poder hacer un cambio necesitamos saber el repartidor Activo en el momento",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=0e619255-1d60-48ee-9a09-c7f7e45888ab&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1204289583&collection=contentId-1204289583",
+          "nombre": "image-20251119-151453.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "una vez dado a Cambiar repartidor guardar",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "sap", "cambio-repartidor", "ruta", "ZMM_GESTION_RUTAS", "repartidor"]
+  },
+  {
+    "ID": 25,
+    "tema": "Dar permiso para usar PDA de SAP",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Para que un usuario pueda acceder a las PDA´s debe de estar dado de al alta en la transacción siguiente →  LRFMD y copiar los mismos datos que los otros usuarios.",
+        "img": null
+      },
+      {
+        "tipo": "texto",
+        "valor": "Se dan de alta con las iniciales.",
+        "img": null
+      }
+    ],
+    "tags": ["SAP", "sap", "PDA", "permisos", "LRFMD", "alta-usuario", "acceso-PDA"]
+  },
+  {
+    "ID": 26,
+    "tema": "Sacar listado usuarios por transaccion o rol",
+    "descripcion": [
+      {
+        "tipo": "texto",
+        "valor": "Desde la SUIM he sacado el listado de usuarios que tienen acceso a: La transacción FB01",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=4008cadf-3d78-4160-b9a2-a964aaa53619&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1426554902&collection=contentId-1426554902",
+          "nombre": "image-20260330-155832.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Seleccionamos la transacción y ejecutamos para ver los usuarios asignados",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=64168177-d567-4ace-818d-fcd5a9961e1f&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1426554902&collection=contentId-1426554902",
+          "nombre": "image-20260330-155844.png"
+        }
+      },
+      {
+        "tipo": "texto",
+        "valor": "Resultado del listado de usuarios con acceso a la transacción",
+        "img": {
+          "url": "blob:https://aquaservice.atlassian.net/92cfceca-fada-4a8a-b81c-f869fe65ab6e#media-blob-url=true&id=d0dd35c6-b5c7-4c91-8cb7-46a8ae65cbd2&clientId=717661f0-ab27-4d5c-b1a7-f5cbbe757146&contextId=contentId-1426554902&collection=contentId-1426554902",
+          "nombre": "image-20260330-155906.png"
+        }
+      }
+    ],
+    "tags": ["SAP", "sap", "transacciones", "rol", "rol-sap", "transaccion", "SUIM", "FB01", "listado-usuarios"]
+  }
+]
