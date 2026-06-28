@@ -3,7 +3,7 @@ import { FileDown, User, Monitor, Shield, Mail, FileText, Plus, Trash2, Globe } 
 
 export default function App() {
   const [isPdfReady, setIsPdfReady] = useState(false);
-  const [registrosAltas, setRegistrosAltas] = useState([]);
+  const [registrosAltas, setRegistrosAltas] = useState<any[]>([]);
 
   const [formData, setFormData] = useState({
     idioma: 'es',
@@ -28,7 +28,7 @@ export default function App() {
     { tipo: 'Teléfono Móvil', marca: '', modelo: '', serial: '' },
   ]);
 
-  const pdfRef = useRef(null);
+  const pdfRef = useRef<HTMLDivElement>(null);
 
   // Cargar html2pdf dinámicamente
   useEffect(() => {
@@ -68,10 +68,17 @@ export default function App() {
       }
     };
 
+    const clearAltasData = () => {
+      if (window.confirm('¿Estás seguro de que quieres eliminar todos los registros de altas precargados?')) {
+        localStorage.removeItem('cartasData');
+        setRegistrosAltas([]);
+      }
+    };
+
     loadAltasData();
 
     // Escuchar cambios en localStorage
-    const handleStorage = (e) => {
+    const handleStorage = (e: StorageEvent) => {
       if (e.key === 'cartasData') {
         loadAltasData();
       }
@@ -84,7 +91,7 @@ export default function App() {
     };
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ 
       ...prev, 
@@ -93,9 +100,9 @@ export default function App() {
     }));
   };
 
-  const handleEquipoChange = (index, field, value) => {
+  const handleEquipoChange = (index: number, field: string, value: string) => {
     const newEquipos = [...equipos];
-    newEquipos[index][field] = value;
+    (newEquipos[index] as any)[field] = value;
     setEquipos(newEquipos);
   };
 
@@ -103,27 +110,34 @@ export default function App() {
     setEquipos([...equipos, { tipo: 'Otros', marca: '', modelo: '', serial: '' }]);
   };
 
-  const removeEquipo = (index) => {
+  const removeEquipo = (index: number) => {
     const newEquipos = equipos.filter((_, i) => i !== index);
     setEquipos(newEquipos);
   };
 
   const generatePDF = () => {
-    if (!isPdfReady || !window.html2pdf) {
+    if (!isPdfReady || !(window as any).html2pdf) {
       alert('El motor de PDF aún se está cargando. Inténtalo de nuevo en unos segundos.');
       return;
     }
 
     const element = pdfRef.current;
+    if (!element) return;
+
+    element.classList.add('exporting-pdf');
+
     const opt = {
       margin: 0, // Margen manejado por CSS interno
-      filename: `Carta_Bienvenida_${formData.nombre.replace(/\s+/g, '_') || 'Empleado'}.pdf`,
+      filename: formData.iniciales ? `Iniciales ${formData.iniciales}.pdf` : 'Iniciales.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: 'css', before: '.page-break' }
     };
 
-    window.html2pdf().set(opt).from(element).save();
+    (window as any).html2pdf().set(opt).from(element).save().then(() => {
+      element.classList.remove('exporting-pdf');
+    });
   };
 
   // Firma SVG para imitar la original
@@ -154,10 +168,24 @@ export default function App() {
         <div className="space-y-6">
           {/* Precargar de Altas */}
           {registrosAltas.length > 0 && (
-            <section className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-              <label className="block text-sm font-semibold text-yellow-800 mb-2 flex items-center gap-2">
-                <User size={16} /> Precargar datos de Altas
-              </label>
+            <section className="bg-white p-4 rounded-lg border border-yellow-200">
+              <div className="flex items-center justify-between mb-2">
+                <label className="text-sm font-semibold text-yellow-800 flex items-center gap-2">
+                  <User size={16} /> Precargar datos de Altas
+                </label>
+                <button
+                  onClick={() => {
+                    if (window.confirm('¿Estás seguro de que quieres eliminar todos los registros de altas precargados?')) {
+                      localStorage.removeItem('cartasData');
+                      setRegistrosAltas([]);
+                    }
+                  }}
+                  className="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 p-1.5 rounded-md transition-colors flex items-center gap-1 text-xs"
+                  title="Limpiar registros"
+                >
+                  <Trash2 size={14} /> Limpiar
+                </button>
+              </div>
               <select 
                 className="w-full text-sm border-yellow-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2 border bg-white"
                 onChange={(e) => {
@@ -185,7 +213,7 @@ export default function App() {
             </section>
           )}
           {/* Tipo de Plantilla */}
-          <section className="bg-blue-50 p-4 rounded-lg border border-blue-100">
+          <section className="bg-white p-4 rounded-lg border border-blue-100">
             <h2 className="text-sm font-semibold text-blue-800 flex items-center gap-2 mb-3">
               <Mail size={16} /> Tipo de Plantilla
             </h2>
@@ -202,7 +230,7 @@ export default function App() {
           </section>
 
           {/* Idioma del Documento */}
-          <section className="bg-green-50 p-4 rounded-lg border border-green-100">
+          <section className="bg-white p-4 rounded-lg border border-green-100">
             <h2 className="text-sm font-semibold text-green-800 flex items-center gap-2 mb-3">
               <Globe size={16} /> Idioma del Documento
             </h2>
@@ -336,9 +364,16 @@ export default function App() {
           }}
         >
           <style>{`
+            .pdf-container {
+              width: 210mm;
+              margin: 0 auto;
+            }
+            .exporting-pdf {
+              margin: 0 !important;
+            }
             .pdf-page {
               width: 210mm;
-              min-height: 297mm;
+              height: 297mm;
               padding: 25mm 20mm;
               margin-bottom: 20px;
               background: white;
@@ -347,6 +382,14 @@ export default function App() {
               font-size: 11pt;
               line-height: 1.25;
               position: relative;
+              overflow: hidden;
+              display: flex;
+              flex-direction: column;
+            }
+            .exporting-pdf .pdf-page {
+              margin: 0 !important;
+              box-shadow: none !important;
+              height: 296mm !important; /* Slightly smaller to prevent jsPDF overflow blank pages */
             }
             .pdf-table {
               width: 100%;
@@ -371,13 +414,6 @@ export default function App() {
             .small-text { font-size: 8.5pt; line-height: 1.15; }
             .list-disc { padding-left: 20px; margin-bottom: 10px; }
             .list-disc li { margin-bottom: 4px; }
-            @media print {
-              .pdf-page {
-                box-shadow: none;
-                margin: 0;
-                page-break-after: always;
-              }
-            }
           `}</style>
 
           {/* ================= PÁGINA 1: CARTA DE BIENVENIDA ================= */}
@@ -469,10 +505,11 @@ export default function App() {
               <p className="font-bold">Tomás Mateos Herrero</p>
               <p>{formData.idioma === 'pt' ? 'Diretor do departamento de T.I.' : 'Director del departamento de T.I.'}</p>
             </div>
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
           </div>
 
           {/* ================= PÁGINA 2: LOPD ================= */}
-          <div className="pdf-page text-justify small-text" id="page-2">
+          <div className="pdf-page page-break text-justify small-text" id="page-2">
             <h2 className="font-bold text-center mb-4" style={{ fontSize: '11pt' }}>
               {formData.idioma === 'pt'
                 ? 'Declaração de registo de utilizador do sistema de informação da Viva Aqua Service Spain S.A.'
@@ -562,32 +599,33 @@ export default function App() {
                 <>
                   <li>Guardar o necessário sigilo em relação a qualquer tipo de informação de caráter pessoal conhecida no decorrer do trabalho desenvolvido, mesmo após a conclusão da relação laboral com a entidade.</li>
                   <li>Comunicar ao Responsável de Segurança, conforme o procedimento de notificação, os incidentes de segurança dos quais tenha conhecimento.</li>
-                  <li>É proibida a deslocação de qualquer listagem ou documento análogo com dados de caráter pessoal onde se armazene informação propriedade da entidade para fora das instalações da mesma.</li>
-                  <li>Guardar todos os suportes físicos ou documentos que contenham informação com dados de caráter pessoal num local seguro, quando não estiverem a ser utilizados, particularmente fora do horário de trabalho.</li>
-                  <li>Assegurar-se de que não ficam documentos impressos contendo dados protegidos na bandeja de saída da impressora.</li>
                 </>
               ) : (
                 <>
                   <li>Guardar el necesario secreto respecto a cualquier tipo de información de carácter personal conocida en función del trabajo desarrollado, incluso una vez concluida la relación laboral con la entidad.</li>
                   <li>Comunicar al Responsable de Seguridad, conforme al procedimiento de notificación, las incidencias de seguridad de las que tenga conocimiento.</li>
-                  <li>Queda prohibido el traslado de cualquier listado o documento análogo con datos de carácter personal en los que se almacene información titularidad de la entidad fuera de los locales de la misma.</li>
-                  <li>Guardar todos los soportes físicos o documentos que contengan información con datos de carácter personal en un lugar seguro, cuando estos no sean usados, particularmente fuera de la jornada laboral.</li>
-                  <li>Asegurarse de que no quedan documentos impresos que contengan datos protegidos impresos en la bandeja de salida de la impresora.</li>
                 </>
               )}
             </ul>
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
           </div>
 
           {/* ================= PÁGINA 3: LOPD CONT. / ENTREGA DE EQUIPOS ================= */}
-          <div className="pdf-page text-justify small-text" id="page-3">
+          <div className="pdf-page page-break text-justify small-text" id="page-3">
             <ul className="list-disc mb-4">
               {formData.idioma === 'pt' ? (
                 <>
+                  <li>É proibida a deslocação de qualquer listagem ou documento análogo com dados de caráter pessoal onde se armazene informação propriedade da entidade para fora das instalações da mesma.</li>
+                  <li>Guardar todos os suportes físicos ou documentos que contenham informação com dados de caráter pessoal num local seguro, quando não estiverem a ser utilizados, particularmente fora do horário de trabalho.</li>
+                  <li>Assegurar-se de que não ficam documentos impressos contendo dados protegidos na bandeja de saída da impressora.</li>
                   <li>Apenas as pessoas autorizadas poderão introduzir, modificar ou anular os dados contidos nos ficheiros objeto de proteção. As permissões de acesso dos utilizadores aos diferentes ficheiros são concedidas pelo Responsável de Segurança. Caso algum utilizador necessite, para o desenvolvimento do seu trabalho, de aceder a ficheiros cujo acesso não lhe está autorizado, deverá dar conhecimento ao Responsável de Segurança.</li>
                   <li>Ficheiros de caráter temporário são aqueles nos quais se armazenam dados de caráter pessoal, gerados para o cumprimento de uma necessidade determinada, desde que a sua existência não ultrapasse um mês. Os ficheiros de caráter temporário devem ser destruídos assim que deixem de ser necessários para os fins que motivaram a sua criação e, enquanto estiverem em vigor, deverão ser contempladas as medidas de segurança contidas neste documento.</li>
                 </>
               ) : (
                 <>
+                  <li>Queda prohibido el traslado de cualquier listado o documento análogo con datos de carácter personal en los que se almacene información titularidad de la entidad fuera de los locales de la misma.</li>
+                  <li>Guardar todos los soportes físicos o documentos que contengan información con datos de carácter personal en un lugar seguro, cuando estos no sean usados, particularmente fuera de la jornada laboral.</li>
+                  <li>Asegurarse de que no quedan documentos impresos que contengan datos protegidos impresos en la bandeja de salida de la impresora.</li>
                   <li>Únicamente las personas autorizadas para ello podrán introducir, modificar o anular los datos contenidos en los ficheros objeto de protección. Los permisos de acceso de los usuarios a los diferentes ficheros son concedidos por el Responsable de Seguridad. En el caso de que cualquier usuario requiera, para el desarrollo de su trabajo, acceder a ficheros a cuyo acceso no está autorizado, deberá ponerlo en conocimiento del Responsable de Seguridad.</li>
                   <li>Ficheros de carácter temporal son aquellos en los que se almacenan datos de carácter personal, generados para el cumplimiento de una necesidad determinada, siempre y cuando su existencia no sea superior a un mes. Los ficheros de carácter temporal deben ser destruidos una vez hayan dejado de ser necesarios para los fines que motivaron su creación y, mientras estén vigentes, deberán contemplarse las medidas de seguridad contenidas en este documento.</li>
                 </>
@@ -626,83 +664,85 @@ export default function App() {
               <br /><br /><br />
               <p>{formData.idioma === 'pt' ? 'Assinado:' : 'Firmado:'}</p>
             </div>
-
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
           </div>
 
           {/* ================= PÁGINA 4: ENTREGA DE EQUIPOS ================= */}
-          <div className="pdf-page text-justify small-text" id="page-4">
-            <h2 className="font-bold mb-4" style={{ fontSize: '11pt' }}>Entrega de recursos informáticos {formData.iniciales ? `REF.-${formData.iniciales}` : ''}</h2>
-            <p className="mb-4" style={{ fontSize: '11pt' }}>
-              {formData.idioma === 'pt'
-                ? <>Em <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>
-                : <>En <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>}
-            </p>
-
-            <p className="mb-4" style={{ fontSize: '11pt' }}>
-              {formData.idioma === 'pt'
-                ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong> Colaborador(a) da Aquaservice, localizado(a) no escritório recebe o material propriedade da empresa, conforme pedido efetuado pelo departamento de Pessoas e Cultura ao departamento de IT para o desempenho das funções inerentes ao seu posto de trabalho.</>
-                : <>D./Dña. <strong>{formData.nombre || '_____________________________________'}</strong> Empleado/a de Aquaservice, ubicado/a en la oficina recibe el material propiedad de la empresa, según petición realizada por el departamento de Personas y Cultura al departamento de IT para la realización de las funciones derivadas de su puesto trabajo.</>}
-            </p>
-
-            <table className="pdf-table" style={{ fontSize: '10pt' }}>
-              <thead>
-                <tr>
-                  <th>{formData.idioma === 'pt' ? 'Descrição' : 'Descripción'}</th>
-                  <th>Marca</th>
-                  <th>Modelo</th>
-                  <th>{formData.idioma === 'pt' ? 'IMEI / Série' : 'IMEI / Serial'}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {equipos.map((eq, i) => (
-                  <tr key={i}>
-                    <td>{eq.tipo}</td>
-                    <td>{eq.marca}</td>
-                    <td>{eq.modelo}</td>
-                    <td>{eq.serial}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            <p className="font-bold mt-6 mb-2" style={{ fontSize: '10pt' }}>{formData.idioma === 'pt' ? 'O Colaborador manifesta que:' : 'El Empleado manifiesta que:'}</p>
-            <p className="mb-2" style={{ fontSize: '10pt' }}>
-              {formData.idioma === 'pt'
-                ? 'Os equipamentos aqui descritos, bem como qualquer outro que lhe venha a ser entregue pela empresa para a realização do seu trabalho, são propriedade exclusiva da Aquaservice. Em caso de cessação do contrato de trabalho, entrega de novos equipamentos, ou a pedido da empresa, o(a) Colaborador(a) compromete-se a proceder à sua devolução imediata. No caso de telemóveis, isto inclui a colaboração do(a) Colaborador(a) para desvincular o terminal do utilizador.'
-                : 'Los equipos aquí detallados, así como cualquier otro, que le fuera entregada por la empresa para la realización de su trabajo, es propiedad exclusiva de Aquaservice. En caso de terminación del contrato de trabajo, entrega de nuevos equipos, o a requerimiento de la empresa el Empleado/a se compromete a realizar la devolución de forma inmediata. En el caso de teléfonos móviles el Empleado/a esto incluye la colaboración para eliminar la vinculación del terminal con el usuario.'}
-            </p>
-            <p className="mb-2" style={{ fontSize: '10pt' }}>
-              {formData.idioma === 'pt'
-                ? 'O trabalhador autoriza expressamente a empresa, mediante a assinatura deste documento, a descontar nos salários pendentes e no acerto de contas o valor dos equipamentos quando estes não forem devolvidos em qualquer dos casos mencionados anteriormente.'
-                : 'El trabajador autoriza expresamente a la empresa mediante la firma de este documento a descontar de salarios pendientes la liquidación de prestaciones el valor de los equipos cuando estos no sean devueltos en cualquiera de los casos mencionados anteriormente.'}
-            </p>
-            <p className="mb-2" style={{ fontSize: '10pt' }}>
-              {formData.idioma === 'pt'
-                ? <>Perante qualquer situação de perda ou roubo do mesmo, deve-se notificar o departamento de T.I. através de <strong>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão de nova incidência.</>
-                : <>Ante cualquier incidencia de pérdida o robo del mismo se debe notificar al departamento de T.I. a través de <strong>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia.</>}
-            </p>
-            <p className="mb-2 font-bold" style={{ fontSize: '10pt' }}>
-              {formData.idioma === 'pt'
-                ? 'Lembramos que os documentos devem ser guardados na drive Google Drive ou na unidade partilhada A. Não nos responsabilizamos pela perda de qualquer ficheiro guardado localmente.'
-                : 'Recuerda que los documentos deben guardarse en la unidad Google Drive o en la unidad compartida A, no nos haremos responsables de perdida de cualquier archivo guardado en local.'}
-            </p>
-            <p className="mb-6" style={{ fontSize: '10pt' }}>
-              {formData.idioma === 'pt'
-                ? <>Também nos pode ligar para o número <strong>961415503</strong> para qualquer esclarecimento.</>
-                : <>También nos puede llamar al teléfono <strong>961415503</strong> para cualquier aclaración.</>}
-            </p>
-
-            <div style={{ fontSize: '11pt' }}>
-              <p>
+          {equipos.length > 0 && (
+            <div className="pdf-page page-break text-justify small-text" id="page-4">
+              <h2 className="font-bold mb-4" style={{ fontSize: '11pt' }}>Entrega de recursos informáticos {formData.iniciales ? `REF.-${formData.iniciales}` : ''}</h2>
+              <p className="mb-4" style={{ fontSize: '11pt' }}>
                 {formData.idioma === 'pt'
-                  ? <>Em <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>
-                  : <>En <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>}
+                  ? <>Em <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>
+                  : <>En <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>}
               </p>
-              <br /><br /><br />
-              <p>{formData.idioma === 'pt' ? 'Assinado:' : 'Firmado:'}</p>
-            </div>
 
-          </div>
+              <p className="mb-4" style={{ fontSize: '11pt' }}>
+                {formData.idioma === 'pt'
+                  ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong> Colaborador(a) da Aquaservice, localizado(a) no escritório recebe o material propriedade da empresa, conforme pedido efetuado pelo departamento de Pessoas e Cultura ao departamento de IT para o desempenho das funções inerentes ao seu posto de trabalho.</>
+                  : <>D./Dña. <strong>{formData.nombre || '_____________________________________'}</strong> Empleado/a de Aquaservice, ubicado/a en la oficina recibe el material propiedad de la empresa, según petición realizada por el departamento de Personas y Cultura al departamento de IT para la realización de las funciones derivadas de su puesto trabajo.</>}
+              </p>
+
+              <table className="pdf-table" style={{ fontSize: '10pt' }}>
+                <thead>
+                  <tr>
+                    <th>{formData.idioma === 'pt' ? 'Descrição' : 'Descripción'}</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>{formData.idioma === 'pt' ? 'IMEI / Série' : 'IMEI / Serial'}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {equipos.map((eq, i) => (
+                    <tr key={i}>
+                      <td>{eq.tipo}</td>
+                      <td>{eq.marca}</td>
+                      <td>{eq.modelo}</td>
+                      <td>{eq.serial}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <p className="font-bold mt-6 mb-2" style={{ fontSize: '10pt' }}>{formData.idioma === 'pt' ? 'O Colaborador manifesta que:' : 'El Empleado manifiesta que:'}</p>
+              <p className="mb-2" style={{ fontSize: '10pt' }}>
+                {formData.idioma === 'pt'
+                  ? 'Os equipamentos aqui descritos, bem como qualquer outro que lhe venha a ser entregue pela empresa para a realização do seu trabalho, são propriedade exclusiva da Aquaservice. Em caso de cessação do contrato de trabalho, entrega de novos equipamentos, ou a pedido da empresa, o(a) Colaborador(a) compromete-se a proceder à sua devolução imediata. No caso de telemóveis, isto inclui a colaboração do(a) Colaborador(a) para desvincular o terminal do utilizador.'
+                  : 'Los equipos aquí detallados, así como cualquier otro, que le fuera entregada por la empresa para la realización de su trabajo, es propiedad exclusiva de Aquaservice. En caso de terminación del contrato de trabajo, entrega de nuevos equipos, o a requerimiento de la empresa el Empleado/a se compromete a realizar la devolución de forma inmediata. En el caso de teléfonos móviles el Empleado/a esto incluye la colaboración para eliminar la vinculación del terminal con el usuario.'}
+              </p>
+              <p className="mb-2" style={{ fontSize: '10pt' }}>
+                {formData.idioma === 'pt'
+                  ? 'O trabalhador autoriza expressamente a empresa, mediante a assinatura deste documento, a descontar nos salários pendentes e no acerto de contas o valor dos equipamentos quando estes não forem devolvidos em qualquer dos casos mencionados anteriormente.'
+                  : 'El trabajador autoriza expresamente a la empresa mediante la firma de este documento a descontar de salarios pendientes la liquidación de prestaciones el valor de los equipos cuando estos no sean devueltos en cualquiera de los casos mencionados anteriormente.'}
+              </p>
+              <p className="mb-2" style={{ fontSize: '10pt' }}>
+                {formData.idioma === 'pt'
+                  ? <>Perante qualquer situação de perda ou roubo do mesmo, deve-se notificar o departamento de T.I. através de <strong>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão de nova incidência.</>
+                  : <>Ante cualquier incidencia de pérdida o robo del mismo se debe notificar al departamento de T.I. a través de <strong>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia.</>}
+              </p>
+              <p className="mb-2 font-bold" style={{ fontSize: '10pt' }}>
+                {formData.idioma === 'pt'
+                  ? 'Lembramos que os documentos devem ser guardados na drive Google Drive ou na unidade partilhada A. Não nos responsabilizamos pela perda de qualquer ficheiro guardado localmente.'
+                  : 'Recuerda que los documentos deben guardarse en la unidad Google Drive o en la unidad compartida A, no nos haremos responsables de perdida de cualquier archivo guardado en local.'}
+              </p>
+              <p className="mb-6" style={{ fontSize: '10pt' }}>
+                {formData.idioma === 'pt'
+                  ? <>Também nos pode ligar para o número <strong>961415503</strong> para qualquer esclarecimento.</>
+                  : <>También nos puede llamar al teléfono <strong>961415503</strong> para cualquier aclaración.</>}
+              </p>
+
+              <div style={{ fontSize: '11pt' }}>
+                <p>
+                  {formData.idioma === 'pt'
+                    ? <>Em <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>
+                    : <>En <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>}
+                </p>
+                <br /><br /><br />
+                <p>{formData.idioma === 'pt' ? 'Assinado:' : 'Firmado:'}</p>
+              </div>
+              <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
+            </div>
+          )}
 
         </div>
       </div>

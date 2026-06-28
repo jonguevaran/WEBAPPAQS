@@ -1678,6 +1678,33 @@ Ender Guevara
 
             checkRegistryVisibility(); // Verifica si existe un registro histórico para mostrar la opción de descarga
         });
+
+        // Atajo de teclado Ctrl + . para navegar entre pestañas
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === '.') {
+                e.preventDefault();
+                const tabs = ['upload', 'workspace', 'table', 'cartas'];
+                let currentTab = 'upload';
+                for (let i = 0; i < tabs.length; i++) {
+                    const tabEl = document.getElementById('tab-' + tabs[i]);
+                    if (tabEl && !tabEl.classList.contains('hidden')) {
+                        currentTab = tabs[i];
+                        break;
+                    }
+                }
+                
+                if (currentTab === 'upload') {
+                    if (typeof handleProcess === 'function') handleProcess();
+                    else if (typeof processJSON === 'function') processJSON();
+                } else if (currentTab === 'workspace') {
+                    if (typeof switchTab === 'function') switchTab('table');
+                } else if (currentTab === 'table') {
+                    if (typeof switchTab === 'function') switchTab('cartas');
+                } else if (currentTab === 'cartas') {
+                    if (typeof switchTab === 'function') switchTab('upload');
+                }
+            }
+        });
     </script>
 </body>
 </html>
