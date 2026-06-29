@@ -1,0 +1,57 @@
+{
+  "name": "webappaqs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "electron:start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "electron:build": "npm run build && electron-builder --x64",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "build": {
+    "appId": "com.aqswebapp.app",
+    "productName": "Generador AQS",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "alquimicod.ico"
+    },
+    "files": [
+      "dist/**/*",
+      "main.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonguevaran/WEBAPPAQS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jonguevaran/WEBAPPAQS/issues"
+  },
+  "homepage": "https://github.com/jonguevaran/WEBAPPAQS#readme",
+  "dependencies": {
+    "electron-serve": "^3.0.1",
+    "lucide-react": "^1.21.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.3",
+    "electron": "^42.5.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0",
+    "wait-on": "^9.0.10"
+  }
+}

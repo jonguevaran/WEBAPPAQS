@@ -1,34 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Gestor de Incidencias</title>
-
-    <!-- Etiquetas para Modo Aplicación (Web App) -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#f8fafc">
-
-    <!-- Manifiesto incrustado con íconos base64 para engañar al navegador y permitir la instalación PWA (Standalone) -->
-    <link rel="manifest"
-        href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Gestor%20de%20Incidencias%22%2C%22short_name%22%3A%22Incidencias%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f8fafc%22%2C%22theme_color%22%3A%22%23f8fafc%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzI1NjNlYiIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPklOQzwvdGV4dD48L3N2Zz4%3D%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzI1NjNlYiIvPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPklOQzwvdGV4dD48L3N2Zz4%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
-
+    <title>Bloc de Notas - Llamadas</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Cambiado a JetBrains Mono (fuente de programación) -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
-            /* Fuente de programación monospace */
             font-family: 'JetBrains Mono', monospace;
             background-color: #f8fafc;
         }
-
+        
         .notepad-container {
             background-color: #ffffff;
             border: 1px solid #e5e7eb;
@@ -36,8 +22,9 @@
             position: relative;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             transition: all 0.2s ease;
+            height: 400px;
         }
-
+        
         .notepad-container:focus-within {
             border-color: #93c5fd;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
@@ -45,7 +32,7 @@
 
         .notepad-textarea {
             width: 100%;
-            /* Ligeras líneas grises de fondo */
+            height: 100%;
             background-image: repeating-linear-gradient(transparent, transparent 31px, #f3f4f6 31px, #f3f4f6 32px);
             line-height: 32px;
             padding: 8px 16px 8px 48px;
@@ -64,7 +51,6 @@
             left: 36px;
             width: 1px;
             background-color: rgba(239, 68, 68, 0.25);
-            /* Línea roja suave */
             z-index: 0;
         }
 
@@ -73,588 +59,254 @@
             z-index: 1;
         }
 
-        /* Ocultar barra de desplazamiento si no es necesaria */
-        textarea::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        textarea::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        textarea::-webkit-scrollbar-thumb {
-            background-color: #cbd5e1;
-            border-radius: 4px;
-        }
+        textarea::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track { background: transparent; }
+        textarea::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-
 <body class="text-gray-800 p-4 md:p-6 lg:p-8 min-h-screen flex flex-col">
 
-    <div class="w-full max-w-4xl mx-auto mb-6">
-        <div
-            class="bg-white p-3 rounded-xl shadow-sm flex flex-wrap justify-between items-center gap-4 border border-gray-100">
-
-            <!-- Título y Navegación (Izquierda) -->
-            <div
-                class="flex items-center gap-4 order-first sm:order-none w-full sm:w-auto justify-between sm:justify-start">
-                <h1 class="text-lg font-bold text-gray-800 flex items-center gap-2 min-w-max">
-                    <i class="fa-solid fa-headset text-blue-500"></i> Incidencias
+    <div class="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-6">
+        
+        <!-- PANEL IZQUIERDO: Bloc de Notas e Historial -->
+        <div class="flex-grow flex flex-col gap-6 lg:w-2/3">
+            
+            <!-- Cabecera del Bloc de Notas -->
+            <div class="bg-white p-3 rounded-xl shadow-sm flex flex-wrap justify-between items-center gap-4 border border-gray-100">
+                <h1 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-blue-500"></i> Bloc de Notas
                 </h1>
-
-                <div class="flex items-center bg-gray-50 rounded-lg border border-gray-200 p-1">
-                    <button id="btnPrev"
-                        class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm text-gray-600 disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all">
-                        <i class="fa-solid fa-chevron-left"></i>
+                
+                <div class="flex items-center gap-2">
+                    <button id="btnNewNote" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Nueva Nota
                     </button>
-
-                    <span id="recordCounter" class="text-sm font-semibold text-gray-700 px-3 min-w-[60px] text-center">
-                        1 / 1
-                    </span>
-
-                    <button id="btnNext"
-                        class="w-8 h-8 flex items-center justify-center rounded-md hover:bg-white hover:shadow-sm text-gray-600 disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-all">
-                        <i class="fa-solid fa-chevron-right"></i>
+                    <button id="btnDeleteNote" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-sm font-medium py-1.5 px-3 rounded-lg transition-colors flex items-center gap-2">
+                        <i class="fa-regular fa-trash-can"></i> Borrar
                     </button>
                 </div>
             </div>
 
-            <!-- Botones de Acción (Derecha) -->
-            <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                <!-- Botón para instalar PWA (Oculto por defecto hasta que el navegador lo permita) -->
-                <button id="btnInstall" title="Instalar Aplicación en el PC"
-                    class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2 hidden">
-                    <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Instalar App</span>
-                </button>
-
-                <button id="btnNew"
-                    class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Nuevo</span>
-                </button>
-
-                <button id="btnReset" title="Restablecer registro"
-                    class="bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-medium py-1.5 px-3 rounded-lg transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-rotate-left"></i> <span class="hidden sm:inline">Restablecer</span>
-                </button>
-
-                <button id="btnDelete"
-                    class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-sm font-medium py-1.5 px-3 rounded-lg transition-colors flex items-center gap-2">
-                    <i class="fa-regular fa-trash-can"></i> Ok
-                </button>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="flex flex-col gap-6 w-full max-w-4xl mx-auto flex-grow">
-
-        <!-- Textarea 1: Datos del Contacto -->
-        <div class="flex flex-col relative">
-            <div class="flex justify-between items-end mb-2 px-1">
-                <label class="font-semibold text-gray-700 flex items-center gap-2">
-                    <i class="fa-solid fa-user-pen text-gray-400"></i> Datos del contacto
-                </label>
-                <button onclick="copyContent('ta1')"
-                    class="bg-white border border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-300 text-xs font-medium py-1.5 px-3 rounded-md shadow-sm flex items-center gap-2 transition-colors">
-                    <i class="fa-regular fa-copy"></i>
-                </button>
-            </div>
+            <!-- Área de Texto Principal -->
             <div class="notepad-container">
-                <textarea id="ta1" class="notepad-textarea overflow-hidden text-sm" spellcheck="false"></textarea>
+                <textarea id="mainNotepad" class="notepad-textarea text-sm" spellcheck="false" placeholder="Escribe aquí..."></textarea>
             </div>
+
+            <!-- Tabla de Historial de Notas -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col mb-8">
+                <h2 class="text-sm font-bold text-gray-800 flex items-center gap-2 uppercase tracking-wide mb-3">
+                    <i class="fa-solid fa-clock-rotate-left text-gray-400"></i> Historial de Notas
+                </h2>
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse min-w-[300px]">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs uppercase tracking-wider">
+                                <th class="py-2 px-4 font-semibold w-24">Fecha</th>
+                                <th class="py-2 px-4 font-semibold">Título (Primera línea)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="notesTableBody" class="text-sm">
+                            <!-- Filas dinámicas -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
         </div>
 
-        <!-- Textarea 2: Proceso (con Checkboxes) -->
-        <div class="flex flex-col relative">
-            <div class="flex flex-wrap justify-between items-end mb-2 px-1 gap-2">
-                <div class="flex flex-wrap items-center gap-4">
-                    <label class="font-semibold text-gray-700 flex items-center gap-2">
-                        <i class="fa-solid fa-envelope-open-text text-gray-400"></i> Proceso
+        <!-- PANEL DERECHO: Plantillas de Respuesta -->
+        <div class="lg:w-1/3 flex flex-col gap-4">
+            
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col sticky top-6">
+                <div class="flex justify-between items-center mb-4 border-b border-gray-100 pb-2">
+                    <h2 class="text-md font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-solid fa-bolt text-yellow-500"></i> Respuestas Rápidas
+                    </h2>
+                    
+                    <label class="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1.5 rounded border border-gray-200 transition-colors">
+                        <input type="checkbox" id="chkIdiomaPT" class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"> 
+                        <span class="text-sm font-bold text-gray-700">PT</span>
                     </label>
+                </div>
+                
+                <!-- Plantilla A: Escalar -->
+                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <h3 class="text-sm font-bold text-gray-700 mb-2">1. Escalar</h3>
+                    <button id="btnCopyEscalar" class="w-full bg-white border border-gray-300 text-gray-700 hover:text-indigo-600 hover:border-indigo-400 text-sm font-medium py-2 px-3 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-regular fa-copy"></i> Copiar Respuesta Escalar
+                    </button>
+                </div>
 
-                    <!-- Checkboxes (Arriba) -->
-                    <div
-                        class="flex items-center gap-3 text-sm font-medium text-gray-700 bg-white px-3 py-1 rounded-md border border-gray-200 shadow-sm">
-                        <label class="flex items-center gap-1.5 cursor-pointer hover:text-gray-900 transition-colors">
-                            <input type="checkbox" id="chkPt"
-                                class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer">
-                            Pt
+                <!-- Plantilla Nueva: Envío de Documento -->
+                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <h3 class="text-sm font-bold text-gray-700 mb-2">2. Envío de Documento</h3>
+                    <button id="btnCopyEnvioDoc" class="w-full bg-white border border-gray-300 text-gray-700 hover:text-indigo-600 hover:border-indigo-400 text-sm font-medium py-2 px-3 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-regular fa-copy"></i> Copiar Envío de Documento
+                    </button>
+                </div>
+
+                <!-- Plantilla B: Solicitud de Información -->
+                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <h3 class="text-sm font-bold text-gray-700 mb-2">3. Solicitud de Información</h3>
+                    
+                    <div class="flex flex-col gap-1.5 mb-3 text-sm text-gray-700" id="reqInfoCheckboxes">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="contexto" class="w-4 h-4 text-blue-600 rounded border-gray-300 cursor-pointer"> 
+                            <span class="lbl-contexto">Mas contexto</span>
                         </label>
-                        <div class="w-px h-4 bg-gray-300"></div>
-                        <label class="flex items-center gap-1.5 cursor-pointer hover:text-gray-900 transition-colors">
-                            <input type="checkbox" id="chkRemota"
-                                class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer">
-                            Acceso Remoto
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="registro" class="w-4 h-4 text-blue-600 rounded border-gray-300 cursor-pointer"> 
+                            <span class="lbl-registro">Nro de Registro</span>
                         </label>
-                        <div class="w-px h-4 bg-gray-300"></div>
-                        <label class="flex items-center gap-1.5 cursor-pointer hover:text-gray-900 transition-colors">
-                            <input type="checkbox" id="chkConfirmado"
-                                class="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer">
-                            Confirmado
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="transaccion" class="w-4 h-4 text-blue-600 rounded border-gray-300 cursor-pointer"> 
+                            <span class="lbl-transaccion">Transaccion</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="print" class="w-4 h-4 text-blue-600 rounded border-gray-300 cursor-pointer"> 
+                            <span class="lbl-print">Print de pantalla del error</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" value="pasos" class="w-4 h-4 text-blue-600 rounded border-gray-300 cursor-pointer"> 
+                            <span class="lbl-pasos">Una breve descripcion de los pasos realizados</span>
                         </label>
                     </div>
+
+                    <button id="btnCopyReqInfo" class="w-full bg-white border border-gray-300 text-gray-700 hover:text-blue-600 hover:border-blue-400 text-sm font-medium py-2 px-3 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-regular fa-copy"></i> Copiar Solicitud
+                    </button>
                 </div>
-            </div>
-            <div class="notepad-container">
-                <textarea id="ta2" class="notepad-textarea overflow-hidden text-sm" spellcheck="false"
-                    placeholder="Escriba aquí el resumen de su caso..."></textarea>
-            </div>
 
-            <!-- Botones de Acción (Abajo a la derecha) -->
-            <div class="flex justify-end items-center gap-2 mt-3">
-                <button onclick="copyRelatorio()"
-                    class="bg-white border border-gray-200 text-gray-700 hover:text-indigo-600 hover:border-indigo-300 text-xs font-medium py-1.5 px-3 rounded-md shadow-sm flex items-center gap-2 transition-colors">
-                    <i class="fa-regular fa-copy"></i> Relatorio
-                </button>
-                <button onclick="copySeguimiento()"
-                    class="bg-white border border-gray-200 text-gray-700 hover:text-teal-600 hover:border-teal-300 text-xs font-medium py-1.5 px-3 rounded-md shadow-sm flex items-center gap-2 transition-colors">
-                    <i class="fa-regular fa-copy"></i> Seguimiento
-                </button>
-                <button onclick="copyRespuesta()"
-                    class="bg-white border border-gray-200 text-gray-700 hover:text-blue-600 hover:border-blue-300 text-xs font-medium py-1.5 px-3 rounded-md shadow-sm flex items-center gap-2 transition-colors">
-                    <i class="fa-regular fa-copy"></i> Respuesta
-                </button>
+                <!-- Plantilla C: Solución -->
+                <div class="mb-4 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <h3 class="text-sm font-bold text-gray-700 mb-2">4. Solución</h3>
+                    <button id="btnCopySolucion" class="w-full bg-white border border-gray-300 text-gray-700 hover:text-green-600 hover:border-green-400 text-sm font-medium py-2 px-3 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-regular fa-copy"></i> Copiar Solución
+                    </button>
+                </div>
+                
             </div>
+            
         </div>
 
-        <!-- Campo Link Ticket -->
-        <div class="mt-2 bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col">
-            <label class="font-semibold text-gray-700 flex items-center gap-2 mb-2">
-                <i class="fa-solid fa-link text-gray-400"></i> Link Ticket
-            </label>
-            <input type="text" id="ticketLink" placeholder="Ej: https://aquaservice.atlassian.net/browse/..."
-                class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent font-['JetBrains_Mono']">
-        </div>
-
-        <!-- Tabla de Registros -->
-        <div class="mt-2 bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col mb-8">
-            <div class="flex justify-between items-center mb-3">
-                <h2 class="text-sm font-bold text-gray-800 flex items-center gap-2 uppercase tracking-wide">
-                    <i class="fa-solid fa-table-list text-gray-400"></i> Historial de Registros
-                </h2>
-                <button id="btnClearAll"
-                    class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-xs font-medium py-1.5 px-3 rounded-md transition-colors flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-solid fa-trash-arrow-up"></i> Restablecer
-                </button>
-            </div>
-            <div class="overflow-x-auto rounded-lg border border-gray-200">
-                <table class="w-full text-left border-collapse min-w-[500px]">
-                    <thead>
-                        <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs uppercase tracking-wider">
-                            <th class="py-3 px-4 font-semibold w-24">Fecha</th>
-                            <th class="py-3 px-4 font-semibold">Proceso (Primera Línea)</th>
-                            <th class="py-3 px-4 font-semibold w-32 text-center">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="recordsTableBody" class="text-sm">
-                        <!-- Filas generadas dinámicamente -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Modal Confirmación Borrar Todo -->
-    <div id="confirmModal"
-        class="hidden fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-xl border border-gray-200 p-6 max-w-sm w-full text-center">
-            <div
-                class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600 text-xl">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-            </div>
-            <h3 class="text-lg font-bold text-gray-900 mb-2">Restablecer Todo</h3>
-            <p class="text-gray-600 text-sm mb-6">¿Estás seguro de que deseas eliminar <b>todos los registros</b> del
-                historial? Esta acción no se puede deshacer.</p>
-            <div class="flex gap-3 justify-center">
-                <button id="btnCancelClear"
-                    class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-semibold py-2 px-4 rounded-lg transition-colors flex-1">Cancelar</button>
-                <button id="btnConfirmClear"
-                    class="bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition-colors flex-1">Sí,
-                    eliminar</button>
-            </div>
-        </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast"
-        class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-2.5 rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center gap-2 text-sm font-medium">
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-2.5 rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center gap-2 text-sm font-medium">
         <i class="fa-solid fa-circle-check text-green-400"></i> <span id="toastMsg">¡Copiado!</span>
     </div>
 
     <script>
-        // PWA Setup: Registro de un Service Worker virtual para permitir la instalación
-        if ('serviceWorker' in navigator) {
-            const swCode = `self.addEventListener('fetch', function() {});`;
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(err => console.log('SW no registrado', err));
-        }
+        // State
+        let notes = [];
+        let currentNoteIndex = 0;
 
-        let deferredPrompt;
-        const btnInstall = document.getElementById('btnInstall');
+        // Elements
+        const mainNotepad = document.getElementById('mainNotepad');
+        const btnNewNote = document.getElementById('btnNewNote');
+        const btnDeleteNote = document.getElementById('btnDeleteNote');
+        const notesTableBody = document.getElementById('notesTableBody');
+        const chkIdiomaPT = document.getElementById('chkIdiomaPT');
+        
+        // Template Buttons
+        const btnCopyEscalar = document.getElementById('btnCopyEscalar');
+        const btnCopyEnvioDoc = document.getElementById('btnCopyEnvioDoc');
+        const btnCopyReqInfo = document.getElementById('btnCopyReqInfo');
+        const btnCopySolucion = document.getElementById('btnCopySolucion');
+        const reqInfoCheckboxes = document.querySelectorAll('#reqInfoCheckboxes input[type="checkbox"]');
 
-        // Capturar el evento de instalación nativo
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault(); // Evitar el mini-infobar por defecto
-            deferredPrompt = e; // Guardar evento
-            // Mostrar nuestro botón de "Instalar App"
-            if (btnInstall) {
-                btnInstall.classList.remove('hidden');
-            }
-        });
-
-        // Ocultar el botón si ya está instalada
-        window.addEventListener('appinstalled', () => {
-            if (btnInstall) btnInstall.classList.add('hidden');
-            console.log('Aplicación instalada con éxito');
-        });
-
-        if (btnInstall) {
-            btnInstall.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt(); // Mostrar pop-up del sistema
-                    const { outcome } = await deferredPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        btnInstall.classList.add('hidden');
-                    }
-                    deferredPrompt = null;
-                }
-            });
-        }
-
-        // Default Templates - Eliminados campos Iniciales y Tipo de incidencia
-        const DEFAULT_TEXT_1 = `Nombre: \nDelegación: \nDepartamento/Rol: `;
-        const DEFAULT_TEXT_2 = `El usuario indica que:\n`;
-
-        // Application State
-        let records = [];
-        let currentIndex = 0;
-
-        // DOM Elements
-        const ta1 = document.getElementById('ta1');
-        const ta2 = document.getElementById('ta2');
-        const btnPrev = document.getElementById('btnPrev');
-        const btnNext = document.getElementById('btnNext');
-        const btnNew = document.getElementById('btnNew');
-        const btnReset = document.getElementById('btnReset');
-        const btnDelete = document.getElementById('btnDelete');
-        const recordCounter = document.getElementById('recordCounter');
-        const chkPt = document.getElementById('chkPt');
-        const chkRemota = document.getElementById('chkRemota');
-        const chkConfirmado = document.getElementById('chkConfirmado');
-        const ticketLink = document.getElementById('ticketLink');
-        const btnClearAll = document.getElementById('btnClearAll');
-        const confirmModal = document.getElementById('confirmModal');
-        const btnConfirmClear = document.getElementById('btnConfirmClear');
-        const btnCancelClear = document.getElementById('btnCancelClear');
-        const tbody = document.getElementById('recordsTableBody');
+        // Toast
         const toast = document.getElementById('toast');
         const toastMsg = document.getElementById('toastMsg');
         let toastTimeout;
 
+        // Initialization
         function initApp() {
-            const saved = localStorage.getItem('incidenciasApp_records');
-            const savedIndex = localStorage.getItem('incidenciasApp_index');
-
-            if (saved) {
+            const savedNotes = localStorage.getItem('bloc_llamadas_notes');
+            const savedIndex = localStorage.getItem('bloc_llamadas_index');
+            
+            if (savedNotes) {
                 try {
-                    records = JSON.parse(saved);
-                    // Ensure dates exist
-                    records.forEach(rec => {
-                        if (!rec.createdAt) rec.createdAt = new Date().toISOString();
-                    });
-                    if (records.length === 0) createNewRecord();
+                    notes = JSON.parse(savedNotes);
+                    if (!Array.isArray(notes)) notes = [];
                 } catch (e) {
-                    createNewRecord();
+                    notes = [];
                 }
-            } else {
-                createNewRecord();
+            }
+            
+            if (notes.length === 0) {
+                createNewNote();
             }
 
-            if (savedIndex !== null && !isNaN(savedIndex) && savedIndex >= 0 && savedIndex < records.length) {
-                currentIndex = parseInt(savedIndex);
+            if (savedIndex !== null && !isNaN(savedIndex) && savedIndex >= 0 && savedIndex < notes.length) {
+                currentNoteIndex = parseInt(savedIndex);
             } else {
-                currentIndex = 0;
+                currentNoteIndex = 0;
             }
 
             setupEventListeners();
-            renderCurrentRecord();
+            updateUI();
         }
 
-        function createNewRecord() {
-            records.push({
-                text1: DEFAULT_TEXT_1,
-                text2: DEFAULT_TEXT_2,
-                isPt: false,
-                isRemota: false,
-                isConfirmado: false,
-                ticketLink: "",
+        function createNewNote() {
+            notes.unshift({
+                content: "",
                 createdAt: new Date().toISOString()
             });
+            currentNoteIndex = 0;
+            saveState();
         }
 
         function saveState() {
-            localStorage.setItem('incidenciasApp_records', JSON.stringify(records));
-            localStorage.setItem('incidenciasApp_index', currentIndex);
-        }
-
-        // Auto Resize Textareas based on content
-        function autoResize(element) {
-            if (!element) return;
-
-            element.style.height = '1px';
-            let newHeight = element.scrollHeight;
-
-            if (element.id === 'ta2') {
-                newHeight = Math.max(150, newHeight);
-            }
-
-            element.style.height = newHeight + 'px';
+            localStorage.setItem('bloc_llamadas_notes', JSON.stringify(notes));
+            localStorage.setItem('bloc_llamadas_index', currentNoteIndex);
         }
 
         function renderTable() {
-            tbody.innerHTML = '';
-
-            records.forEach((rec, idx) => {
-                const dateObj = new Date(rec.createdAt);
+            notesTableBody.innerHTML = '';
+            
+            notes.forEach((note, idx) => {
+                const dateObj = new Date(note.createdAt);
                 const day = String(dateObj.getDate()).padStart(2, '0');
                 const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-                const dateStr = `${day}/${month}`;
-
-                const lines = (rec.text2 || "").split('\n').filter(line => line.trim() !== '');
-                const firstLine = lines.length > 0 ? lines[0].trim() : '(Sin contenido)';
-                const displayTitle = firstLine.length > 55 ? firstLine.substring(0, 55) + '...' : firstLine;
-
+                const time = `${String(dateObj.getHours()).padStart(2, '0')}:${String(dateObj.getMinutes()).padStart(2, '0')}`;
+                const dateStr = `${day}/${month} ${time}`;
+                
+                const lines = (note.content || "").split('\n').filter(line => line.trim() !== '');
+                const firstLine = lines.length > 0 ? lines[0].trim() : '(Nueva nota sin título)';
+                const displayTitle = firstLine.length > 70 ? firstLine.substring(0, 70) + '...' : firstLine;
+                
                 const tr = document.createElement('tr');
-                tr.className = `border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition-colors ${idx === currentIndex ? 'bg-blue-100' : 'bg-white'}`;
-
+                tr.className = `border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition-colors ${idx === currentNoteIndex ? 'bg-blue-100' : 'bg-white'}`;
+                
                 tr.onclick = () => {
-                    currentIndex = idx;
-                    renderCurrentRecord();
+                    currentNoteIndex = idx;
+                    updateUI();
                     saveState();
                 };
-
+                
                 tr.innerHTML = `
-                    <td class="py-2.5 px-4 text-gray-600 font-medium whitespace-nowrap">${dateStr}</td>
-                    <td class="py-2.5 px-4 text-gray-800">${displayTitle}</td>
-                    <td class="py-2.5 px-4 text-center">
-                        ${rec.isConfirmado
-                        ? '<span class="inline-block px-2.5 py-1 bg-green-100 text-green-700 rounded-md text-xs font-bold w-full border border-green-200">Resuelto</span>'
-                        : '<span class="inline-block px-2.5 py-1 bg-amber-100 text-amber-700 rounded-md text-xs font-bold w-full border border-amber-200">Pendiente</span>'}
-                    </td>
+                    <td class="py-2.5 px-4 text-gray-500 font-medium whitespace-nowrap text-xs">${dateStr}</td>
+                    <td class="py-2.5 px-4 text-gray-800 font-medium">${displayTitle}</td>
                 `;
-                tbody.appendChild(tr);
+                notesTableBody.appendChild(tr);
             });
         }
 
-        function renderCurrentRecord() {
-            const currentRec = records[currentIndex];
-
-            ta1.value = currentRec.text1 || "";
-            ta2.value = currentRec.text2 || "";
-            chkPt.checked = !!currentRec.isPt;
-            chkRemota.checked = !!currentRec.isRemota;
-            chkConfirmado.checked = !!currentRec.isConfirmado;
-            ticketLink.value = currentRec.ticketLink || "";
-
-            recordCounter.innerText = `${currentIndex + 1} / ${records.length}`;
-
-            btnPrev.disabled = currentIndex === 0;
-            btnNext.disabled = currentIndex === records.length - 1;
-
+        function updateUI() {
+            if (notes.length > 0) {
+                mainNotepad.value = notes[currentNoteIndex].content || "";
+            } else {
+                mainNotepad.value = "";
+            }
             renderTable();
-
-            setTimeout(() => {
-                autoResize(ta1);
-                autoResize(ta2);
-            }, 10);
-        }
-
-        function setupEventListeners() {
-            const handleInput = (e) => {
-                records[currentIndex].text1 = ta1.value;
-                records[currentIndex].text2 = ta2.value;
-                records[currentIndex].isPt = chkPt.checked;
-                records[currentIndex].isRemota = chkRemota.checked;
-                records[currentIndex].isConfirmado = chkConfirmado.checked;
-                records[currentIndex].ticketLink = ticketLink.value;
-                saveState();
-
-                if (e && e.target && (e.target === ta2 || e.target === chkPt)) {
-                    renderTable();
-                }
-
-                if (e && e.target && (e.target === ta1 || e.target === ta2)) {
-                    autoResize(e.target);
-                }
-            };
-
-            ta1.addEventListener('input', handleInput);
-            ta2.addEventListener('input', handleInput);
-            chkPt.addEventListener('change', handleInput);
-            ticketLink.addEventListener('input', handleInput);
-
-            chkRemota.addEventListener('change', (e) => {
-                const checked = e.target.checked;
-                const remotaText = "Entramos remotamente al ordenador del cliente";
-                let lines = ta2.value.split('\n');
-
-                if (checked) {
-                    if (!lines.includes(remotaText)) {
-                        // Buscar el índice de la última línea con texto
-                        let lastTextIdx = -1;
-                        for (let i = lines.length - 1; i >= 0; i--) {
-                            if (lines[i].trim() !== "") {
-                                lastTextIdx = i;
-                                break;
-                            }
-                        }
-                        if (lastTextIdx !== -1) {
-                            // Insertar remotaText en la línea siguiente a la última con texto, y una línea vacía después
-                            lines.splice(lastTextIdx + 1, 0, remotaText, "");
-                        } else {
-                            // Si el campo está vacío, colocar remotaText y una línea vacía
-                            lines = [remotaText, ""];
-                        }
-                    }
-                } else {
-                    const idx = lines.indexOf(remotaText);
-                    if (idx !== -1) {
-                        // Si la línea siguiente es vacía, la quitamos también
-                        if (idx + 1 < lines.length && lines[idx + 1] === "") {
-                            lines.splice(idx, 2);
-                        } else {
-                            lines.splice(idx, 1);
-                        }
-                    }
-                }
-
-                ta2.value = lines.join('\n');
-                ta2.dispatchEvent(new Event('input', { bubbles: true }));
-                records[currentIndex].isRemota = checked;
-                saveState();
-
-                if (checked) {
-                    // Dejar el cursor en la nueva línea vacía justo después del texto insertado
-                    const startPos = ta2.value.indexOf(remotaText);
-                    if (startPos !== -1) {
-                        const cursorSectionPos = startPos + remotaText.length + 1;
-                        ta2.focus();
-                        ta2.setSelectionRange(cursorSectionPos, cursorSectionPos);
-                    }
-                }
-            });
-
-            chkConfirmado.addEventListener('change', (e) => {
-                const checked = e.target.checked;
-                const confirmadoText = "El usuario confirma solucion de su pedido";
-                let lines = ta2.value.split('\n');
-
-                if (checked) {
-                    if (!lines.includes(confirmadoText)) {
-                        if (lines.length === 0 || (lines.length === 1 && lines[0].trim() === '')) {
-                            lines = [confirmadoText];
-                        } else {
-                            lines.push(confirmadoText);
-                        }
-                    }
-                } else {
-                    const idx = lines.indexOf(confirmadoText);
-                    if (idx !== -1) {
-                        lines.splice(idx, 1);
-                    }
-                }
-
-                ta2.value = lines.join('\n');
-                ta2.dispatchEvent(new Event('input', { bubbles: true }));
-                records[currentIndex].isConfirmado = checked;
-                saveState();
-            });
-
-            window.addEventListener('resize', () => {
-                autoResize(ta1);
-                autoResize(ta2);
-            });
-
-            btnPrev.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                    renderCurrentRecord();
-                    saveState();
-                }
-            });
-
-            btnNext.addEventListener('click', () => {
-                if (currentIndex < records.length - 1) {
-                    currentIndex++;
-                    renderCurrentRecord();
-                    saveState();
-                }
-            });
-
-            btnNew.addEventListener('click', () => {
-                createNewRecord();
-                currentIndex = records.length - 1;
-                renderCurrentRecord();
-                saveState();
-            });
-
-            btnReset.addEventListener('click', () => {
-                records[currentIndex].text1 = DEFAULT_TEXT_1;
-                records[currentIndex].text2 = DEFAULT_TEXT_2;
-                records[currentIndex].isPt = false;
-                records[currentIndex].isRemota = false;
-                records[currentIndex].isConfirmado = false;
-                records[currentIndex].ticketLink = "";
-                renderCurrentRecord();
-                saveState();
-                showToast("Registro restaurado");
-            });
-
-            btnDelete.addEventListener('click', () => {
-                if (records.length > 1) {
-                    records.splice(currentIndex, 1);
-                    if (currentIndex >= records.length) {
-                        currentIndex = records.length - 1;
-                    }
-                } else {
-                    records[0].text1 = DEFAULT_TEXT_1;
-                    records[0].text2 = DEFAULT_TEXT_2;
-                    records[0].isPt = false;
-                    records[0].isRemota = false;
-                    records[0].isConfirmado = false;
-                    records[0].ticketLink = "";
-                }
-                renderCurrentRecord();
-                saveState();
-                showToast("Registro eliminado");
-            });
-
-            // Modal Borrar Todo
-            btnClearAll.addEventListener('click', () => {
-                confirmModal.classList.remove('hidden');
-            });
-
-            btnCancelClear.addEventListener('click', () => {
-                confirmModal.classList.add('hidden');
-            });
-
-            btnConfirmClear.addEventListener('click', () => {
-                records = [];
-                createNewRecord();
-                currentIndex = 0;
-                saveState();
-                renderCurrentRecord();
-                confirmModal.classList.add('hidden');
-                showToast("Todos los registros eliminados");
-            });
         }
 
         function showToast(msg) {
             toastMsg.innerText = msg;
             toast.classList.remove('opacity-0');
             toast.classList.add('opacity-100');
-
+            
             clearTimeout(toastTimeout);
             toastTimeout = setTimeout(() => {
                 toast.classList.remove('opacity-100');
@@ -662,113 +314,169 @@
             }, 2500);
         }
 
-        function copyContent(elementId) {
-            const textArea = document.getElementById(elementId);
-
+        function copyToClipboard(text) {
             const tempTextArea = document.createElement("textarea");
-            tempTextArea.value = textArea.value;
+            tempTextArea.value = text;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
-
+            
             try {
-                if (document.execCommand('copy')) showToast("¡Texto copiado!");
+                if (document.execCommand('copy')) {
+                    showToast("¡Texto copiado!");
+                }
             } catch (err) {
                 console.error('Error copiando', err);
             }
-
+            
             document.body.removeChild(tempTextArea);
-            textArea.focus();
         }
 
-        function copySeguimiento() {
-            const pt = chkPt.checked;
+        // --- Template Generation Logic ---
 
-            const horaActual = new Date().getHours();
-
-            let saludo;
-            let finalStr;
-
-            if (!pt) {
-                saludo = horaActual < 12 ? "Buen dia" : "Buenas tardes";
-                finalStr = `${saludo}\n\nInformamos que hemos escalado su caso, una vez nos confirmen estaremos respondiendo resolutivamente.\n\nSaludos`;
+        function getGreeting(isPT) {
+            const hour = new Date().getHours();
+            if (isPT) {
+                return hour < 12 ? "Bom dia," : "Boa tarde,";
             } else {
-                saludo = horaActual < 12 ? "Bom dia" : "Boa tarde";
-                finalStr = `${saludo}\n\nEncaminhamos o seu caso. Responderemos assim que recebermos a confirmação.\n\nCom os melhores cumprimentos,`;
+                return hour < 12 ? "Buenos dias," : "Buenas tardes,";
             }
-
-            const tempTextArea = document.createElement("textarea");
-            tempTextArea.value = finalStr;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-
-            try {
-                if (document.execCommand('copy')) showToast("¡Seguimiento copiado!");
-            } catch (err) {
-                console.error('Error copiando', err);
-            }
-
-            document.body.removeChild(tempTextArea);
-            ta2.focus();
         }
 
-        function copyRespuesta() {
-            const pt = chkPt.checked;
-
-            const horaActual = new Date().getHours();
-
-            let saludo;
-            let finalStr;
-
-            if (!pt) {
-                saludo = horaActual < 12 ? "Buen dia" : "Buenas tardes";
-                finalStr = `${saludo}\n\nInformamos que luego de realizar un análisis y seguimiento de su caso el mismo se encuentra corregido.\n\n`;
-                finalStr += `Saludos`;
+        function getEscalarText(isPT) {
+            const greeting = getGreeting(isPT);
+            if (isPT) {
+                return `${greeting}\n\nInformamos que o seu caso está a ser analisado. Responderemos com uma solução em breve.\n\nCom os melhores cumprimentos,`;
             } else {
-                saludo = horaActual < 12 ? "Bom dia." : "Boa tarde.";
-                finalStr = `${saludo}\n\nInformamos que, após análise e acompanhamento do seu caso, ele foi resolvido.\n\n`;
-                finalStr += `Se precisar de ajuda com outro assunto, pode solicitá-la através do canal:\nhttps://aquaservice.atlassian.net/servicedesk/customer/portal/1/group/14\n\n`;
-                finalStr += `Com os melhores cumprimentos,`;
+                return `${greeting}\n\nInformamos que su caso esta siendo análizado, en breve estaremos respondiendo resolutivamente.\n\nSaludos`;
             }
-
-            const tempTextArea = document.createElement("textarea");
-            tempTextArea.value = finalStr;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-
-            try {
-                if (document.execCommand('copy')) showToast("¡Respuesta copiada!");
-            } catch (err) {
-                console.error('Error copiando', err);
-            }
-
-            document.body.removeChild(tempTextArea);
-            ta2.focus();
         }
 
-        function copyRelatorio() {
-            const t2 = ta2.value;
-
-            // Relatorio ignora el check Pt y no incluye saludos ni links
-            let finalStr = `Resumen del caso:\n\n${t2}`;
-
-            const tempTextArea = document.createElement("textarea");
-            tempTextArea.value = finalStr;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-
-            try {
-                if (document.execCommand('copy')) showToast("¡Relatorio copiado!");
-            } catch (err) {
-                console.error('Error copiando', err);
+        function getEnvioDocText(isPT) {
+            const greeting = getGreeting(isPT);
+            if (isPT) {
+                return `${greeting}\n\nEm anexo encontrará a informação solicitada.\n\nCom os melhores cumprimentos,`;
+            } else {
+                return `${greeting}\n\nEn el anexo encontrara la informacion solicitada.\n\nSaludos`;
             }
-
-            document.body.removeChild(tempTextArea);
-            ta2.focus();
         }
 
-        // Iniciar
+        function getSolucionText(isPT) {
+            const greeting = getGreeting(isPT);
+            if (isPT) {
+                return `${greeting}\n\nInformamos que finalizámos o seu pedido. Podem avançar.\n\nCom os melhores cumprimentos,`;
+            } else {
+                return `${greeting}\n\nInformamos que hemos finalizado su solicitud, pueden avanzar.\n\nSaludos`;
+            }
+        }
+
+        function getReqInfoText(isPT, checkedValues) {
+            const greeting = getGreeting(isPT);
+            
+            const reqMapES = {
+                'contexto': 'Mas contexto',
+                'registro': 'Nro de Registro',
+                'transaccion': 'Transaccion',
+                'print': 'Print de pantalla del error',
+                'pasos': 'Una breve descripcion de los pasos realizados'
+            };
+            
+            const reqMapPT = {
+                'contexto': 'Mais contexto',
+                'registro': 'N.º de Registo',
+                'transaccion': 'Transação',
+                'print': 'Captura de ecrã do erro',
+                'pasos': 'Uma breve descrição dos passos realizados'
+            };
+
+            const mapToUse = isPT ? reqMapPT : reqMapES;
+            
+            let bullets = "";
+            checkedValues.forEach(val => {
+                if (mapToUse[val]) {
+                    bullets += `- ${mapToUse[val]}\n`;
+                }
+            });
+
+            if (isPT) {
+                return `${greeting}\n\nPara darmos seguimento ao seu caso, necessitamos que nos forneça mais informações, incluindo:\n\n${bullets}\nAguardamos o vosso feedback para os podermos ajudar.\n\nCom os melhores cumprimentos,`;
+            } else {
+                return `${greeting}\n\nPara dar continuidad a su caso necesitamos nos amplien la información incluyendo:\n\n${bullets}\nAguardamos feedback para ayudarles.\n\nSaludos`;
+            }
+        }
+
+        function setupEventListeners() {
+            // Notepad Logic
+            mainNotepad.addEventListener('input', () => {
+                if (notes.length > 0) {
+                    notes[currentNoteIndex].content = mainNotepad.value;
+                    saveState();
+                    renderTable();
+                }
+            });
+
+            btnNewNote.addEventListener('click', () => {
+                createNewNote();
+                updateUI();
+            });
+
+            btnDeleteNote.addEventListener('click', () => {
+                if (notes.length > 1) {
+                    notes.splice(currentNoteIndex, 1);
+                    if (currentNoteIndex >= notes.length) {
+                        currentNoteIndex = notes.length - 1;
+                    }
+                } else {
+                    notes[0].content = "";
+                    notes[0].createdAt = new Date().toISOString();
+                }
+                saveState();
+                updateUI();
+                showToast("Nota eliminada");
+            });
+
+            // Template Buttons Logic
+            btnCopyEscalar.addEventListener('click', () => {
+                const isPT = chkIdiomaPT.checked;
+                copyToClipboard(getEscalarText(isPT));
+            });
+
+            btnCopyEnvioDoc.addEventListener('click', () => {
+                const isPT = chkIdiomaPT.checked;
+                copyToClipboard(getEnvioDocText(isPT));
+            });
+
+            btnCopySolucion.addEventListener('click', () => {
+                const isPT = chkIdiomaPT.checked;
+                copyToClipboard(getSolucionText(isPT));
+            });
+
+            btnCopyReqInfo.addEventListener('click', () => {
+                const isPT = chkIdiomaPT.checked;
+                const checkedValues = Array.from(reqInfoCheckboxes)
+                                           .filter(chk => chk.checked)
+                                           .map(chk => chk.value);
+                
+                if (checkedValues.length === 0) {
+                    alert(isPT ? "Por favor, selecione pelo menos uma opção." : "Por favor, selecciona al menos una opción.");
+                    return;
+                }
+                
+                copyToClipboard(getReqInfoText(isPT, checkedValues));
+            });
+
+            // Actualizar etiquetas de checkboxes si cambia el idioma
+            chkIdiomaPT.addEventListener('change', () => {
+                const isPT = chkIdiomaPT.checked;
+                document.querySelector('.lbl-contexto').innerText = isPT ? 'Mais contexto' : 'Mas contexto';
+                document.querySelector('.lbl-registro').innerText = isPT ? 'N.º de Registo' : 'Nro de Registro';
+                document.querySelector('.lbl-transaccion').innerText = isPT ? 'Transação' : 'Transaccion';
+                document.querySelector('.lbl-print').innerText = isPT ? 'Captura de ecrã do erro' : 'Print de pantalla del error';
+                document.querySelector('.lbl-pasos').innerText = isPT ? 'Uma breve descrição dos passos realizados' : 'Una breve descripcion de los pasos realizados';
+            });
+        }
+
+        // Run
         window.onload = initApp;
     </script>
 </body>
-
 </html>

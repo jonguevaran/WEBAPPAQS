@@ -114,6 +114,9 @@ Ender Guevara
             <button id="tab-table-btn" onclick="switchTab('table')" class="flex-1 min-w-[150px] py-4 text-center font-semibold text-slate-500 border-b-2 border-transparent focus:outline-none flex items-center justify-center gap-2">
                 <span id="tab3Text">3. Tabela Excel</span>
             </button>
+            <button id="tab-cartas-btn" onclick="switchTab('cartas')" class="flex-1 min-w-[150px] py-4 text-center font-semibold text-slate-500 border-b-2 border-transparent focus:outline-none flex items-center justify-center gap-2">
+                <span id="tab4Text">4. Cartas</span>
+            </button>
         </div>
 
         <div class="flex-1 p-4 md:p-6 overflow-y-auto bg-slate-50 dark:bg-slate-900 transition-colors duration-300 relative">
@@ -278,6 +281,11 @@ Ender Guevara
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- PESTAÑA 4: CARTAS -->
+            <div id="tab-cartas" class="hidden h-full flex-col fade-in">
+                <iframe src="cartas.html" class="w-full h-full min-h-[800px] border-0 rounded-xl bg-white shadow-sm"></iframe>
             </div>
         </div>
     </div>
@@ -593,7 +601,7 @@ Ender Guevara
         }
 
         function switchTab(tab) {
-            ['upload', 'workspace', 'table'].forEach(t => {
+            ['upload', 'workspace', 'table', 'cartas'].forEach(t => {
                 const el = document.getElementById(`tab-${t}`);
                 const btn = document.getElementById(`tab-${t}-btn`);
                 if (t === tab) { 
@@ -823,6 +831,9 @@ Ender Guevara
                 currentGroupIndex = 0; appData = cargoGroups.length > 0 ? cargoGroups[0] : []; currentIndex = 0;
                 showAlert(currentLang === 'pt' ? "Dados processados!" : "¡Datos procesados!", 'success');
                 switchTab('workspace');
+                
+                // Guardar datos generados para Cartas (opcional si están en el mismo DOM, pero sirve para persistencia/localStorage)
+                localStorage.setItem('cartasData', JSON.stringify(allParsedData));
             } catch (e) { showAlert("Error JSON.", "error"); }
         }
 
@@ -1668,6 +1679,33 @@ Ender Guevara
             }
 
             checkRegistryVisibility(); // Verifica si existe un registro histórico para mostrar la opción de descarga
+        });
+
+        // Atajo de teclado Ctrl + . para navegar entre pestañas
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === '.') {
+                e.preventDefault();
+                const tabs = ['upload', 'workspace', 'table', 'cartas'];
+                let currentTab = 'upload';
+                for (let i = 0; i < tabs.length; i++) {
+                    const tabEl = document.getElementById('tab-' + tabs[i]);
+                    if (tabEl && !tabEl.classList.contains('hidden')) {
+                        currentTab = tabs[i];
+                        break;
+                    }
+                }
+                
+                if (currentTab === 'upload') {
+                    if (typeof handleProcess === 'function') handleProcess();
+                    else if (typeof processJSON === 'function') processJSON();
+                } else if (currentTab === 'workspace') {
+                    if (typeof switchTab === 'function') switchTab('table');
+                } else if (currentTab === 'table') {
+                    if (typeof switchTab === 'function') switchTab('cartas');
+                } else if (currentTab === 'cartas') {
+                    if (typeof switchTab === 'function') switchTab('upload');
+                }
+            }
         });
     </script>
 </body>
