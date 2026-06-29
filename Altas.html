@@ -397,7 +397,7 @@ Ender Guevara
                 recordCounterTpl: "Registo {0} de {1}",
                 lblRoleSelect: "Selecione o Cargo:",
                 roleOptDefault: "-- Selecione um cargo --",
-                opt_role1: "Armazéns, Operario-a Auxiliar, Higiene, Coolers",
+                opt_role1: "Armazém, Armazéns, Operario-a Auxiliar, Higiene, Coolers",
                 opt_role2: "Distribuidor/Repartidor (RB, RZ)",
                 opt_role3: "Instalador",
                 opt_role4: "Comercial (SMALL, SALES, AQUASTORE)",
@@ -478,7 +478,7 @@ Ender Guevara
                 recordCounterTpl: "Registro {0} de {1}",
                 lblRoleSelect: "Selecciona el Cargo:",
                 roleOptDefault: "-- Selecione un cargo --",
-                opt_role1: "Almaceneros, Higienes, coolers",
+                opt_role1: "Almacén, Almaceneros, Higienes, coolers",
                 opt_role2: "Distribuidor/Repartidor (RB, RZ)",
                 opt_role3: "Instalador",
                 opt_role4: "Comercial (SMALL, SALES, AQUASTORE)",
@@ -862,7 +862,7 @@ Ender Guevara
                     const normalizedLastNameLabel = escapeHtml(record['Apellido Normalizado'] || record['apellido normalizado'] || '');
                     const normalizedNameId = `field_Nombre_Normalizado_${currentIndex}`;
                     const normalizedLastNameId = `field_Apellido_Normalizado_${currentIndex}`;
-                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" ondblclick="copyFieldById('${normalizedNameId}')" title="Doble clic para copiar">
+                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" onclick="copyFieldById('${normalizedNameId}')" title="Clic para copiar">
                                 <div class="flex justify-between items-center mb-1">
                                     <span class="text-[10px] font-bold uppercase text-slate-400">NOMBRES NORMALIZADOS</span>
                                     <div class="flex items-center gap-2">
@@ -871,7 +871,7 @@ Ender Guevara
                                 </div>
                                 <div id="${normalizedNameId}" data-original="${normalizedNameLabel}" data-case-mode="title" class="font-bold text-sm break-words">${normalizedNameLabel}</div>
                             </div>`;
-                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" ondblclick="copyFieldById('${normalizedLastNameId}')" title="Doble clic para copiar">
+                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" onclick="copyFieldById('${normalizedLastNameId}')" title="Clic para copiar">
                                 <div class="flex justify-between items-center mb-1">
                                     <span class="text-[10px] font-bold uppercase text-slate-400">APELLIDOS NORMALIZADOS</span>
                                     <div class="flex items-center gap-2">
@@ -916,11 +916,11 @@ Ender Guevara
                 if (lk === 'email') {
                     extraActionHtml = `<button onclick="cycleEmailInView(); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400" title="Alternar formato de correo"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg></button>`;
                 }
-                const skipToggleCase = ['iniciales', 'dni', 'fecha', 'contraseña', 'contraseña app', 'pass app', 'password app', 'palavra-passe', 'cargo', 'email'].includes(lk);
+                const skipToggleCase = ['iniciales', 'dni', 'fecha', 'contraseña', 'contraseña app', 'pass app', 'password app', 'palavra-passe', 'email'].includes(lk);
                 const caseMode = (lk === 'usuario' || lk === 'user' || lk === 'utilizador') ? 'upper-lower' : 'title';
                 const toggleButtonHtml = (skipToggleCase ? '' : `<button onclick="toggleFieldCaseById('${fieldId}'); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>`) + extraActionHtml;
 
-                html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" ondblclick="copyFieldById('${fieldId}')" title="Doble clic para copiar"><div class="flex justify-between items-center mb-1"><span class="text-[10px] font-bold uppercase ${labelClasses}">${dk}</span><div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">${toggleButtonHtml}</div></div><div id="${fieldId}" data-original="${safeValue}" data-case-mode="${caseMode}" class="font-bold text-sm break-words">${safeValue}</div></div>`;
+                html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" onclick="copyFieldById('${fieldId}')" title="Clic para copiar"><div class="flex justify-between items-center mb-1"><span class="text-[10px] font-bold uppercase ${labelClasses}">${dk}</span><div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">${toggleButtonHtml}</div></div><div id="${fieldId}" data-original="${safeValue}" data-case-mode="${caseMode}" class="font-bold text-sm break-words">${safeValue}</div></div>`;
             }
             document.getElementById('dataDisplay').innerHTML = html + '</div>';
         }
@@ -1134,6 +1134,8 @@ Ender Guevara
                     let text = cell.textContent || "";
                     if (j === 3 || j === 7) {
                         cell.textContent = text.toUpperCase();
+                    } else if (j === 8) {
+                        cell.textContent = text.toLowerCase();
                     } else {
                         cell.textContent = toTitleCase(text);
                     }
@@ -1431,7 +1433,7 @@ Ender Guevara
             const delegacion = document.getElementById('edit-delegacion').value.trim();
             const fecAlta = document.getElementById('edit-fecalta').value.trim();
             const tecnico = document.getElementById('edit-tecnico').value.trim().toUpperCase();
-            const mail = document.getElementById('edit-mail').value.trim();
+            const mail = document.getElementById('edit-mail').value.trim().toLowerCase();
             
             let registry = [];
             const existing = localStorage.getItem('jsonRegistryControl');
@@ -1548,7 +1550,7 @@ Ender Guevara
         function autoSelectRoleByCargo(cargoRecord) {
             // Mapeo de cargos a roles
             const cargoToRole = {
-                'role1': [/almacén|armazém|operario|auxiliar|higiene|cooler|almacenero/i],
+                'role1': [/almac[eé]n|armazém|operario|auxiliar|higiene|cooler|almacenero|oficina.t[eé]cnica|producci[oó]n|jefe\s*de\s*plana|jefe\s*de\s*almac[eé]n|jefe\s*de\s*planta/i],
                 'role2': [/distribuidor|repartidor|rb|rz/i],
                 'role3': [/instalador/i],
                 'role4': [/comercial|small|sales|aquastore/i],
