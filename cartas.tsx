@@ -1,6 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FileDown, User, Monitor, Shield, Mail, FileText, Plus, Trash2, Globe } from 'lucide-react';
 
+const getVal = (record: any, type: 'windows' | 'crm') => {
+  if (!record) return '';
+  const keys = Object.keys(record);
+  for (const k of keys) {
+    const lk = k.toLowerCase().replace(/[^a-zñ]/g, '');
+    if (type === 'crm') {
+      if (lk.includes('app') && (lk.includes('contra') || lk.includes('pass') || lk.includes('clave'))) return record[k];
+    } else {
+      if (!lk.includes('app') && (lk.includes('contra') || lk.includes('pass') || lk.includes('clave') || lk.includes('palavra'))) return record[k];
+    }
+  }
+  return '';
+};
+
 export default function App() {
   const [isPdfReady, setIsPdfReady] = useState(false);
   const [registrosAltas, setRegistrosAltas] = useState<any[]>([]);
@@ -61,7 +75,9 @@ export default function App() {
               lugar: record['Delegacion'] || 'Paterna (Valencia)',
               iniciales: record['Iniciales'] || '',
               usuario: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-              usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : '')
+              usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
+              passWindows: getVal(record, 'windows'),
+              passCrm: getVal(record, 'crm')
             }));
           }
         } catch (e) {}
@@ -200,7 +216,9 @@ export default function App() {
                       lugar: record['Delegacion'] || 'Paterna (Valencia)',
                       iniciales: record['Iniciales'] || '',
                       usuario: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-                      usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : '')
+                      usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
+                      passWindows: getVal(record, 'windows'),
+                      passCrm: getVal(record, 'crm')
                     }));
                   }
                 }}
@@ -272,6 +290,16 @@ export default function App() {
               </div>
             </div>
           </section>
+
+          {/* Debug panel to understand why passwords might be missing */}
+          {registrosAltas.length > 0 && formData.usuario && (!formData.passWindows || !formData.passCrm) && (
+            <div className="bg-red-50 border border-red-200 text-red-800 p-3 rounded-md mb-4 text-xs">
+              <strong>MODO DEPURACIÓN - Claves encontradas en el registro de {formData.usuario}:</strong>
+              <div className="mt-1 break-words font-mono text-[10px]">
+                {Object.keys(registrosAltas.find(r => r['Usuario'] === formData.usuario || r['Email']?.split('@')[0] === formData.usuario) || {}).map(k => `"${k}": "${(registrosAltas.find(r => r['Usuario'] === formData.usuario || r['Email']?.split('@')[0] === formData.usuario) || {})[k]}"`).join(', ')}
+              </div>
+            </div>
+          )}
 
           {/* Accesos */}
           <section>

@@ -17,7 +17,10 @@
       "output": "dist_electron"
     },
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "alquimicod.ico"
     },
     "files": [
@@ -52,6 +55,7 @@
     "electron-builder": "^26.15.3",
     "typescript": "^6.0.3",
     "vite": "^8.1.0",
+    "vite-plugin-singlefile": "^2.3.3",
     "wait-on": "^9.0.10"
   }
 }
