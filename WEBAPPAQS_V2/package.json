@@ -1,20 +1,20 @@
 {
   "name": "webappaqs",
   "version": "1.0.0",
-  "description": "",
+  "description": "Asistente AQS - Herramienta interna Aquaservice",
   "main": "main.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && xcopy /E /I /Y assets dist\\assets && copy cartas_v2.html dist\\cartas_v2.html /Y && copy entrega.html dist\\entrega.html /Y && copy logo.png dist\\logo.png /Y && copy DataAlmacenes.json dist\\DataAlmacenes.json /Y",
     "electron:start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
     "electron:build": "npm run build && electron-builder --x64",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "build": {
     "appId": "com.aqswebapp.app",
-    "productName": "Asistente AQS",
+    "productName": "asistenteAQS",
     "directories": {
-      "output": "AsistenteAQS_Output"
+      "output": "Distribucion"
     },
     "win": {
       "target": [
@@ -25,7 +25,15 @@
     },
     "files": [
       "dist/**/*",
-      "main.js"
+      "main.js",
+      "AsistenteAQS.ico"
+    ],
+    "asar": true,
+    "extraResources": [
+      {
+        "from": "AsistenteAQS.ico",
+        "to": "AsistenteAQS.ico"
+      }
     ]
   },
   "repository": {
@@ -51,7 +59,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "concurrently": "^10.0.3",
-    "electron": "^42.5.0",
+    "electron": "42.5.0",
     "electron-builder": "^26.15.3",
     "typescript": "^6.0.3",
     "vite": "^8.1.0",

@@ -81,8 +81,14 @@
                     <button class="menu-button icon-button rounded-2xl bg-slate-700 text-white shadow-sm hover:bg-slate-800 active" data-page="Llamadas.html" data-tooltip="Llamadas" title="Llamadas" aria-label="Llamadas">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.83 19.83 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.83 19.83 0 0 1 2.09 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12.81.35 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.74-1.14a2 2 0 0 1 2.11-.45c.74.33 1.53.56 2.34.68A2 2 0 0 1 22 16.92Z"/></svg>
                     </button>
+                    <button class="menu-button icon-button rounded-2xl bg-slate-900 text-white shadow-sm hover:bg-slate-800" data-page="respuestas.html" data-tooltip="Respuestas" title="Respuestas Rápidas" aria-label="Respuestas Rápidas">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </button>
                     <button class="menu-button icon-button rounded-2xl bg-slate-900 text-white shadow-sm hover:bg-slate-800" data-page="Altas.html" data-tooltip="Altas" title="Altas" aria-label="Altas">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </button>
+                    <button class="menu-button icon-button rounded-2xl bg-slate-900 text-white shadow-sm hover:bg-slate-800" data-page="entrega.html" data-tooltip="Entrega" title="Entrega de Equipos" aria-label="Entrega de Equipos">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                     </button>
                     <button class="menu-button icon-button rounded-2xl bg-slate-900 text-white shadow-sm hover:bg-slate-800" data-page="DelegacionAlmacenes.html" data-tooltip="Almacenes" title="Almacenes" aria-label="Almacenes">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.75V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.75"/><path d="M12 3v4.5M3 9.75L12 4.5l9 5.25"/><path d="M7 12h3M14 12h3M7 16h3M14 16h3"/></svg>
@@ -95,7 +101,9 @@
             <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 p-0 flex-1 min-h-0">
                 <div id="iframeContainer" class="h-full w-full min-h-0">
                     <iframe id="frame-Llamadas.html" class="content-frame bg-white h-full" data-page="Llamadas.html" src="Llamadas.html" title="Llamadas"></iframe>
+                    <iframe id="frame-respuestas.html" class="content-frame bg-white h-full hidden-frame" data-page="respuestas.html" src="respuestas.html" title="Respuestas Rápidas"></iframe>
                     <iframe id="frame-Altas.html" class="content-frame bg-white h-full hidden-frame" data-page="Altas.html" src="Altas.html" title="Altas"></iframe>
+                    <iframe id="frame-entrega.html" class="content-frame bg-white h-full hidden-frame" data-page="entrega.html" src="entrega.html" title="Entrega de Equipos"></iframe>
                     <iframe id="frame-DelegacionAlmacenes.html" class="content-frame bg-white h-full hidden-frame" data-page="DelegacionAlmacenes.html" src="DelegacionAlmacenes.html" title="Almacenes"></iframe>
                     <iframe id="frame-Password.html" class="content-frame bg-white h-full hidden-frame" data-page="Password.html" src="Password.html" title="Password"></iframe>
                 </div>
@@ -138,6 +146,37 @@
         const initialButton = Array.from(buttons).find(btn => btn.dataset.page === savedPage) || buttons[0];
         setActiveButton(initialButton);
         showPage(initialButton.dataset.page);
+
+        // Keyboard navigation
+        function handleKeyNavigation(e) {
+            if (e.ctrlKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+                const buttonsArray = Array.from(buttons);
+                const currentIndex = buttonsArray.findIndex(btn => btn.classList.contains('active'));
+                if (currentIndex === -1) return;
+                
+                let newIndex = currentIndex;
+                if (e.key === 'ArrowLeft') {
+                    newIndex = (currentIndex - 1 + buttonsArray.length) % buttonsArray.length;
+                } else if (e.key === 'ArrowRight') {
+                    newIndex = (currentIndex + 1) % buttonsArray.length;
+                }
+                
+                buttonsArray[newIndex].click();
+                e.preventDefault();
+            }
+        }
+        
+        document.addEventListener('keydown', handleKeyNavigation);
+
+        frames.forEach(frame => {
+            frame.addEventListener('load', () => {
+                try {
+                    frame.contentWindow.document.addEventListener('keydown', handleKeyNavigation);
+                } catch(err) {
+                    console.log("No se pudo añadir el evento de teclado al iframe:", err);
+                }
+            });
+        });
     </script>
 </body>
 </html>

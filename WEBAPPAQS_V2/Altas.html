@@ -42,30 +42,16 @@ Ender Guevara
         .excel-table th.sortable.sorted-asc::after { content: '\2191'; color: #4f46e5; opacity: 1; }
         .excel-table th.sortable.sorted-desc::after { content: '\2193'; color: #4f46e5; opacity: 1; }
     </style>
+  <link rel="stylesheet" crossorigin href="./assets/theme-DCVHs8yF.css">
 </head>
-<body class="bg-slate-100 dark:bg-slate-900 transition-colors duration-300 h-[100dvh] text-slate-800 dark:text-slate-100 font-sans p-2 sm:p-4 flex flex-col items-center justify-center overflow-hidden">
+<body class="bg-slate-100 dark:bg-slate-900 transition-colors duration-300 h-[100dvh] text-slate-800 dark:text-slate-100 font-sans p-2 sm:p-4 flex flex-col items-center justify-center overflow-hidden bg-transparent dark:text-slate-200">
 
     <div id="floating-menu-container" class="fixed top-6 -right-6 opacity-70 z-50 transition-all duration-300 ease-in-out flex flex-col items-end">
-        <div id="settingsMenu" class="hidden absolute right-0 mt-14 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all origin-top-right">
+        <div id="settingsMenu" class="hidden absolute right-0 mt-14 w-64 glass dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transform transition-all origin-top-right">
             
-            <!-- Grupo 1: Personalización -->
-            <div class="flex flex-col">
-                <button onclick="toggleLanguage(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
-                    <span id="langBtnText">Mudar para Português</span>
-                </button>
-                <button onclick="toggleTheme(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-3 transition-colors border-t border-slate-100 dark:border-slate-700 focus:outline-none">
-                    <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
-                    <span id="themeBtnText">Modo Escuro</span>
-                </button>
-            </div>
-
-            <!-- Separador físico 20px -->
-            <div class="h-[20px] bg-slate-50 dark:bg-slate-800/80 border-y border-slate-100 dark:border-slate-700"></div>
-
             <!-- Grupo 2: Datos (Historial) -->
             <div id="menuRegistrySection" class="hidden flex-col">
-                <button onclick="loadRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 flex items-center gap-3 transition-colors focus:outline-none">
+                <button onclick="loadRegistry(); closeMenu();" class="w-full text-left px-4 py-3 text-sm text-indigo-600 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 flex items-center gap-3 transition-colors focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
                     <span id="btnMenuLoadRegistryText">Cargar Registro</span>
                 </button>
@@ -90,18 +76,18 @@ Ender Guevara
                 </button>
             </div>
         </div>
-        <button id="menuToggleButton" onmouseenter="openMenu()" onclick="openMenu()" class="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 p-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all flex items-center justify-center relative z-10">
+        <button id="menuToggleButton" onmouseenter="openMenu()" onclick="openMenu()" class="glass dark:border-slate-700 dark:bg-slate-800 text-slate-700 dark:text-slate-200 p-3 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all flex items-center justify-center relative z-10">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
     </div>
 
-    <div class="w-full max-w-6xl h-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden flex flex-col border border-transparent dark:border-slate-700 transition-colors duration-300">
-        <div class="bg-indigo-600 dark:bg-indigo-800 p-4 md:p-6 text-white text-center transition-colors duration-300 shrink-0">
+    <div class="w-full max-w-6xl h-full glass dark:border-slate-700 dark:bg-slate-800 rounded-2xl shadow-xl overflow-hidden flex flex-col border border-transparent dark:border-slate-700 transition-colors duration-300">
+        <div class="bg-blue-200 dark:bg-indigo-800 p-4 md:p-6 text-blue-900 dark:text-white text-center transition-colors duration-300 shrink-0">
             <h1 class="text-xl md:text-3xl font-bold flex items-center justify-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 md:h-8 md:w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>
                 <span id="mainTitle">Dados</span>
             </h1>
-            <p id="mainSubtitle" class="text-indigo-200 text-xs md:text-sm mt-1 md:mt-2"></p>
+            <p id="mainSubtitle" class="text-blue-900 dark:text-indigo-200 text-xs md:text-sm mt-1 md:mt-2"></p>
         </div>
 
         <div class="flex border-b border-slate-200 dark:border-slate-700 overflow-x-auto shrink-0">
@@ -148,7 +134,7 @@ Ender Guevara
                     </div>
                 </div>
                 <div class="mt-2 flex justify-end shrink-0">
-                    <button onclick="handleProcess()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2 shadow-md">
+                    <button onclick="handleProcess()" class="bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold font-bold py-3 px-8 rounded-lg transition-all flex items-center gap-2 shadow-md">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" /></svg>
                         <span id="btnProcessText">Gerar e Processar</span>
                     </button>
@@ -157,7 +143,7 @@ Ender Guevara
 
             <!-- PESTAÑA 2 -->
             <div id="tab-workspace" class="hidden min-h-full flex-col lg:flex-row gap-4 md:gap-6 fade-in">
-                <div class="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col w-full lg:w-5/12 xl:w-1/3 flex-1 min-h-[400px] lg:min-h-0">
+                <div class="glass dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col w-full lg:w-5/12 xl:w-1/3 flex-1 min-h-[400px] lg:min-h-0">
                     <div class="mb-4">
                         <label id="lblRoleSelect" class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 uppercase"></label>
                         <select id="roleSelect" onchange="onRoleSelectChange()" class="w-full p-3 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm">
@@ -186,14 +172,14 @@ Ender Guevara
                     <div id="accessCheckboxes" class="space-y-2.5 flex-1 overflow-y-auto pr-2"></div>
                 </div>
 
-                <div class="flex flex-col w-full lg:w-7/12 xl:w-2/3 flex-1 min-h-[400px] lg:min-h-0 bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 relative">
-                    <div id="noDataMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 rounded-xl z-10">
+                <div class="flex flex-col w-full lg:w-7/12 xl:w-2/3 flex-1 min-h-[400px] lg:min-h-0 glass dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 relative">
+                    <div id="noDataMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 glass dark:border-slate-700 dark:bg-slate-800 rounded-xl z-10">
                         <div class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 p-4 rounded-full mb-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                         </div>
                         <h3 id="noDataTitleText" class="text-lg font-bold mb-2"></h3>
                         <p id="noDataDescText" class="text-slate-500 mb-6 text-sm"></p>
-                        <button onclick="switchTab('upload')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackText"></span></button>
+                        <button onclick="switchTab('upload')" class="bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackText"></span></button>
                     </div>
                     <div id="analyzerContent" class="flex-1 flex flex-col">
                         <div class="flex items-center justify-between mb-4 border-b dark:border-slate-700 pb-4 shrink-0">
@@ -223,15 +209,15 @@ Ender Guevara
 
             <!-- PESTAÑA 3 -->
             <div id="tab-table" class="hidden h-full flex-col fade-in">
-                <div class="bg-white dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col h-full">
-                    <div id="noDataTableMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 bg-white dark:bg-slate-800 rounded-xl z-10 h-full">
+                <div class="glass dark:bg-slate-800 p-4 md:p-6 rounded-xl shadow-sm border dark:border-slate-700 flex flex-col h-full">
+                    <div id="noDataTableMessage" class="hidden absolute inset-0 flex-col items-center justify-center text-center p-6 glass dark:border-slate-700 dark:bg-slate-800 rounded-xl z-10 h-full">
                         <div class="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-500 p-4 rounded-full mb-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                         </div>
                         <h3 id="noDataTableTitleText" class="text-lg font-bold mb-2"></h3>
                         <p id="noDataTableDescText" class="text-slate-500 mb-6 text-sm"></p>
                         <div class="flex gap-3 flex-wrap justify-center">
-                            <button onclick="switchTab('upload')" class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackTextTable"></span></button>
+                            <button onclick="switchTab('upload')" class="bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold py-2 px-6 rounded-lg font-bold transition-colors"><span id="btnBackTextTable"></span></button>
                         </div>
                     </div>
                     <div id="tableContentWrapper" class="flex-1 flex flex-col min-h-0">
@@ -256,7 +242,7 @@ Ender Guevara
                         </div>
                         <div class="flex flex-wrap items-center w-full gap-3 mb-4 shrink-0 pb-4 border-b border-slate-200 dark:border-slate-700">
                             <div class="flex gap-3">
-                                <button onclick="generateExcelTable()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm flex items-center gap-2">
+                                <button onclick="generateExcelTable()" class="bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm flex items-center gap-2">
                                     <span id="btnGenerateTableText"></span>
                                 </button>
                                 <button onclick="copyTableToClipboard()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-sm flex items-center gap-2">
@@ -283,8 +269,9 @@ Ender Guevara
                 </div>
             </div>
 
+            <!-- PESTAÑA 4: CARTAS -->
             <div id="tab-cartas" class="hidden h-full flex-col fade-in">
-                <iframe src="cartas.html" class="w-full h-full min-h-[800px] border-0 rounded-xl bg-white shadow-sm"></iframe>
+                <iframe src="cartas_v2.html" class="w-full h-full min-h-[800px] border-0 rounded-xl glass dark:border-slate-700 shadow-sm"></iframe>
             </div>
         </div>
     </div>
@@ -296,9 +283,9 @@ Ender Guevara
 
     <!-- Modal de Edición de Registros -->
     <div id="editRecordModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm fade-in">
-        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-2xl overflow-hidden flex flex-col transform transition-all duration-300">
+        <div class="glass dark:border-slate-700 dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-2xl overflow-hidden flex flex-col transform transition-all duration-300">
             <!-- Modal Header -->
-            <div class="bg-indigo-600 dark:bg-indigo-800 p-4 text-white flex justify-between items-center">
+            <div class="bg-blue-200 dark:bg-indigo-800 p-4 text-white flex justify-between items-center">
                 <h3 class="font-bold text-lg flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                     <span id="editModalTitle">Editar Registro</span>
@@ -360,7 +347,7 @@ Ender Guevara
                 <button id="btnCancelEdit" onclick="closeEditModal()" class="px-5 py-2.5 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors text-sm focus:outline-none">
                     Cancelar
                 </button>
-                <button id="btnSaveEdit" onclick="saveEditChanges()" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg transition-colors text-sm flex items-center gap-2 shadow-md focus:outline-none">
+                <button id="btnSaveEdit" onclick="saveEditChanges()" class="px-5 py-2.5 bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold font-bold rounded-lg transition-colors text-sm flex items-center gap-2 shadow-md focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
                     Guardar
                 </button>
@@ -368,14 +355,38 @@ Ender Guevara
         </div>
     </div>
 
+    <!-- Modal Prompt Customizado para Electron -->
+    <div id="promptModal" class="fixed inset-0 z-[60] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm fade-in">
+        <div class="glass dark:border-slate-700 dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 w-full max-w-sm flex flex-col overflow-hidden">
+            <div class="bg-blue-200 dark:bg-indigo-800 p-3 text-white">
+                <h3 id="promptMessage" class="font-bold text-sm"></h3>
+            </div>
+            <div class="p-4">
+                <input type="text" id="promptInput" class="w-full p-2.5 border rounded-lg dark:bg-slate-900 dark:border-slate-600 dark:text-slate-100 font-semibold text-sm mb-4 outline-none focus:ring-2 focus:ring-indigo-500">
+                <div class="flex justify-end gap-3">
+                    <button onclick="closePromptModal(false)" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-lg text-sm">Cancelar</button>
+                    <button onclick="closePromptModal(true)" class="px-4 py-2 bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:text-blue-900 font-bold rounded-lg text-sm shadow-md">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        let currentLang = localStorage.getItem('appLang') || 'pt';
+        let currentLang = localStorage.getItem('lang') || 'es';
         let isDarkMode = localStorage.getItem('appTheme') === 'dark';
         if (isDarkMode) document.documentElement.classList.add('dark');
         
         window.addEventListener('DOMContentLoaded', () => {
             applyTranslations();
         });
+// Listen for language changes from parent frame
+window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'changeLang') {
+        currentLang = event.data.lang;
+        applyTranslations();
+    }
+});
+
 
         let allParsedData = [];
         let cargoGroups = [];
@@ -834,7 +845,7 @@ Ender Guevara
                 
                 // Guardar datos generados para Cartas (opcional si están en el mismo DOM, pero sirve para persistencia/localStorage)
                 saveCartasData();
-            } catch (e) { showAlert("Error JSON.", "error"); }
+            } catch (e) { console.error(e); showAlert("Error JSON: " + e.message, "error"); }
         }
 
         function saveCartasData() {
@@ -906,6 +917,17 @@ Ender Guevara
                                 </div>
                                 <div id="${normalizedLastNameId}" data-original="${normalizedLastNameLabel}" data-case-mode="title" class="font-bold text-sm break-words">${normalizedLastNameLabel}</div>
                             </div>`;
+                    const nombresApellidosLabel = escapeHtml(record['Nombres Apellidos'] || record['nombres apellidos'] || record['nomes apelidos'] || '');
+                    const nombresApellidosId = `field_Nombres_Apellidos_${currentIndex}`;
+                    html += `<div class="p-3 bg-slate-50 dark:bg-slate-700 rounded-lg border dark:border-slate-600 relative group cursor-pointer" onclick="copyFieldById('${nombresApellidosId}')" title="Clic para copiar">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-[10px] font-bold uppercase text-slate-400">NOMBRES APELLIDOS</span>
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="toggleFieldCaseById('${nombresApellidosId}'); event.stopPropagation();" class="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400">Aa</button>
+                                    </div>
+                                </div>
+                                <div id="${nombresApellidosId}" data-original="${nombresApellidosLabel}" data-case-mode="title" class="font-bold text-sm break-words">${nombresApellidosLabel}</div>
+                            </div>`;
                     groupedNamesInserted = true;
                     continue;
                 }
@@ -934,7 +956,7 @@ Ender Guevara
                 else if(lk === 'cargo') dk = i18n[currentLang].lbl_cargo;
                 else if(lk === 'delegacion' || lk === 'delegação') dk = i18n[currentLang].lbl_delegacion;
                 else if(lk === 'contraseña' || lk === 'password' || lk === 'palavra-passe') dk = i18n[currentLang].lbl_password;
-                else if(lk === 'usuario' || lk === 'user' || lk === 'utilizador') dk = i18n[currentLang].lbl_user;
+                else if(lk === 'usuario' || lk === 'user' || lk === 'utilizador') { dk = i18n[currentLang].lbl_user; labelClasses = "text-orange-500 dark:text-orange-400"; }
                 else if(lk === 'email') dk = i18n[currentLang].lbl_email;
                 else if(lk === 'solicitante') dk = i18n[currentLang].lblSolicitante;
 
@@ -993,12 +1015,19 @@ Ender Guevara
                 }
                 record['Email'] = prefix ? `${prefix}${originalDomain}` : record._originalEmail;
             } else if (viewEmailCycleStep === 4) {
-                const manualEmail = prompt("Ingresa el correo manualmente:", record['Email']);
-                if (manualEmail !== null && manualEmail.trim() !== "") {
-                    record['Email'] = manualEmail.trim();
-                } else {
-                    viewEmailCycleStep = 3; // revert
-                }
+                openPromptModal("Ingresa el correo manualmente:", record['Email'], function(manualEmail) {
+                    if (manualEmail !== null && manualEmail.trim() !== "") {
+                        record['Email'] = manualEmail.trim();
+                    } else {
+                        viewEmailCycleStep = 3; // revert
+                    }
+                    if (record['Email']) {
+                        record['Usuario'] = record['Email'].split('@')[0];
+                    }
+                    document.getElementById('jsonInput').value = JSON.stringify(allParsedData, null, 2);
+                    renderCurrentRecord();
+                });
+                return;
             }
             
             if (record['Email']) {
@@ -1009,6 +1038,31 @@ Ender Guevara
             
             renderCurrentRecord();
         }
+
+        function openPromptModal(message, defaultValue, callback) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50';
+            modal.innerHTML = `
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-xl w-full max-w-sm">
+                    <p class="mb-4 text-slate-800 dark:text-white font-medium">${message}</p>
+                    <input type="text" id="promptInput" value="${defaultValue}" class="w-full p-2 border rounded mb-4 dark:bg-slate-700 dark:border-slate-600 text-slate-800 dark:text-white">
+                    <div class="flex justify-end gap-2">
+                        <button id="btnCancel" class="px-4 py-2 bg-slate-200 dark:bg-slate-700 rounded">Cancelar</button>
+                        <button id="btnConfirm" class="px-4 py-2 bg-indigo-600 text-white rounded">Aceptar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            modal.querySelector('#btnConfirm').onclick = () => {
+                callback(modal.querySelector('#promptInput').value);
+                document.body.removeChild(modal);
+            };
+            modal.querySelector('#btnCancel').onclick = () => {
+                callback(null);
+                document.body.removeChild(modal);
+            };
+        }
+
         function toggleRegisteredStatus() { if(appData.length > 0) appData[currentIndex]._isRegistered = document.getElementById('recordRegisteredChk').checked; }
 
         function resetApp() {
@@ -1530,7 +1584,7 @@ Ender Guevara
 
             let html = createChk('cta_servidor', taskDict['cta_servidor'][currentLang], true);
             roleData[role].forEach(k => html += createChk(k, taskDict[k][currentLang]));
-            html += createChk('carta_alta', taskDict['carta_alta'][currentLang]) + `<div class="mt-4 p-3.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 rounded-lg flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p class="text-sm font-medium text-blue-800 dark:text-blue-200 leading-snug">${i18n[currentLang].reminderText}</p></div>`;
+            html += createChk('carta_alta', taskDict['carta_alta'][currentLang]) + `<div class="mt-4 p-3.5 bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 rounded-lg flex items-start gap-3"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><p class="text-sm font-medium text-indigo-800 dark:text-indigo-200 leading-snug">${i18n[currentLang].reminderText}</p></div>`;
             container.innerHTML = html;
         }
 
@@ -1550,7 +1604,7 @@ Ender Guevara
             const isChecked = record && record._checkedAccesses && record._checkedAccesses[key];
             const checkedAttr = isChecked ? 'checked' : '';
             const badge = first ? `<span class="ml-2 text-[10px] uppercase font-bold bg-indigo-200 text-indigo-800 px-2 py-0.5 rounded-full">${i18n[currentLang].step1}</span>` : '';
-            return `<label class="flex items-start space-x-3 p-3 rounded-lg border dark:border-slate-700 ${first?'bg-indigo-50 dark:bg-indigo-900/20':''} hover:bg-slate-50 transition-colors cursor-pointer"><input type="checkbox" data-access-key="${key}" onchange="onAccessCheckboxChange(this)" ${checkedAttr} class="role-checkbox mt-1 h-4 w-4 text-indigo-600 rounded"><span class="text-slate-700 dark:text-slate-300 font-medium flex items-center flex-wrap gap-1.5 text-sm">${t} ${badge}</span></label>`;
+            return `<label class="flex items-start space-x-3 p-3 rounded-lg border dark:border-slate-700 ${first?'bg-indigo-50 dark:bg-indigo-900/20':''} hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"><input type="checkbox" data-access-key="${key}" onchange="onAccessCheckboxChange(this)" ${checkedAttr} class="role-checkbox mt-1 h-4 w-4 text-indigo-600 rounded"><span class="text-slate-700 dark:text-slate-300 font-medium flex items-center flex-wrap gap-1.5 text-sm">${t} ${badge}</span></label>`;
         }
 
         function onAccessCheckboxChange(checkbox) {
@@ -1642,37 +1696,34 @@ Ender Guevara
                 if (realKey) {
                     record[realKey] = newText;
                     
-                    // Mantener sincronizados los campos de nombre completo si cambia Nombre o Apellido Normalizado
-                    if (realKey === 'Nombre Normalizado' || realKey === 'Apellido Normalizado') {
+                    // Sincronizar todos los campos de nombre
+                    const nameFields = ['Nombre Normalizado', 'Apellido Normalizado', 'Nombre Completo Normalizado', 'Nombres Apellidos'];
+                    if (nameFields.includes(realKey)) {
                         const isUppercase = (newText === newText.toUpperCase());
                         
-                        const otherKey = realKey === 'Nombre Normalizado' ? 'Apellido Normalizado' : 'Nombre Normalizado';
-                        const otherTargetKeyId = sanitizeId(otherKey);
-                        const otherId = `field_${otherTargetKeyId}_${id.substring(id.lastIndexOf('_') + 1)}`;
-                        const otherEl = document.getElementById(otherId);
-                        
-                        if (otherEl) {
-                            const otherCurrent = otherEl.textContent.trim();
-                            const otherOriginal = otherEl.dataset.original || otherCurrent;
-                            const otherNewText = isUppercase ? otherCurrent.toUpperCase() : toTitleCaseStr(otherOriginal);
-                            otherEl.textContent = otherNewText;
-                            record[otherKey] = otherNewText;
-                        }
-
-                        const currentName = record['Nombre Normalizado'] || '';
-                        const currentLastName = record['Apellido Normalizado'] || '';
-                        
-                        if ('Nombre Completo Normalizado' in record) {
-                            record['Nombre Completo Normalizado'] = `${currentName} ${currentLastName}`.trim();
-                        }
-                        if ('Nombres Apellidos' in record) {
-                            record['Nombres Apellidos'] = `${currentName} ${currentLastName}`.trim();
-                        }
+                        nameFields.forEach(key => {
+                            if (key !== realKey && (key in record)) {
+                                const targetKeyId = sanitizeId(key);
+                                const otherId = `field_${targetKeyId}_${id.substring(id.lastIndexOf('_') + 1)}`;
+                                const otherEl = document.getElementById(otherId);
+                                
+                                if (otherEl) {
+                                    const otherCurrent = otherEl.textContent.trim();
+                                    const otherOriginal = otherEl.dataset.original || otherCurrent;
+                                    const otherNewText = isUppercase ? otherCurrent.toUpperCase() : toTitleCaseStr(otherOriginal);
+                                    otherEl.textContent = otherNewText;
+                                    record[key] = otherNewText;
+                                } else {
+                                    const current = record[key] || '';
+                                    record[key] = isUppercase ? current.toUpperCase() : toTitleCaseStr(current);
+                                }
+                            }
+                        });
                     }
                 }
             }
         }
-        function showAlert(m, type) { const box = document.getElementById('alertBox'); document.getElementById('alertMessage').textContent = m; box.classList.remove('hidden', 'translate-y-full', 'opacity-0', 'border-red-500', 'border-green-500'); box.classList.add('bg-white', type === 'error' ? 'border-red-500' : 'border-green-500'); setTimeout(() => { box.classList.add('translate-y-full', 'opacity-0'); }, 3000); }
+        function showAlert(m, type) { const box = document.getElementById('alertBox'); document.getElementById('alertMessage').textContent = m; box.classList.remove('hidden', 'translate-y-full', 'opacity-0', 'border-red-500', 'border-green-500'); box.classList.add('glass', 'dark:border-slate-700', type === 'error' ? 'border-red-500' : 'border-green-500'); setTimeout(() => { box.classList.add('translate-y-full', 'opacity-0'); }, 3000); }
 
         // Ocultar menú de ajustes al hacer clic fuera
         document.addEventListener('click', function(event) {
@@ -1724,5 +1775,7 @@ Ender Guevara
             }
         });
     </script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/core.js"></script>
 </body>
 </html>

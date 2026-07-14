@@ -1,123 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Delegaciones y Almacenes - Aquaservice</title>
-    <!-- Aquí es donde se carga Tailwind, esto es vital para el CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9; 
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
-        }
-    </style>
-</head>
-<body class="bg-slate-50 min-h-screen font-sans antialiased text-slate-800">
 
-    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        
-        <header class="mb-8 border-b border-slate-200 pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <div>
-                <h1 class="text-3xl font-black text-blue-900 tracking-tight">Aquaservice</h1>
-                <p class="text-slate-500 mt-1 text-sm sm:text-base">Infraestructura Logística: Red Completa de Delegaciones y Almacenes</p>
-            </div>
-            <div class="bg-blue-50 border border-blue-200 px-4 py-2 rounded-xl text-center sm:text-right shadow-sm hover:shadow-md transition-shadow">
-                <span class="text-xs font-bold text-blue-800 uppercase tracking-wider block">Base de Datos Integrada</span>
-                <span class="text-sm font-semibold text-slate-700">20 Delegaciones | 76 Almacenes (ESP)</span>
-            </div>
-        </header>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
-            <!-- PANEL LATERAL (4 Columnas) -->
-            <aside class="lg:col-span-4 flex flex-col gap-6">
-                <!-- Tarjeta de Controles (Selectores) -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 flex flex-col gap-5">
-                    
-                    <!-- Selector Delegación -->
-                    <div>
-                        <label for="delegacion-select" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Buscar por Delegación
-                        </label>
-                        <select id="delegacion-select" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none block p-3.5 transition-all cursor-pointer font-medium hover:bg-slate-100">
-                            <option value="" disabled selected>-- Elija una delegación --</option>
-                        </select>
-                    </div>
-
-                    <!-- Divisor Visual -->
-                    <div class="relative flex items-center py-2">
-                        <div class="flex-grow border-t border-slate-100"></div>
-                        <span class="flex-shrink-0 mx-4 text-slate-300 text-[10px] font-bold uppercase tracking-widest">Búsqueda Inversa</span>
-                        <div class="flex-grow border-t border-slate-100"></div>
-                    </div>
-
-                    <!-- Selector Almacén -->
-                    <div>
-                        <label for="almacen-select" class="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">
-                            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                            Buscar por Almacén
-                        </label>
-                        <select id="almacen-select" class="w-full bg-slate-50 border border-slate-300 text-slate-900 text-sm rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none block p-3.5 transition-all cursor-pointer font-medium hover:bg-slate-100">
-                            <option value="" disabled selected>-- Elija un almacén --</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Tarjeta Info Delegación (Oculta por defecto) -->
-                <div id="info-delegacion" class="hidden bg-gradient-to-br from-blue-900 to-indigo-950 p-6 rounded-2xl text-white shadow-md relative overflow-hidden">
-                    <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"></div>
-                    <p class="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Delegación Activa</p>
-                    <p id="nombre-delegacion-activa" class="text-2xl font-black mt-1 tracking-tight relative z-10"></p>
-                    <div class="mt-5 pt-4 border-t border-blue-800/60 flex justify-between items-center text-xs text-blue-200 relative z-10">
-                        <span>ID Registro:</span>
-                        <span id="id-delegacion-activa" class="font-mono bg-blue-800/50 px-2.5 py-1 rounded-md text-white font-bold tracking-wider"></span>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- CONTENIDO PRINCIPAL (8 Columnas) -->
-            <main class="lg:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 min-h-[500px] flex flex-col">
-                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
-                    <h2 class="text-lg font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                        Centros de Distribución Vinculados
-                    </h2>
-                    <span id="contador-almacenes" class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full hidden transition-all"></span>
-                </div>
-
-                <!-- Estado Vacío -->
-                <div id="estado-vacio" class="flex-1 flex flex-col items-center justify-center py-12 text-center my-auto transition-all">
-                    <div class="p-5 bg-slate-50 rounded-full text-slate-300 mb-4 border border-slate-100 shadow-inner">
-                        <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                        </svg>
-                    </div>
-                    <p class="text-slate-700 font-bold text-lg">Esperando selección</p>
-                    <p class="text-slate-500 text-sm mt-2 max-w-md leading-relaxed">Elija una delegación o busque un almacén específico en el panel lateral para desplegar su red logística.</p>
-                </div>
-
-                <!-- Grid de Almacenes -->
-                <div id="lista-almacenes" class="grid grid-cols-1 sm:grid-cols-2 gap-4 hidden pb-4">
-                    <!-- Las tarjetas se inyectan aquí mediante JS -->
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <script>
         // Estructura de datos JSON validada
         let dbAquaservice = null;
         const dataUrl = './DataAlmacenes.json';
@@ -846,12 +727,12 @@
                     // Clases dinámicas dependiendo de si está resaltado
                     let baseClasses = "p-4 border rounded-xl transition-all duration-300 flex items-center space-x-4 ";
                     let iconBgClass = isHighlighted ? "bg-blue-600" : "bg-slate-700";
-                    let titleColorClass = isHighlighted ? "text-blue-900" : "text-slate-900";
+                    let titleColorClass = isHighlighted ? "text-indigo-900 dark:text-indigo-200 dark:text-indigo-200" : "text-slate-800 dark:text-white";
 
                     if (isHighlighted) {
-                        baseClasses += "bg-blue-50 border-blue-500 ring-2 ring-blue-200 shadow-md scale-[1.02] z-10 relative";
+                        baseClasses += "bg-indigo-50 dark:bg-indigo-900/40 border-blue-500 ring-2 ring-blue-200 shadow-md scale-[1.02] z-10 relative";
                     } else {
-                        baseClasses += "bg-slate-50 border-slate-200 hover:border-blue-300 hover:bg-white shadow-sm";
+                        baseClasses += "bg-slate-50 dark:bg-slate-800/50 border-slate-200 hover:border-blue-300 hover:bg-white shadow-sm";
                     }
 
                     card.className = baseClasses;
@@ -866,7 +747,7 @@
                         </div>
                         <div class="min-w-0 flex-1">
                             <h3 class="font-bold ${titleColorClass} truncate tracking-tight text-sm sm:text-base">${nombre}</h3>
-                            <p class="text-xs text-slate-500 mt-1">Cód: <span class="font-mono font-bold text-slate-700 bg-slate-200/80 px-1.5 py-0.5 rounded">${id}</span></p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Cód: <span class="font-mono font-bold text-slate-700 dark:text-slate-900 bg-slate-200/80 px-1.5 py-0.5 rounded">${id}</span></p>
                         </div>
                     `;
                     
@@ -900,8 +781,8 @@
                 <div class="p-4 bg-orange-50 rounded-full text-orange-400 mb-4 border border-orange-100">
                     <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                 </div>
-                <p class="text-slate-700 font-bold text-lg">Sin resultados</p>
-                <p class="text-slate-500 text-sm mt-2">${mensaje}</p>
+                <p class="text-slate-700 dark:text-slate-300 dark:text-slate-500 font-bold text-lg">Sin resultados</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-2">${mensaje}</p>
             `;
             estadoVacio.classList.remove('hidden');
             listaAlmacenes.classList.add('hidden');
@@ -946,6 +827,4 @@
         } else {
             cargarDatos();
         }
-    </script>
-</body>
-</html>
+    

@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Bloc de Notas - Llamadas</title>
+    <title data-i18n="menu_llamadas">Bloc de Notas - Llamadas</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/theme.css">
     
     <style>
         body {
             font-family: 'JetBrains Mono', monospace;
-            background-color: #f8fafc;
+            background-color: transparent;
         }
         
         .notepad-container {
-            background-color: #ffffff;
+            background-color: #ffffff !important;
             border: 1px solid #e5e7eb;
             border-radius: 0.5rem;
             position: relative;
@@ -33,30 +37,13 @@
         .notepad-textarea {
             width: 100%;
             height: 100%;
-            background-image: repeating-linear-gradient(transparent, transparent 31px, #f3f4f6 31px, #f3f4f6 32px);
-            line-height: 32px;
-            padding: 8px 16px 8px 48px;
+            line-height: 1.5;
+            padding: 16px;
             border: none;
             resize: none;
             outline: none;
             background-color: transparent;
-            color: #374151;
-        }
-
-        .notepad-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 36px;
-            width: 1px;
-            background-color: rgba(239, 68, 68, 0.25);
-            z-index: 0;
-        }
-
-        .notepad-textarea {
-            position: relative;
-            z-index: 1;
+            color: #000000 !important;
         }
 
         textarea::-webkit-scrollbar { width: 8px; }
@@ -64,23 +51,23 @@
         textarea::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-<body class="text-gray-800 p-4 md:p-6 lg:p-8 min-h-screen flex flex-col">
+<body class="text-slate-800 dark:text-slate-200 p-4 md:p-6 lg:p-8 min-h-screen flex flex-col bg-transparent">
 
     <div class="w-full max-w-4xl mx-auto flex flex-col gap-6">
         
         <!-- Bloc de Notas e Historial -->
         <div class="flex flex-col gap-6 w-full">
             <!-- Cabecera del Bloc de Notas -->
-            <div class="bg-white p-3 rounded-xl shadow-sm flex flex-wrap justify-between items-center gap-4 border border-gray-100">
-                <h1 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <i class="fa-solid fa-book-open text-blue-500"></i> Bloc de Notas
+            <div class="glass p-3 rounded-xl shadow-sm flex flex-wrap justify-between items-center gap-4">
+                <h1 class="text-lg font-bold flex items-center gap-2" data-i18n="llamadas_title">
+                    <i class="fa-solid fa-book-open text-indigo-500"></i> Bloc de Notas
                 </h1>
                 
                 <div class="flex items-center gap-2">
-                    <button id="btnNewNote" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2">
+                    <button id="btnNewNote" class="bg-blue-200 hover:bg-blue-300 text-blue-900 dark:bg-blue-300 dark:hover:bg-blue-400 dark:text-blue-900 font-bold text-sm font-medium py-1.5 px-3 rounded-lg shadow-sm transition-colors flex items-center gap-2" data-i18n="llamadas_new_note">
                         <i class="fa-solid fa-plus"></i> Nueva Nota
                     </button>
-                    <button id="btnDeleteNote" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-sm font-medium py-1.5 px-3 rounded-lg transition-colors flex items-center gap-2">
+                    <button id="btnDeleteNote" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 text-sm font-medium py-1.5 px-3 rounded-lg transition-colors flex items-center gap-2" data-i18n="llamadas_delete">
                         <i class="fa-regular fa-trash-can"></i> Borrar
                     </button>
                 </div>
@@ -88,20 +75,20 @@
 
             <!-- Área de Texto Principal -->
             <div class="notepad-container">
-                <textarea id="mainNotepad" class="notepad-textarea text-sm" spellcheck="false" placeholder="Escribe aquí..."></textarea>
+                <textarea id="mainNotepad" class="notepad-textarea text-sm" spellcheck="false" placeholder="Escribe aquí..." data-i18n="llamadas_placeholder"></textarea>
             </div>
 
             <!-- Tabla de Historial de Notas -->
-            <div class="w-full bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col mb-8">
-                <h2 class="text-sm font-bold text-gray-800 flex items-center gap-2 uppercase tracking-wide mb-3">
+            <div class="w-full glass p-4 rounded-xl shadow-sm flex flex-col mb-8">
+                <h2 class="text-sm font-bold flex items-center gap-2 uppercase tracking-wide mb-3" data-i18n="llamadas_history">
                     <i class="fa-solid fa-clock-rotate-left text-gray-400"></i> Historial de Notas
                 </h2>
                 <div class="overflow-x-auto rounded-lg border border-gray-200">
                     <table class="w-full text-left border-collapse min-w-[300px]">
                         <thead>
                             <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 text-xs uppercase tracking-wider">
-                                <th class="py-2 px-4 font-semibold w-24">Fecha</th>
-                                <th class="py-2 px-4 font-semibold">Título (Primera línea)</th>
+                                <th class="py-2 px-4 font-semibold w-24" data-i18n="llamadas_col_date">Fecha</th>
+                                <th class="py-2 px-4 font-semibold" data-i18n="llamadas_col_title">Título (Primera línea)</th>
                             </tr>
                         </thead>
                         <tbody id="notesTableBody" class="text-sm">
@@ -181,7 +168,7 @@
                 const displayTitle = firstLine.length > 70 ? firstLine.substring(0, 70) + '...' : firstLine;
                 
                 const tr = document.createElement('tr');
-                tr.className = `border-b border-gray-100 hover:bg-blue-50 cursor-pointer transition-colors ${idx === currentNoteIndex ? 'bg-blue-100' : 'bg-white'}`;
+                tr.className = `border-b border-gray-100 hover:bg-indigo-50 cursor-pointer transition-colors ${idx === currentNoteIndex ? 'bg-indigo-100' : 'glass dark:border-slate-700'}`;
                 
                 tr.onclick = () => {
                     currentNoteIndex = idx;
@@ -242,5 +229,7 @@
         // Run
         window.onload = initApp;
     </script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/core.js"></script>
 </body>
 </html>

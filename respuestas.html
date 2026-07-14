@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Respuestas Rápidas</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        html {
+            font-size: 110%;
+        }
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="text-gray-800 p-4 md:p-6 lg:p-8 min-h-screen flex flex-col items-center">
+
+    <div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col">
+            <div class="flex justify-between items-center mb-6 border-b border-gray-100 pb-3">
+                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-yellow-500"></i> Respuestas Rápidas
+                </h2>
+            </div>
+            
+            <!-- Plantilla 1: Escalar (Rojo) -->
+            <div class="mb-4 bg-red-200 p-4 rounded-lg border border-red-400">
+                <h3 class="text-lg font-bold text-red-900 mb-3">1. Escalar</h3>
+                <div class="flex gap-2">
+                    <button onclick="copyEscalar(false)" class="flex-1 bg-white border border-red-400 text-gray-700 hover:text-red-700 hover:bg-red-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Español">
+                        <i class="fa-regular fa-copy"></i> Español
+                    </button>
+                    <button onclick="copyEscalar(true)" class="flex-1 bg-white border border-red-400 text-gray-700 hover:text-red-700 hover:bg-red-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Portugués">
+                        <i class="fa-regular fa-copy"></i> Português
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plantilla 2: Solicitud de Información (Amarillo) -->
+            <div class="mb-4 bg-yellow-100 p-4 rounded-lg border border-yellow-300">
+                <h3 class="text-lg font-bold text-yellow-900 mb-3">2. Solicitud de Información</h3>
+                
+                <div class="flex flex-col gap-2 mb-4 text-sm text-gray-700" id="reqInfoCheckboxes">
+                    <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-yellow-50 rounded">
+                        <input type="checkbox" value="contexto" class="w-4 h-4 text-yellow-600 rounded border-gray-300 cursor-pointer"> 
+                        <span>Mas contexto / Mais contexto</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-yellow-50 rounded">
+                        <input type="checkbox" value="registro" class="w-4 h-4 text-yellow-600 rounded border-gray-300 cursor-pointer"> 
+                        <span>Nro de Registro / N.º de Registo</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-yellow-50 rounded">
+                        <input type="checkbox" value="transaccion" class="w-4 h-4 text-yellow-600 rounded border-gray-300 cursor-pointer"> 
+                        <span>Transaccion / Transação</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-yellow-50 rounded">
+                        <input type="checkbox" value="print" class="w-4 h-4 text-yellow-600 rounded border-gray-300 cursor-pointer"> 
+                        <span>Print de pantalla del error / Captura de ecrã do erro</span>
+                    </label>
+                    <label class="flex items-center gap-2 cursor-pointer p-1 hover:bg-yellow-50 rounded">
+                        <input type="checkbox" value="pasos" class="w-4 h-4 text-yellow-600 rounded border-gray-300 cursor-pointer"> 
+                        <span>Una breve descripcion de los pasos realizados / Uma breve descrição dos passos</span>
+                    </label>
+                </div>
+
+                <div class="mb-4">
+                    <textarea id="txtAdditionalInfo" rows="2" class="w-full text-sm p-2 border border-yellow-300 rounded focus:ring-yellow-500 focus:border-yellow-500 resize-none text-gray-700" placeholder="Texto adicional (opcional)..."></textarea>
+                </div>
+
+                <div class="flex gap-2">
+                    <button onclick="copyReqInfo(false)" class="flex-1 bg-white border border-yellow-300 text-gray-700 hover:text-yellow-700 hover:bg-yellow-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Español">
+                        <i class="fa-regular fa-copy"></i> Español
+                    </button>
+                    <button onclick="copyReqInfo(true)" class="flex-1 bg-white border border-yellow-300 text-gray-700 hover:text-yellow-700 hover:bg-yellow-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Portugués">
+                        <i class="fa-regular fa-copy"></i> Português
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plantilla 3: Envío de Documento (Verde oscuro) -->
+            <div class="mb-4 bg-emerald-300 p-4 rounded-lg border border-emerald-500">
+                <h3 class="text-lg font-bold text-emerald-900 mb-3">3. Envío de Documentos</h3>
+                <div class="flex gap-2">
+                    <button onclick="copyEnvioDoc(false)" class="flex-1 bg-white border border-emerald-500 text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Español">
+                        <i class="fa-regular fa-copy"></i> Español
+                    </button>
+                    <button onclick="copyEnvioDoc(true)" class="flex-1 bg-white border border-emerald-500 text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Portugués">
+                        <i class="fa-regular fa-copy"></i> Português
+                    </button>
+                </div>
+            </div>
+
+            <!-- Plantilla 4: Solución (Verde oscuro) -->
+            <div class="mb-4 bg-emerald-300 p-4 rounded-lg border border-emerald-500">
+                <h3 class="text-lg font-bold text-emerald-900 mb-3">4. Solución</h3>
+                <div class="flex gap-2">
+                    <button onclick="copySolucion(false)" class="flex-1 bg-white border border-emerald-500 text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Español">
+                        <i class="fa-regular fa-copy"></i> Español
+                    </button>
+                    <button onclick="copySolucion(true)" class="flex-1 bg-white border border-emerald-500 text-gray-700 hover:text-emerald-800 hover:bg-emerald-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Portugués">
+                        <i class="fa-regular fa-copy"></i> Português
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-8 mb-6 flex items-center">
+                <div class="flex-grow border-t border-gray-200"></div>
+                <span class="flex-shrink-0 mx-4 text-gray-500 text-sm font-medium"><i class="fa-solid fa-bookmark text-blue-500"></i> Respuestas Personalizadas</span>
+                <div class="flex-grow border-t border-gray-200"></div>
+            </div>
+
+            <!-- Plantillas Personalizadas -->
+            <div id="customRepliesContainer"></div>
+
+            <div class="mt-6 border-t border-gray-200 pt-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-md font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-blue-500"></i> Agregar Nueva Respuesta
+                    </h3>
+                    <div class="flex gap-2">
+                        <button onclick="downloadCustomReplies()" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 py-1.5 px-3 rounded border border-gray-300 flex items-center gap-1 transition-colors" title="Descargar respuestas">
+                            <i class="fa-solid fa-download"></i> Descargar
+                        </button>
+                        <label class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 py-1.5 px-3 rounded border border-gray-300 flex items-center gap-1 transition-colors cursor-pointer" title="Cargar desde JSON">
+                            <i class="fa-solid fa-upload"></i> Cargar
+                            <input type="file" id="uploadJson" accept=".json" class="hidden" onchange="uploadCustomReplies(event)">
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex flex-col gap-3">
+                    <input type="text" id="customTitle" placeholder="Título (ej: Confirmación de datos)" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 text-gray-700">
+                    <textarea id="customTextES" rows="2" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 resize-none text-gray-700" placeholder="Texto en Español (sin saludo inicial ni firma)"></textarea>
+                    <textarea id="customTextPT" rows="2" class="w-full text-sm p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 resize-none text-gray-700" placeholder="Texto en Portugués (sin saludo inicial ni firma)"></textarea>
+                    <button id="btnSaveCustom" onclick="saveCustomReply()" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-4 rounded-md shadow-sm transition-colors mt-1">
+                        <i class="fa-solid fa-save mr-1"></i> Guardar Respuesta
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-2.5 rounded-lg shadow-xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center gap-2 text-sm font-medium">
+        <i class="fa-solid fa-circle-check text-green-400"></i> <span id="toastMsg">¡Copiado!</span>
+    </div>
+
+    <script>
+        const reqInfoCheckboxes = document.querySelectorAll('#reqInfoCheckboxes input[type="checkbox"]');
+        const txtAdditionalInfo = document.getElementById('txtAdditionalInfo');
+
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        let toastTimeout;
+
+        function showToast(msg) {
+            toastMsg.innerText = msg;
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 2500);
+        }
+
+        function copyToClipboard(text) {
+            const tempTextArea = document.createElement("textarea");
+            tempTextArea.value = text;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                if (document.execCommand('copy')) {
+                    showToast("¡Texto copiado!");
+                }
+            } catch (err) {
+                console.error('Error copiando', err);
+            }
+            
+            document.body.removeChild(tempTextArea);
+        }
+
+        function getGreeting(isPT) {
+            const hour = new Date().getHours();
+            if (isPT) {
+                return hour < 12 ? "Bom dia," : "Boa tarde,";
+            } else {
+                return hour < 12 ? "Buenos dias," : "Buenas tardes,";
+            }
+        }
+
+        function copyEscalar(isPT) {
+            const greeting = getGreeting(isPT);
+            let text = "";
+            if (isPT) {
+                text = `${greeting}\n\nInformamos que o seu caso está a ser analisado. Responderemos com uma solução em breve.\n\nCom os melhores cumprimentos,`;
+            } else {
+                text = `${greeting}\n\nInformamos que su caso esta siendo análizado, en breve estaremos respondiendo resolutivamente.\n\nSaludos`;
+            }
+            copyToClipboard(text);
+        }
+
+        function copyEnvioDoc(isPT) {
+            const greeting = getGreeting(isPT);
+            let text = "";
+            if (isPT) {
+                text = `${greeting}\n\nEm anexo encontrará a informação solicitada.\n\nCom os melhores cumprimentos,`;
+            } else {
+                text = `${greeting}\n\nEn el anexo encontrara la informacion solicitada.\n\nSaludos`;
+            }
+            copyToClipboard(text);
+        }
+
+        function copySolucion(isPT) {
+            const greeting = getGreeting(isPT);
+            let text = "";
+            if (isPT) {
+                text = `${greeting}\n\nInformamos que finalizámos o seu pedido. Podem avançar.\n\nCom os melhores cumprimentos,`;
+            } else {
+                text = `${greeting}\n\nInformamos que su pedido se ha procesado correctamente, pueden avanzar.\n\nSaludos`;
+            }
+            copyToClipboard(text);
+        }
+
+        function copyReqInfo(isPT) {
+            const greeting = getGreeting(isPT);
+            
+            const reqMapES = {
+                'contexto': 'Mas contexto',
+                'registro': 'Nro de Registro',
+                'transaccion': 'Transaccion',
+                'print': 'Print de pantalla del error',
+                'pasos': 'Una breve descripcion de los pasos realizados'
+            };
+            
+            const reqMapPT = {
+                'contexto': 'Mais contexto',
+                'registro': 'N.º de Registo',
+                'transaccion': 'Transação',
+                'print': 'Captura de ecrã do erro',
+                'pasos': 'Uma breve descrição dos passos realizados'
+            };
+
+            const mapToUse = isPT ? reqMapPT : reqMapES;
+            const checkedValues = Array.from(reqInfoCheckboxes).filter(chk => chk.checked).map(chk => chk.value);
+            const additionalText = txtAdditionalInfo.value;
+
+            if (checkedValues.length === 0 && additionalText.trim() === "") {
+                alert(isPT ? "Por favor, selecione pelo menos uma opção ou agregue texto adicional." : "Por favor, selecciona al menos una opción o agrega texto adicional.");
+                return;
+            }
+
+            let bullets = "";
+            checkedValues.forEach(val => {
+                if (mapToUse[val]) {
+                    bullets += `- ${mapToUse[val]}\n`;
+                }
+            });
+
+            if (additionalText && additionalText.trim() !== "") {
+                bullets += `- ${additionalText.trim()}\n`;
+            }
+
+            let text = "";
+            if (isPT) {
+                text = `${greeting}\n\nPara darmos seguimento ao seu caso, necessitamos que nos forneça mais informações, incluindo:\n\n${bullets}\nAguardamos o vosso feedback para os podermos ajudar.\n\nCom os melhores cumprimentos,`;
+            } else {
+                text = `${greeting}\n\nPara dar continuidad a su caso necesitamos nos amplien la información incluyendo:\n\n${bullets}\nAguardamos feedback para ayudarles.\n\nSaludos`;
+            }
+            copyToClipboard(text);
+        }
+
+        
+        let customReplies = JSON.parse(localStorage.getItem('customReplies') || '[]');
+        let editingIndex = -1;
+
+        // "Azul celeste" background for custom replies
+        function renderCustomReplies() {
+            const container = document.getElementById('customRepliesContainer');
+            if(!container) return;
+            container.innerHTML = '';
+            
+            customReplies.forEach((reply, index) => {
+                const num = 5 + index;
+                const div = document.createElement('div');
+                div.className = "mb-4 bg-sky-100 p-4 rounded-lg border border-sky-300 relative group";
+                div.innerHTML = `
+                    <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                        <button onclick="editCustomReply(${index})" class="text-sky-500 hover:text-sky-700" title="Editar respuesta">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button onclick="deleteCustomReply(${index})" class="text-red-400 hover:text-red-600" title="Eliminar respuesta">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                    <h3 class="text-lg font-bold text-sky-900 mb-3">${num}. ${reply.title}</h3>
+                    <div class="flex gap-2">
+                        <button onclick="copyCustomReply(${index}, false)" class="flex-1 bg-white border border-sky-300 text-gray-700 hover:text-sky-700 hover:bg-sky-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Español">
+                            <i class="fa-regular fa-copy"></i> Español
+                        </button>
+                        <button onclick="copyCustomReply(${index}, true)" class="flex-1 bg-white border border-sky-300 text-gray-700 hover:text-sky-700 hover:bg-sky-50 text-sm font-medium py-2.5 px-4 rounded-md shadow-sm flex items-center justify-center gap-2 transition-colors" title="Copiar en Portugués">
+                            <i class="fa-regular fa-copy"></i> Português
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function editCustomReply(index) {
+            editingIndex = index;
+            const reply = customReplies[index];
+            document.getElementById('customTitle').value = reply.title;
+            document.getElementById('customTextES').value = reply.textES;
+            document.getElementById('customTextPT').value = reply.textPT;
+            
+            const btnSave = document.getElementById('btnSaveCustom');
+            if(btnSave) {
+                btnSave.innerHTML = '<i class="fa-solid fa-save mr-1"></i> Actualizar Respuesta';
+                btnSave.classList.replace('bg-blue-600', 'bg-indigo-600');
+                btnSave.classList.replace('hover:bg-blue-700', 'hover:bg-indigo-700');
+            }
+            
+            document.getElementById('customTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function saveCustomReply() {
+            const title = document.getElementById('customTitle').value.trim();
+            const textES = document.getElementById('customTextES').value.trim();
+            const textPT = document.getElementById('customTextPT').value.trim();
+            
+            if(!title || !textES || !textPT) {
+                alert("Por favor, completa el título y los textos en ambos idiomas.");
+                return;
+            }
+            
+            if (editingIndex >= 0) {
+                customReplies[editingIndex].title = title;
+                customReplies[editingIndex].textES = textES;
+                customReplies[editingIndex].textPT = textPT;
+                editingIndex = -1;
+                
+                const btnSave = document.getElementById('btnSaveCustom');
+                if (btnSave) {
+                    btnSave.innerHTML = '<i class="fa-solid fa-save mr-1"></i> Guardar Respuesta';
+                    btnSave.classList.replace('bg-indigo-600', 'bg-blue-600');
+                    btnSave.classList.replace('hover:bg-indigo-700', 'hover:bg-blue-700');
+                }
+                showToast("¡Respuesta actualizada!");
+            } else {
+                customReplies.push({ id: Date.now(), title, textES, textPT });
+                showToast("¡Respuesta guardada!");
+            }
+            
+            localStorage.setItem('customReplies', JSON.stringify(customReplies));
+            
+            document.getElementById('customTitle').value = '';
+            document.getElementById('customTextES').value = '';
+            document.getElementById('customTextPT').value = '';
+            
+            renderCustomReplies();
+        }
+
+        function deleteCustomReply(index) {
+            if(confirm("¿Seguro que deseas eliminar esta respuesta?")) {
+                customReplies.splice(index, 1);
+                localStorage.setItem('customReplies', JSON.stringify(customReplies));
+                renderCustomReplies();
+            }
+        }
+
+        function copyCustomReply(index, isPT) {
+            const reply = customReplies[index];
+            const greeting = getGreeting(isPT);
+            const text = isPT ? reply.textPT : reply.textES;
+            const signoff = isPT ? "Com os melhores cumprimentos," : "Saludos";
+            
+            const fullText = `${greeting}\n\n${text}\n\n${signoff}`;
+            copyToClipboard(fullText);
+        }
+
+        function downloadCustomReplies() {
+            if (customReplies.length === 0) {
+                alert("No hay respuestas personalizadas para descargar.");
+                return;
+            }
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(customReplies, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "respuestas_personalizadas.json");
+            document.body.appendChild(downloadAnchorNode); 
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function uploadCustomReplies(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    if (Array.isArray(parsed)) {
+                        customReplies = [...customReplies, ...parsed];
+                        localStorage.setItem('customReplies', JSON.stringify(customReplies));
+                        renderCustomReplies();
+                        showToast("¡Respuestas cargadas!");
+                    } else {
+                        alert("El archivo no tiene un formato válido.");
+                    }
+                } catch (err) {
+                    alert("Error al leer el archivo JSON.");
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        txtAdditionalInfo.value = localStorage.getItem('reqInfoAdditionalText') || '';
+        txtAdditionalInfo.addEventListener('input', () => {
+            localStorage.setItem('reqInfoAdditionalText', txtAdditionalInfo.value);
+        });
+
+        renderCustomReplies();
+    </script>
+</body>
+</html>

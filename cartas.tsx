@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { flushSync } from 'react-dom';
 import { FileDown, User, Monitor, Shield, Mail, FileText, Plus, Trash2, Globe } from 'lucide-react';
 
 const getVal = (record: any, type: 'windows' | 'crm') => {
@@ -33,6 +34,7 @@ export default function App() {
     fechaLugar: '', // ej. "Paterna (Valencia), a 26 de Junio de 2026"
     lugar: '',
     fecha: '',
+    peticion: '',
   });
 
   const [equipos, setEquipos] = useState([
@@ -74,10 +76,13 @@ export default function App() {
               delegacion: record['Delegacion'] || '',
               lugar: record['Delegacion'] || 'Paterna (Valencia)',
               iniciales: record['Iniciales'] || '',
+              peticion: record['Iniciales'] || record['FecPEDIDO'] || record['DatPEDIDO'] || '',
               usuario: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-              usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-              passWindows: getVal(record, 'windows'),
-              passCrm: getVal(record, 'crm')
+              usuarioCrm: record['Iniciales'] || record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
+              passWindows: getVal(record, 'windows') || ' ',
+              passCrm: getVal(record, 'crm') || ' ',
+              fecha: record['FecALTA'] || record['Fecha'] || prev.fecha,
+              tipoPlantilla: (record._selectedRole && ["role4", "role5", "role6", "role7", "role8", "role9", "role10"].includes(record._selectedRole)) ? 'con_correo' : 'sin_correo'
             }));
           }
         } catch (e) {}
@@ -131,7 +136,24 @@ export default function App() {
     setEquipos(newEquipos);
   };
 
-  const generatePDF = () => {
+  const [showLangModal, setShowLangModal] = useState(false);
+
+  const handleGenerateClick = () => {
+    setShowLangModal(true);
+  };
+
+  const confirmGeneratePDF = (lang: string) => {
+    flushSync(() => {
+      setFormData(prev => ({ ...prev, idioma: lang }));
+      setShowLangModal(false);
+    });
+    // Pequeño retardo adicional por si html2canvas necesita que el DOM se asiente
+    setTimeout(() => {
+      executePDFGeneration();
+    }, 50);
+  };
+
+  const executePDFGeneration = () => {
     if (!isPdfReady || !(window as any).html2pdf) {
       alert('El motor de PDF aún se está cargando. Inténtalo de nuevo en unos segundos.');
       return;
@@ -165,21 +187,68 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row font-sans relative">
+      {/* MODAL DE IDIOMA */}
+      {showLangModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full mx-4">
+            <h3 className="text-lg font-bold text-gray-800 mb-2">Confirmar Idioma</h3>
+            <p className="text-sm text-gray-600 mb-6">¿En qué idioma deseas generar el documento PDF?</p>
+            <div className="flex gap-3">
+              <button onClick={() => confirmGeneratePDF('es')} className="flex-1 py-2.5 bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold rounded-lg transition-colors border border-blue-200 text-sm">
+                Español
+              </button>
+              <button onClick={() => confirmGeneratePDF('pt')} className="flex-1 py-2.5 bg-green-100 hover:bg-green-200 text-green-800 font-semibold rounded-lg transition-colors border border-green-200 text-sm">
+                Português
+              </button>
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button onClick={() => setShowLangModal(false)} className="text-gray-500 hover:text-gray-700 text-sm font-semibold p-2">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* PANEL IZQUIERDO - FORMULARIO */}
-      <div className="w-full md:w-1/3 bg-white border-r border-gray-200 p-6 overflow-y-auto h-screen shadow-lg z-10">
+      <div className="w-full md:w-1/3 bg-white md:border-r border-gray-200 p-6 md:overflow-y-auto md:h-screen shadow-lg z-10">
         <div className="flex items-center gap-2 mb-6 text-blue-600">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Water_drop_icon.svg/512px-Water_drop_icon.svg.png" alt="Logo" className="w-6 h-6 opacity-80 filter invert-20" />
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>
           <h1 className="text-xl font-bold">Generador Aquaservice</h1>
         </div>
 
         <button
-          onClick={generatePDF}
-          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md font-semibold flex items-center justify-center gap-2 transition-colors mb-6"
+          onClick={handleGenerateClick}
+          className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-md font-semibold flex items-center justify-center gap-2 transition-colors mb-3"
         >
           <FileDown size={20} /> Generar PDF Oficial
         </button>
+
+        <div className="flex gap-2 mb-6">
+          <button
+            onClick={() => {
+              const hour = new Date().getHours();
+              const greeting = hour >= 12 ? 'Buenas tardes' : 'Buen dia';
+              const text = `${greeting},\n\nSigue en anexo carta de iniciales\n\nUn saludo`;
+              navigator.clipboard.writeText(text).then(() => alert('Texto copiado al portapapeles'));
+            }}
+            className="flex-1 py-2 bg-slate-600 hover:bg-slate-700 text-white rounded-lg shadow-md font-semibold text-sm transition-colors"
+          >
+            Respuesta - Esp
+          </button>
+          <button
+            onClick={() => {
+              const hour = new Date().getHours();
+              const greeting = hour >= 12 ? 'Boa tarde' : 'Bom dia';
+              const text = `${greeting},\n\nNo anexo a carta de iniciais.\n\nCom os melhores cumprimentos,`;
+              navigator.clipboard.writeText(text).then(() => alert('Texto copiado al portapapeles'));
+            }}
+            className="flex-1 py-2 bg-slate-600 hover:bg-slate-700 text-white rounded-lg shadow-md font-semibold text-sm transition-colors"
+          >
+            Respuesta - Pt
+          </button>
+        </div>
 
         <div className="space-y-6">
           {/* Precargar de Altas */}
@@ -215,10 +284,13 @@ export default function App() {
                       delegacion: record['Delegacion'] || '',
                       lugar: record['Delegacion'] || 'Paterna (Valencia)',
                       iniciales: record['Iniciales'] || '',
+                      peticion: record['Iniciales'] || record['FecPEDIDO'] || record['DatPEDIDO'] || '',
                       usuario: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-                      usuarioCrm: record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
-                      passWindows: getVal(record, 'windows'),
-                      passCrm: getVal(record, 'crm')
+                      usuarioCrm: record['Iniciales'] || record['Usuario'] || (record['Email'] ? record['Email'].split('@')[0] : ''),
+                      passWindows: getVal(record, 'windows') || ' ',
+                      passCrm: getVal(record, 'crm') || ' ',
+                      fecha: record['FecALTA'] || record['Fecha'] || prev.fecha,
+                      tipoPlantilla: (record._selectedRole && ["role4", "role5", "role6", "role7", "role8", "role9", "role10"].includes(record._selectedRole)) ? 'con_correo' : 'sin_correo'
                     }));
                   }
                 }}
@@ -274,7 +346,7 @@ export default function App() {
                 <label className="block text-xs text-gray-500 mb-1">Nombre Completo</label>
                 <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" placeholder="Ej. Juan Pérez" />
               </div>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
                 <div>
                   <label className="block text-xs text-gray-500 mb-1">Departamento</label>
                   <input type="text" name="departamento" value={formData.departamento} onChange={handleChange} className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" />
@@ -286,6 +358,10 @@ export default function App() {
                 <div>
                   <label className="block text-xs text-gray-500 mb-1">Iniciales</label>
                   <input type="text" name="iniciales" value={formData.iniciales} onChange={handleChange} className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" />
+                </div>
+                <div>
+                  <label className="block text-xs text-gray-500 mb-1">REF/Pedido</label>
+                  <input type="text" name="peticion" value={formData.peticion} onChange={handleChange} className="w-full text-sm border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border" />
                 </div>
               </div>
             </div>
@@ -377,7 +453,7 @@ export default function App() {
       </div>
 
       {/* PANEL DERECHO - VISTA PREVIA DEL DOCUMENTO */}
-      <div className="w-full md:w-2/3 bg-gray-200 overflow-y-auto p-4 flex flex-col items-center">
+      <div className="w-full md:w-2/3 bg-gray-200 md:overflow-y-auto p-4 flex flex-col items-center">
         <div className="mb-4 text-gray-500 flex items-center gap-2 text-sm">
           <FileText size={16} /> Vista Previa del Documento (A4)
         </div>
@@ -407,7 +483,7 @@ export default function App() {
               background: white;
               box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
               box-sizing: border-box;
-              font-size: 11pt;
+              font-size: 10pt;
               line-height: 1.25;
               position: relative;
               overflow: hidden;
@@ -425,7 +501,7 @@ export default function App() {
               margin: 15px 0;
             }
             .pdf-table th, .pdf-table td {
-              border: 1px solid #000;
+              border: 0.6px solid #00509a;
               padding: 6px 10px;
               text-align: left;
             }
@@ -439,7 +515,7 @@ export default function App() {
             .mb-4 { margin-bottom: 1rem; }
             .mt-6 { margin-top: 1.5rem; }
             .mt-12 { margin-top: 3rem; }
-            .small-text { font-size: 8.5pt; line-height: 1.15; }
+            .small-text { font-size: 10pt; line-height: 1.15; }
             .list-disc { padding-left: 20px; margin-bottom: 10px; }
             .list-disc li { margin-bottom: 4px; }
           `}</style>
@@ -459,7 +535,7 @@ export default function App() {
 
             <p className="mb-4 text-justify">
               {formData.idioma === 'pt'
-                ? 'Do departamento de Tecnologias de Informação da Aquaservice, queremos dar-te as boas-vindas.'
+                ? 'Desde o departamento de Tecnologias de Informação da Aquaservice, queremos dar-te as boas-vindas.'
                 : 'Desde el departamento de Tecnologías de la Información de Aquaservice, queremos darte nuestra bienvenida.'}
             </p>
 
@@ -473,7 +549,7 @@ export default function App() {
 
             <p className="mb-4 text-justify">
               {formData.idioma === 'pt'
-                ? <>Para alterar a palavra-passe, depois de te explicarem na formação como te ligares à VPN e estiveres ligado, podes premir as teclas <strong>Control + Alt + Delete</strong> e escolher a opção de <strong>alterar palavra-passe</strong>, escolhe uma que possas lembrar facilmente, não a apontes em nenhum lado e o mais importante, certifica-te de que ninguém mais a sabe além de ti. Depois disso, volta a premir <strong>Control + Alt + Delete</strong> e clica em Bloquear, assim já estará completamente alterada.</>
+                ? <>Para alterar a palavra-passe, se estiveres ligado à VPN, podes premir as teclas <strong>Control + Alt + Delete</strong> e escolher a opção de <strong>alterar palavra-passe</strong>, escolhe uma que possas lembrar facilmente, não a apontes em nenhum lado e o mais importante, certifica-te de que ninguém mais a sabe além de ti. Depois disso, volta a premir <strong>Control + Alt + Delete</strong> e clica em Bloquear, assim já estará completamente alterada.</>
                 : <>Para cambiar la contraseña, una te hayan explicado en la formación como conectarte a la vpn y estés conectado, puedes pulsar las teclas <strong>Control + Alt+ Supr</strong> y elegir la opción de <strong>cambiar contraseña</strong>, elige una que puedas recordar fácilmente, no la apuntes en ningún sitio y lo más importante, asegúrate que no la sepa nadie más que tú. Después de eso vuelve a pulsar <strong>Control + Alt+ Supr</strong> y dale a Bloquear, asi ya estará cambiada completamente.</>}
             </p>
 
@@ -515,13 +591,13 @@ export default function App() {
 
             <p className="mb-4 text-justify">
               {formData.idioma === 'pt'
-                ? <>Se tiveres qualquer problema informático ou precisares de ajuda, podes contactar-nos através de <strong>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão nova incidência ou usando o botão flutuante no ambiente de trabalho. É importante que faças isto, pois sem um número de incidência não te poderemos atender.</>
-                : <>Si tienes cualquier problema informático o necesitas ayuda, puedes ponerte en contacto con nosotros a través <strong>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia o usando el botón del flotador del escritorio. Es importante que hagas esto ya que sin un número de incidencia no podemos atenderte.</>}
+                ? <>Se tiveres qualquer problema informático ou precisares de ajuda, podes contactar-nos através de <strong style={{ color: '#00509a' }}>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão nova incidência ou usando o botão flutuante no ambiente de trabalho. É importante que faças isto, pois sem um número de incidência não te poderemos ajudar.</>
+                : <>Si tienes cualquier problema informático o necesitas ayuda, puedes ponerte en contacto con nosotros a través <strong style={{ color: '#00509a' }}>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia o usando el botón del flotador del escritorio. Es importante que hagas esto ya que sin un número de incidencia no podemos atenderte.</>}
             </p>
 
             <p className="mb-4 text-justify">
               {formData.idioma === 'pt'
-                ? <>Também nos podes ligar para o telefone <strong>961415503</strong> se precisares de qualquer esclarecimento, teremos todo o gosto em atender-te.</>
+                ? <>Também nos podes ligar para o telefone <strong>961415503</strong> se precisares de qualquer esclarecimento, teremos todo o gosto em ajudar-te.</>
                 : <>También nos puedes llamar al teléfono <strong>961415503</strong> si necesitas cualquier aclaración, estaremos encantados de atenderte.</>}
             </p>
 
@@ -533,20 +609,20 @@ export default function App() {
               <p className="font-bold">Tomás Mateos Herrero</p>
               <p>{formData.idioma === 'pt' ? 'Diretor do departamento de T.I.' : 'Director del departamento de T.I.'}</p>
             </div>
-            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '210px' }} alt="Logo Aquaservice" />
           </div>
 
           {/* ================= PÁGINA 2: LOPD ================= */}
           <div className="pdf-page page-break text-justify small-text" id="page-2">
-            <h2 className="font-bold text-center mb-4" style={{ fontSize: '11pt' }}>
+            <h2 className="font-bold text-center mb-4" style={{ fontSize: '10pt' }}>
               {formData.idioma === 'pt'
-                ? 'Declaração de registo de utilizador do sistema de informação da Viva Aqua Service Spain S.A.'
+                ? 'Declaração de registo de utilizador do sistema de informação da Aquaservice Portugal Springs Lda.'
                 : 'Declaración de alta de usuario de atención de Viva Aqua Service Spain S.A.'}
             </h2>
 
             <p className="mb-4">
               {formData.idioma === 'pt'
-                ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong>, membro do departamento <strong>{formData.departamento || '_____________________'}</strong>, maior de idade, declara ter recebido formação e ter sido informado(a) das obrigações que assume como utilizador do sistema de informação da Viva Aqua Service Spain S.A. com acesso a dados pessoais, especialmente as seguintes:</>
+                ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong>, membro do departamento <strong>{formData.departamento || '_____________________'}</strong>, maior de idade, declara ter recebido formação e ter sido informado(a) das obrigações que assume como utilizador do sistema de informação da Aquaservice Portugal Springs Lda. com acesso a dados pessoais, especialmente as seguintes:</>
                 : <>D./Dña. <strong>{formData.nombre || '_____________________________________'}</strong>, miembro del departamento <strong>{formData.departamento || '_____________________'}</strong>, mayor de edad, declara haber sido formado e informado de las obligaciones que asume como usuario del sistema de información de Viva Aqua Service Spain S.A. con acceso a datos personales, especialmente de las siguientes:</>}
             </p>
 
@@ -558,9 +634,9 @@ export default function App() {
                   <li>Guardar o necessário sigilo em relação a qualquer tipo de informação de caráter pessoal conhecida em função do trabalho desenvolvido, mesmo após o término da relação laboral com a organização.</li>
                   <li>Guardar todos os suportes físicos e/ou documentos que contenham informação com dados de caráter pessoal num local seguro, quando não estiverem a ser utilizados, particularmente fora do horário de trabalho.</li>
                   <li>É proibida a deslocação de qualquer suporte, listagem ou documento com dados de caráter pessoal onde se armazene informação propriedade da organização para fora das instalações da mesma, sem autorização prévia do Encarregado da Proteção de Dados (sat@aquaservice.com). Caso haja necessidade de deslocação ou distribuição de suportes e documentos, tal realizar-se-á cifrando esses dados, ou através de outro mecanismo que impeça o acesso ou manipulação da informação por terceiros.</li>
-                  <li>Ficheiros de caráter temporário ou cópias de documentos são aqueles onde se armazenam dados de caráter pessoal, gerados para o cumprimento de uma necessidade determinada ou trabalhos temporários e auxiliares, desde que a sua existência não ultrapasse um mês. Estes ficheiros de caráter temporário ou cópias de documentos devem ser apagados logo que deixem de ser necessários para os fins que motivaram a sua criação e, enquanto estiverem em vigor, deverão cumprir os níveis de segurança atribuídos pelo Responsável de Segurança. Se, decorrido um mês, o utilizador necessitar de continuar a utilizar a informação armazenada no ficheiro, deverá comunicá-lo ao Responsável de Segurança, para adoção das medidas adequadas.</li>
+                  <li>Ficheiros de caráter temporário ou cópias de documentos são aqueles onde se armazenam dados de caráter pessoal, gerados para o cumprimento de uma necessidade determinada ou trabalhos temporários e auxiliares, desde que a sua existência não ultrapasse um mês. Estes ficheiros de caráter temporário ou cópias de documentos devem ser apagados logo que deixem de ser necessários para os fins que motivaram a sua criação e, enquanto estiverem em vigor, deverão cumprir os níveis de segurança atribuídos pela informática. Se, decorrido um mês, o utilizador necessitar de continuar a utilizar a informação armazenada no ficheiro, deverá comunicá-lo à informática, para adoção das medidas adequadas.</li>
                   <li>As permissões de acesso dos utilizadores são concedidas pelo departamento de IT. Caso algum utilizador necessite, para o desenvolvimento do seu trabalho, de aceder a ficheiros ou documentos aos quais não está autorizado, deverá informar o seu responsável e formalizar o pedido ao departamento de IT.</li>
-                  <li>Comunicar ao Responsável de Segurança (ciberseguridad@aquaservice.com), de acordo com o procedimento de notificação, os incidentes de segurança dos quais tenha conhecimento.</li>
+                  <li>Comunicar à informática (ciberseguridad@aquaservice.com), de acordo com o procedimento de notificação, os incidentes de segurança dos quais tenha conhecimento.</li>
                 </>
               ) : (
                 <>
@@ -580,10 +656,10 @@ export default function App() {
                 <>
                   <li>Alterar as palavras-passe a pedido do sistema.</li>
                   <li>Encerrar ou bloquear todas as sessões no final do horário de trabalho ou no caso de ausência temporária do posto de trabalho, a fim de evitar acessos não autorizados.</li>
-                  <li>Não copiar a informação contida nos ficheiros onde se armazenam dados de caráter pessoal para o computador pessoal, unidades USB, qualquer outro formato de unidade externa, outros dispositivos portáteis ou qualquer outro suporte sem autorização expressa do respetivo Responsável de Segurança.</li>
+                  <li>Não copiar a informação contida nos ficheiros onde se armazenam dados de caráter pessoal para o computador pessoal, unidades USB, qualquer outro formato de unidade externa, outros dispositivos portáteis ou qualquer outro suporte sem autorização expressa da respetiva informática.</li>
                   <li>Guardar todos os ficheiros com dados de caráter pessoal nos espaços corporativos designados dos sistemas da Aquaservice, para facilitar a aplicação das medidas de segurança que lhes correspondam.</li>
                   <li>Os utilizadores estão proibidos de enviar informação de caráter pessoal de nível alto, salvo autorização expressa do Encarregado da Proteção de Dados. Em todo o caso, este envio apenas poderá ser efetuado se forem adotados os mecanismos necessários para evitar que a informação se torne ininteligível ou manipulada por terceiros.</li>
-                  <li>Os utilizadores não poderão, salvo autorização expressa do Responsável de Segurança, instalar qualquer tipo de programas informáticos ou dispositivos nem nos servidores centrais nem no computador utilizado no posto de trabalho.</li>
+                  <li>Os utilizadores não poderão, salvo autorização expressa da informática, instalar qualquer tipo de programas informáticos ou dispositivos nem nos servidores centrais nem no computador utilizado no posto de trabalho.</li>
                 </>
               ) : (
                 <>
@@ -602,14 +678,30 @@ export default function App() {
               {formData.idioma === 'pt' ? (
                 <>
                   <li>Utilizar identificadores e palavras-passe de outros utilizadores para aceder ao sistema.</li>
-                  <li>Tentar modificar ou aceder ao registo de acessos habilitado pelo Responsável de Segurança competente.</li>
-                  <li>Contornar as medidas de segurança estabelecidas no sistema informático, tentando aceder a ficheiros ou programas cujo acesso não lhe tenha sido permitido.</li>
-                  <li>Enviar correos massivos (spam) utilizando o endereço de correio eletrónico corporativo.</li>
+                  <li>Tentar modificar ou aceder ao registo de acessos habilitado pela informática competente.</li>
                 </>
               ) : (
                 <>
                   <li>Emplear identificadores y contraseñas de otros usuarios para acceder al sistema.</li>
                   <li>Intentar modificar o acceder al registro de accesos habilitado por el Responsable de Seguridad competente.</li>
+                </>
+              )}
+            </ul>
+
+
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '210px' }} alt="Logo Aquaservice" />
+          </div>
+
+          {/* ================= PÁGINA 3: LOPD CONT. / ENTREGA DE EQUIPOS ================= */}
+          <div className="pdf-page page-break text-justify small-text" id="page-3">
+            <ul className="list-disc">
+              {formData.idioma === 'pt' ? (
+                <>
+                  <li>Contornar as medidas de segurança estabelecidas no sistema informático, tentando aceder a ficheiros ou programas cujo acesso não lhe tenha sido permitido.</li>
+                  <li>Enviar correos massivos (spam) utilizando o endereço de correio eletrónico corporativo.</li>
+                </>
+              ) : (
+                <>
                   <li>Burlar las medidas de seguridad establecidas en el sistema informático, intentando acceder a ficheros o programas cuyo acceso no le haya sido permitido.</li>
                   <li>Enviar correos masivos (spam) empleando la dirección de correo electrónico corporativa.</li>
                 </>
@@ -620,37 +712,22 @@ export default function App() {
                 ? 'E em geral, a utilização da rede corporativa, sistemas informáticos e qualquer meio colocado à disposição do utilizador que viole o direito de terceiros, os da própria organização, ou para a realização de atos que possam ser considerados ilícitos. Estas obrigações apenas serão exigíveis aos utilizadores de ficheiros automatizados, desde que a organização disponibilize os meios adequados em cada caso.'
                 : 'Y en general, el empleo de la red corporativa, sistemas informáticos y cualquier medio puesto al alcance del usuario vulnerando el derecho de terceros, los propios de la organización, o bien para la realización de actos que pudieran ser considerados ilícitos. Estas obligaciones sólo serán exigibles a los usuarios de ficheros automatizados, en tanto en cuanto la organización disponga los medios adecuados en cada caso.'}
             </p>
-
             <p className="font-bold mb-2">{formData.idioma === 'pt' ? 'Relativamente aos ficheiros não automatizados' : 'Con respecto a ficheros no automatizados'}</p>
-            <ul className="list-disc">
+            <ul className="list-disc mb-4">
               {formData.idioma === 'pt' ? (
                 <>
                   <li>Guardar o necessário sigilo em relação a qualquer tipo de informação de caráter pessoal conhecida no decorrer do trabalho desenvolvido, mesmo após a conclusão da relação laboral com a entidade.</li>
-                  <li>Comunicar ao Responsável de Segurança, conforme o procedimento de notificação, os incidentes de segurança dos quais tenha conhecimento.</li>
+                  <li>Comunicar à informática, conforme o procedimento de notificação, os incidentes de segurança dos quais tenha conhecimento.</li>
+                  <li>É proibido retirar qualquer listagem ou documento análogo com dados de caráter pessoal onde se armazene informação propriedade da entidade para fora das instalações da mesma.</li>
+                  <li>Guardar todos os suportes físicos ou documentos que contenham informação com dados de caráter pessoal num local seguro, quando não estiverem a ser utilizados, particularmente fora do horário de trabalho.</li>
+                  <li>Assegurar-se de que não ficam documentos impressos contendo dados protegidos na bandeja de saída da impressora.</li>
+                  <li>Apenas as pessoas autorizadas poderão introduzir, modificar ou anular os dados contidos nos ficheiros objeto de proteção. As permissões de acesso dos utilizadores aos diferentes ficheiros são concedidas pela informática. Caso algum utilizador necessite, para o desenvolvimento do seu trabalho, de aceder a ficheiros cujo acesso não lhe está autorizado, deverá dar conhecimento à informática.</li>
+                  <li>Ficheiros de caráter temporário são aqueles nos quais se armazenam dados de caráter pessoal, gerados para o cumprimento de uma necessidade determinada, desde que a sua existência não ultrapasse um mês. Os ficheiros de caráter temporário devem ser destruídos assim que deixem de ser necessários para os fins que motivaram a sua criação e, enquanto estiverem em vigor, deverão ser contempladas as medidas de segurança contidas neste documento.</li>
                 </>
               ) : (
                 <>
                   <li>Guardar el necesario secreto respecto a cualquier tipo de información de carácter personal conocida en función del trabajo desarrollado, incluso una vez concluida la relación laboral con la entidad.</li>
                   <li>Comunicar al Responsable de Seguridad, conforme al procedimiento de notificación, las incidencias de seguridad de las que tenga conocimiento.</li>
-                </>
-              )}
-            </ul>
-            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
-          </div>
-
-          {/* ================= PÁGINA 3: LOPD CONT. / ENTREGA DE EQUIPOS ================= */}
-          <div className="pdf-page page-break text-justify small-text" id="page-3">
-            <ul className="list-disc mb-4">
-              {formData.idioma === 'pt' ? (
-                <>
-                  <li>É proibida a deslocação de qualquer listagem ou documento análogo com dados de caráter pessoal onde se armazene informação propriedade da entidade para fora das instalações da mesma.</li>
-                  <li>Guardar todos os suportes físicos ou documentos que contenham informação com dados de caráter pessoal num local seguro, quando não estiverem a ser utilizados, particularmente fora do horário de trabalho.</li>
-                  <li>Assegurar-se de que não ficam documentos impressos contendo dados protegidos na bandeja de saída da impressora.</li>
-                  <li>Apenas as pessoas autorizadas poderão introduzir, modificar ou anular os dados contidos nos ficheiros objeto de proteção. As permissões de acesso dos utilizadores aos diferentes ficheiros são concedidas pelo Responsável de Segurança. Caso algum utilizador necessite, para o desenvolvimento do seu trabalho, de aceder a ficheiros cujo acesso não lhe está autorizado, deverá dar conhecimento ao Responsável de Segurança.</li>
-                  <li>Ficheiros de caráter temporário são aqueles nos quais se armazenam dados de caráter pessoal, gerados para o cumprimento de uma necessidade determinada, desde que a sua existência não ultrapasse um mês. Os ficheiros de caráter temporário devem ser destruídos assim que deixem de ser necessários para os fins que motivaram a sua criação e, enquanto estiverem em vigor, deverão ser contempladas as medidas de segurança contidas neste documento.</li>
-                </>
-              ) : (
-                <>
                   <li>Queda prohibido el traslado de cualquier listado o documento análogo con datos de carácter personal en los que se almacene información titularidad de la entidad fuera de los locales de la misma.</li>
                   <li>Guardar todos los soportes físicos o documentos que contengan información con datos de carácter personal en un lugar seguro, cuando estos no sean usados, particularmente fuera de la jornada laboral.</li>
                   <li>Asegurarse de que no quedan documentos impresos que contengan datos protegidos impresos en la bandeja de salida de la impresora.</li>
@@ -665,7 +742,7 @@ export default function App() {
               {formData.idioma === 'pt' ? (
                 <>
                   <li>O correio eletrónico é considerado pela entidade como um elemento fundamental para as comunicações dentro da organização... É proibida a sua utilização para fins não relacionados com as funções laborais incumbidas.</li>
-                  <li>Os utilizadores não poderão, salvo autorização expressa do Responsável de Segurança, instalar qualquer tipo de programas informáticos.</li>
+                  <li>Os utilizadores não poderão, salvo autorização expressa da informática, instalar qualquer tipo de programas informáticos.</li>
                   <li>Conhecer a existência dos direitos dos titulares dos dados (direito de acesso, retificação, eliminação e, se for o caso, oposição).</li>
                 </>
               ) : (
@@ -683,7 +760,7 @@ export default function App() {
                 : 'El incumplimiento por parte de los usuarios de cualquiera de las obligaciones aquí establecidas será considerado como una falta grave, imponiéndose las sanciones para este tipo de faltas las previstas en la normativa laboral de aplicación a la organización.'}
             </p>
 
-            <div className="mt-6 mb-8" style={{ fontSize: '11pt' }}>
+            <div className="mt-6 mb-8" style={{ fontSize: '10pt' }}>
               <p>
                 {formData.idioma === 'pt'
                   ? <>Tudo o que acima declaro sob minha responsabilidade, em <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>
@@ -692,22 +769,22 @@ export default function App() {
               <br /><br /><br />
               <p>{formData.idioma === 'pt' ? 'Assinado:' : 'Firmado:'}</p>
             </div>
-            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
+            <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '210px' }} alt="Logo Aquaservice" />
           </div>
 
           {/* ================= PÁGINA 4: ENTREGA DE EQUIPOS ================= */}
           {equipos.length > 0 && (
             <div className="pdf-page page-break text-justify small-text" id="page-4">
-              <h2 className="font-bold mb-4" style={{ fontSize: '11pt' }}>Entrega de recursos informáticos {formData.iniciales ? `REF.-${formData.iniciales}` : ''}</h2>
-              <p className="mb-4" style={{ fontSize: '11pt' }}>
+              <h2 className="font-bold mb-4" style={{ fontSize: '10pt' }}>{formData.peticion ? `REF. - ${formData.peticion} - ` : ''}Entrega de recursos informáticos</h2>
+              <p className="mb-4" style={{ fontSize: '10pt' }}>
                 {formData.idioma === 'pt'
                   ? <>Em <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>
                   : <>En <strong>{formData.lugar || 'Paterna (Valencia)'}</strong>, a <strong>{formData.fecha || '________________________'}</strong>.</>}
               </p>
 
-              <p className="mb-4" style={{ fontSize: '11pt' }}>
+              <p className="mb-4" style={{ fontSize: '10pt' }}>
                 {formData.idioma === 'pt'
-                  ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong> Colaborador(a) da Aquaservice, localizado(a) no escritório recebe o material propriedade da empresa, conforme pedido efetuado pelo departamento de Pessoas e Cultura ao departamento de IT para o desempenho das funções inerentes ao seu posto de trabalho.</>
+                  ? <>O(A) Sr(a). <strong>{formData.nombre || '_____________________________________'}</strong> Colaborador(a) da Aquaservice, recebe o material propriedade da empresa, conforme pedido efetuado pelo departamento de Pessoas e Cultura ao departamento de IT para o desempenho das funções inerentes ao seu posto de trabalho.</>
                   : <>D./Dña. <strong>{formData.nombre || '_____________________________________'}</strong> Empleado/a de Aquaservice, ubicado/a en la oficina recibe el material propiedad de la empresa, según petición realizada por el departamento de Personas y Cultura al departamento de IT para la realización de las funciones derivadas de su puesto trabajo.</>}
               </p>
 
@@ -723,7 +800,7 @@ export default function App() {
                 <tbody>
                   {equipos.map((eq, i) => (
                     <tr key={i}>
-                      <td>{eq.tipo}</td>
+                      <td>{formData.idioma === 'pt' && eq.tipo === 'Teléfono Móvil' ? 'Telemóvel' : eq.tipo}</td>
                       <td>{eq.marca}</td>
                       <td>{eq.modelo}</td>
                       <td>{eq.serial}</td>
@@ -745,8 +822,8 @@ export default function App() {
               </p>
               <p className="mb-2" style={{ fontSize: '10pt' }}>
                 {formData.idioma === 'pt'
-                  ? <>Perante qualquer situação de perda ou roubo do mesmo, deve-se notificar o departamento de T.I. através de <strong>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão de nova incidência.</>
-                  : <>Ante cualquier incidencia de pérdida o robo del mismo se debe notificar al departamento de T.I. a través de <strong>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia.</>}
+                  ? <>Perante qualquer situação de perda ou roubo do mesmo, deve-se notificar o departamento de T.I. através de <strong style={{ color: '#00509a' }}>https://aquaservice.atlassian.net/servicedesk</strong> clicando no botão de nova incidência.</>
+                  : <>Ante cualquier incidencia de pérdida o robo del mismo se debe notificar al departamento de T.I. a través de <strong style={{ color: '#00509a' }}>https://aquaservice.atlassian.net/servicedesk</strong> pulsando el botón nueva incidencia.</>}
               </p>
               <p className="mb-2 font-bold" style={{ fontSize: '10pt' }}>
                 {formData.idioma === 'pt'
@@ -759,7 +836,7 @@ export default function App() {
                   : <>También nos puede llamar al teléfono <strong>961415503</strong> para cualquier aclaración.</>}
               </p>
 
-              <div style={{ fontSize: '11pt' }}>
+              <div style={{ fontSize: '10pt' }}>
                 <p>
                   {formData.idioma === 'pt'
                     ? <>Em <strong>{formData.lugar || '________________'}</strong>, a <strong>{formData.fecha || '________________________'}</strong></>
@@ -768,7 +845,7 @@ export default function App() {
                 <br /><br /><br />
                 <p>{formData.idioma === 'pt' ? 'Assinado:' : 'Firmado:'}</p>
               </div>
-              <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '150px' }} alt="Logo Aquaservice" />
+              <img src="logo.png" style={{ position: 'absolute', bottom: '20mm', right: '20mm', width: '210px' }} alt="Logo Aquaservice" />
             </div>
           )}
 
