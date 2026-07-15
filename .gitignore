@@ -1,4 +1,4 @@
-﻿# Node modules
+# Node modules
 node_modules/
 
 # Logs
@@ -29,4 +29,7 @@ Thumbs.db
 # Mac
 Icon\rWEBAPPAQS_V2/Distribucion/
 
+# Custom Builds
+dist_*/
+electron-build*/
 WEBAPPAQS_V2/Distribucion/
